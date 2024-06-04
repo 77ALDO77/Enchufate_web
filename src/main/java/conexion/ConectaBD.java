@@ -11,7 +11,7 @@ public class ConectaBD {
     public Connection getConnection() {
         Connection cnx = null;
 
-        String url = "jdbc:mysql://localhost:3309/enchufate?useTimeZone=true&"
+        String url = "jdbc:mysql://localhost:3306/enchufate3?useTimeZone=true&"
                 + "serverTimezone=UTC&autoReconnect=true";
 
         String user = "root";
