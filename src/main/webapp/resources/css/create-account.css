@@ -1,0 +1,128 @@
+body {
+    background-color: rgba(0,0,0,.3);
+    font-family: Clarkson,Proxima Nova,Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: 300
+}
+
+.create-account {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 114px 0 rgba(0,0,0,.3);
+    box-sizing: border-box;
+    left: 50%;
+    max-width: calc(100% - 44px);
+    padding: 44px 44px 22px;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 480px
+}
+
+.create-account h1 {
+    color: #3e3e3e;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 41px;
+    margin-top: 0;
+    text-align: center
+}
+
+.create-account h3 {
+    color: #a4a4a4;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: center
+}
+
+.create-account footer {
+    font-size: 12px;
+    line-height: 44px;
+    text-align: center
+}
+
+.create-account footer a {
+    color: #3e3e3e;
+    text-decoration: none
+}
+
+.create-account footer a:first-child {
+    padding-right: 11px
+}
+
+@media only screen and (max-width: 414px) {
+    .create-account {
+        padding:33px 33px 16.5px
+    }
+
+    .create-account footer {
+        line-height: 33px
+    }
+}
+.ubyTsud2HL_zkmLakAJc {
+    color: #f0523d;
+    font-size: 10px;
+    line-height: 16px;
+    padding: 0 5.5px
+}
+
+.create-account-box {
+    border-bottom: 1px solid #ededed;
+    padding: 11px 5.5px;
+    position: relative
+}
+
+.create-account-box input {
+    font-family: Clarkson,Proxima Nova,Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 22px;
+    width: 100%
+}
+
+.create-account-box input:focus {
+    outline-width: 0
+}
+
+.create-account-box input:focus,.create-account-box.GZAp_HvjR5wzRjGu_hvB {
+    background-color: #f7f7f7;
+    transition: background-color .1s ease-out,opacity .1s ease-out
+}
+
+.create-account-box.GZAp_HvjR5wzRjGu_hvB {
+    border-bottom: 1px solid #fff;
+    border-radius: 4px;
+    outline-color: #3e3e3e;
+    outline-offset: 0;
+    outline-style: solid;
+    outline-width: 2px
+}
+.btn-creat-account {
+    background-color: #3e3e3e;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-weight: 500;
+    line-height: 22px;
+    margin-top: 22px;
+    padding: 11px;
+    width: 100%
+}
+
+.btn-creat-account[disabled] {
+    background-color: #e4e4e4;
+    color: #3e3e3e
+}
+.account-last-name{
+    display: flex; 
+}
+.lastname-p{
+    margin-right: 19px;
+}
+
+.account-dni-birthdate{
+    display: flex;
+}
+.account-dni-p{
+    margin-right: 19px;
+}

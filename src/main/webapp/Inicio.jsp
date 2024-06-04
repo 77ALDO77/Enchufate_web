@@ -1,12 +1,12 @@
-<%-- 
-    Document   : Inicio
-    Created on : 3 jun. 2024, 6:04:13 p. m.
-    Author     : aldom
---%>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-//inicio caca 
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="modelo.dto.Customer" %>
+<script src="components/navbarRedirect.js" type="text/javascript"></script>
+<%
+    Customer customer = (Customer) session.getAttribute("customer");
+    String welcomeMessage = (customer != null) ? "Bienvenido " + customer.getUsuario() : "Iniciar sesión";
+    boolean isLoggedIn = (customer != null);
+%>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -31,7 +31,15 @@
                 </ul>
                 <div class="logo">ENCHUFATE</div>
                 <div class="auth-cart">
-                    <a href="#">Iniciar sesión</a>
+                    <button class="btnnavbar btn-color" style="padding: 0px 16px; cursor: pointer; height: 36px">
+                    <%= isLoggedIn ? welcomeMessage : "<a href='login.jsp'>" + welcomeMessage + "</a>"%>
+                </button>
+
+                <% if (isLoggedIn) { %>
+                <button class="btnnavbar btn-color" style="padding: 0px 16px; cursor: pointer; height: 36px">
+                    <a href="logout">Cerrar sesión</a>
+                </button>
+                <% }%>   
                     <a href="#"><img src="${pageContext.request.contextPath}/resources/img/inicio/CarroCompra.png" alt="">Carrito de compras</a>
                 </div>
             </nav>
@@ -81,9 +89,7 @@
                     <p><a href="mailto:enchufate@gmail.com">enchufate@gmail.com</a><br>(555) 555-5555</p>
                 </div>
             </div>
-            <div class="footer-image">
-                <img src="${pageContext.request.contextPath}/resources/img/footer-image.png" alt="">
-            </div>
+            
         </footer>
     </body>
 </html>

@@ -66,30 +66,4 @@ public class CustomerDAO {
         }
         return cst;
     }
-
-    /*public Customer get(int idx) {
-        Customer cst = null;
-        PreparedStatement ps;
-        ResultSet rs;
-        String cadSQL = "SELECT * FROM cliente where dni=?";
-        try {
-            ps = cnx.prepareStatement(cadSQL);
-            ps.setInt(1, idx);
-            rs = ps.executeQuery();
-            if  (rs.next()){
-                cst = new Customer();
-                cst.setCodcliente(rs.getInt("codcliente"));
-                cst.setNombre(rs.getString("nombres"));
-                cst.setApepaterno(rs.getString("apepaterno"));
-                cst.setApematerno(rs.getString("apematerno"));
-                cst.setDni(rs.getString("dni"));
-                cst.setFechanacimiento(rs.getString("fechanacimiento"));
-                cst.setUsuario(rs.getString("usuario"));
-                cst.setCorreo(rs.getString("correo"));
-                cst.setContraseña(rs.getString("contraseña"));
-            }
-        } catch (SQLException ex) {
-        }
-        return cst;
-    }*/
 }
