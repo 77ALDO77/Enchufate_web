@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.auth-cart {
+    display: flex;
+    align-items: center;
+}
+
+.auth-cart a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.auth-cart img {
+    width: 24px;
+    height: 24px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hero {
+    text-align: center;
+    height: 966px; /* Altura fija */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem; /* Añade un margen inferior para separar la sección */
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.hero .btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #000;
+    background: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.hero .btn:hover {
+    background: #f0f0f0;
+}
+
+/* Nueva Sección de Cubículos */
+.cubicles {
+    text-align: center;
+    height: 966px; /* Altura fija */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrado vertical */
+    align-items: center; /* Centrado horizontal */
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    width: 100%;
+}
+
+.cubicles h2 {
+    margin-bottom: 2rem;
+}
+
+.cubicle-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%; /* Añadido para asegurar que los elementos se distribuyen correctamente */
+}
+
+.cubicle {
+    text-align: center;
+    margin: 1rem;
+}
+
+.cubicle img {
+    width: 300px; /* Aumenta el tamaño del círculo */
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.cubicle h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.cubicle p {
+    font-size: 1.25rem;
+}
+
+.cubicles .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background: #000;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cubicles .btn:hover {
+    background: #333;
+}
+
+/* Estilos del Pie de Página */
+footer {
+    background: rgba(0, 0, 0, 0.7); /* Mismo color que el encabezado */
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    margin: 1rem;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section p, .footer-section a {
+    font-size: 1rem;
+    color: #fff; /* Texto blanco para contraste */
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-image img {
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    .auth-cart {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cubicle-container {
+        flex-direction: column;
+    }
+
+    .cubicle img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin: 1rem 0;
+    }
+}
