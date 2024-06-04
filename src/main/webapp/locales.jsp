@@ -49,7 +49,7 @@
                     <li><a href="#">Contacto</a></li>
                     <li><a href="locales.jsp">Locales</a></li>
                 </ul>
-                <div class="logo">ENCHUFATE</div>
+                <div class="logo"><a href="Inicio.jsp">ENCHUFATE</a></div>
                 <div class="auth-cart">
                     <button class="btnnavbar btn-color" style="padding: 0px 16px; cursor: pointer; height: 36px">
                     <%= isLoggedIn ? welcomeMessage : "<a href='login.jsp'>" + welcomeMessage + "</a>"%>

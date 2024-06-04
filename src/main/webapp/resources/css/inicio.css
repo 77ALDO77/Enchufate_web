@@ -40,8 +40,20 @@ nav ul li a {
     font-size: 1rem;
 }
 
+.logo a {
+    text-decoration: none;
+    color: white;
+    border-bottom: none;
+}
+
+.logo a:hover {
+    color: white;
+    text-decoration: none;
+}
+
 .logo {
-    font-size: 1.5rem;
+    color: white;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -250,11 +262,11 @@ footer {
 
 /* Botón de la barra de navegación */
 .btnnavbar.btn-color {
-    background-color: rgba(0, 0, 0, 0.7); 
-    color: #fff; 
-    border: none; 
-    padding: 0.75rem 1.5rem; 
-    font-size: 1rem; 
-    border-radius: 5px; 
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
     margin: 0 0.5rem;
 }
