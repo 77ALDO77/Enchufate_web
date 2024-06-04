@@ -1,0 +1,72 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 4 jun. 2024, 18:09:31
+    Author     : juand
+*/
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 2s ease-in-out;
+}
+
+#Quienessomos{
+    width: calc(70%);
+    margin: 20px auto;
+    border: 2px solid #000000;
+    background-color: #2c3e50;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 0px 20px #000000;
+    text-align: center;
+}
+
+.text-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Vision{
+    width: 48%;
+    margin-right: 2%;
+    border: 2px solid #000000;
+    background-color: #2c3e50;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 0px 20px #000000;
+    text-align: center;
+}
+
+#Mision{
+    width: 48%;
+    border: 2px solid #000000;
+    background-color: #2c3e50;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 0px 20px #000000;
+    text-align: center;
+}
+
+.vm{
+    display: flex;
+    justify-content: space-around;
+    width: calc(70%);
+    margin: 20px auto;
+}
+
+.subtitulo{
+    text-align: center;
+}
+
