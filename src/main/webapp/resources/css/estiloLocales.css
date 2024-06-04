@@ -1,0 +1,84 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 4 jun. 2024, 17:54:47
+    Author     : juand
+*/
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
+}
+
+main.principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.locales{
+    position: relative;
+    width: 85%;
+    padding: 40px 100px;
+}
+
+.locales .titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #009999;
+    font-weight: 500;
+}
+
+.tabla{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+}
+
+.cabeza{
+    background-color: #009999;
+    color: #fff;
+    text-align: center;
+}
+
+.cuerpo{
+    border: 1px solid #ccc;
+}
+
+.contenido{
+    border: 1px solid #ccc;
+}
+
+.contenedor{
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pie{
+    color: #fff;
+    background-color: #009999;
+    text-align: right;
+}
+
+.contenido td {
+    padding: 10px;
+}
+
+.tabla, .tabla th, .tabla td {
+    border: 1px solid black;
+}
+
+.tabla caption {
+            caption-side: top;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }

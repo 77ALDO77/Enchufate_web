@@ -27,7 +27,8 @@
                     <li><a href="#">Tienda</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="#">Acerca de</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="">Contacto</a></li>
+                    <li><a href="locales.jsp">Locales</a></li>
                 </ul>
                 <div class="logo">ENCHUFATE</div>
                 <div class="auth-cart">
@@ -76,10 +77,6 @@
         </main>
         <footer>
             <div class="footer-container">
-                <div class="footer-section">
-                    <h3>Ubicación</h3>
-                    <p>Av Arenales 1737 local 5 20 Centro Comercial Arenales en Lince</p>
-                </div>
                 <div class="footer-section">
                     <h3>Horario</h3>
                     <p>Lunes a viernes<br>De 6:30 a. m. a 11 p. m.</p>
