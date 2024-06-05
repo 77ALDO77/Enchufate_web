@@ -174,3 +174,22 @@ PRIMARY KEY (CodCompra, CodProducto),
 FOREIGN KEY (CodCompra) REFERENCES Compra(CodCompra),
 FOREIGN KEY (CodProducto) REFERENCES Producto(CodProducto)
 );
+CREATE TABLE Contacto
+(
+    id_contacto int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nombre varchar(20) NOT NULL,
+    apellido varchar(20) NOT NULL,
+    correo_contacto varchar(100) NOT NULL,
+    mensaje_contacto VARCHAR(1000) NOT NULL
+);
+
+CREATE TABLE Reclamos
+(
+    CodReclamo INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    NombreCli VARCHAR(100) NOT NULL,
+    CorreoReclamo VARCHAR(100) NOT NULL,
+    DniReclamo VARCHAR(20) NOT NULL,
+    FechaReclamo DATE NOT NULL,
+    AsuntoReclamo VARCHAR(50) NOT NULL,
+    ContenidoReclamo VARCHAR(1000) NOT NULL
+);
