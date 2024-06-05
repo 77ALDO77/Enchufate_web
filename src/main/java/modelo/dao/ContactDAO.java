@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo.dao;
 
 import java.sql.Connection;
@@ -13,7 +9,7 @@ import conexion.ConectaBD;
 
 /**
  *
- * @author ztomz
+ * Author: ztomz
  */
 
 public class ContactDAO {
@@ -26,14 +22,13 @@ public class ContactDAO {
     public String insert(Contact c) {
         String resp = "";
         PreparedStatement ps;
-        ResultSet rs;
-        String cadSQL = "INSERT INTO contacto (nombre, correo, telefono, mensaje) VALUES(?,?,?,?) ";
+        String cadSQL = "INSERT INTO Contacto (nombres_contacto, apellidos_contacto, correo_contacto, mensaje_contacto) VALUES (?, ?, ?, ?)";
         
         try {
             ps = cnx.prepareStatement(cadSQL);
             ps.setString(1, c.getNombre());
-            ps.setString(2, c.getCorreo());
-            ps.setString(3, c.getTelefono());
+            ps.setString(2, c.getApellidos());
+            ps.setString(3, c.getCorreo());
             ps.setString(4, c.getMensaje());
             ps.executeUpdate(); 
         } catch (SQLException ex) {
@@ -41,24 +36,26 @@ public class ContactDAO {
         }
         return resp;
     }
-    public Contact get(int idx) {
+
+    public Contact get(int id) {
         Contact c = null;
         PreparedStatement ps;
         ResultSet rs;
-        String cadSQL = "SELECT * FROM contacto where idcontacto=?";
+        String cadSQL = "SELECT * FROM Contacto WHERE id_contacto = ?";
         try {
             ps = cnx.prepareStatement(cadSQL);
-            ps.setInt(1, idx);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if  (rs.next()){
                 c = new Contact();
-                c.setIdcontacto(rs.getInt("idcontacto"));
-                c.setNombre(rs.getString("nombre"));
-                c.setCorreo(rs.getString("correo"));
-                c.setTelefono(rs.getString("telefono"));
-                c.setMensaje(rs.getString("mensaje"));
+                c.setIdcontacto(rs.getInt("id_contacto"));
+                c.setNombre(rs.getString("nombres_contacto"));
+                c.setApellidos(rs.getString("apellidos_contacto"));
+                c.setCorreo(rs.getString("correo_contacto"));
+                c.setMensaje(rs.getString("mensaje_contacto"));
             }
         } catch (SQLException ex) {
+            // Handle exception
         }
         return c;
     }
