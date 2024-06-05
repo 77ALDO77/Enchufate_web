@@ -1,11 +1,14 @@
 package modelo.dto;
 
-public class Contact {
+public class Contactenos {
+
     private int idcontacto;
-    private String nombre;
+    private String nombres;
     private String apellidos;
     private String correo;
     private String mensaje;
+    public Contactenos(){
+    }
 
     public int getIdcontacto() {
         return idcontacto;
@@ -15,12 +18,12 @@ public class Contact {
         this.idcontacto = idcontacto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
     public String getApellidos() {
@@ -46,4 +49,5 @@ public class Contact {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
 }

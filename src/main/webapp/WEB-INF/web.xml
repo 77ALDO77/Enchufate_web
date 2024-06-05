@@ -20,6 +20,10 @@
         <servlet-name>cntReclamos</servlet-name>
         <servlet-class>ServLets.cntReclamos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntContactenos</servlet-name>
+        <servlet-class>ServLets.cntContactenos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>cntReclamos</servlet-name>
         <url-pattern>/cntReclamos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntContactenos</servlet-name>
+        <url-pattern>/cntContactenos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
