@@ -12,6 +12,10 @@
         <servlet-name>cntCustomer</servlet-name>
         <servlet-class>ServLets.cntCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntContactenos</servlet-name>
+        <servlet-class>ServLets.cntContactenos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>cntCustomer</servlet-name>
         <url-pattern>/cntCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntContactenos</servlet-name>
+        <url-pattern>/cntContactenos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
