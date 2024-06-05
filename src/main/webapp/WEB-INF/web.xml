@@ -16,10 +16,6 @@
         <servlet-name>cntLocales</servlet-name>
         <servlet-class>ServLets.cntLocales</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>cntContac</servlet-name>
-        <servlet-class>/cntContac</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
