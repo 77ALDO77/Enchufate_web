@@ -27,7 +27,7 @@
                     <li><a href="#">Tienda</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="acercade.jsp">Acerca de</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="contactenos.jsp">Contacto</a></li>
                     <li><a href="locales.jsp">Locales</a></li>
                 </ul>
                 <div class="logo"><a href="Inicio.jsp">ENCHUFATE</a></div>
@@ -80,6 +80,7 @@
                 <div class="footer-section">
                     <h3>Horario</h3>
                     <p>Lunes a viernes<br>De 6:30 a. m. a 11 p. m.</p>
+                    <p><a href="Reclamos.jsp">Libro de Reclamaciones</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>

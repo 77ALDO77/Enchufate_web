@@ -34,7 +34,7 @@
                     <li><a href="#">Tienda</a></li>
                     <li><a href="#">Servicios</a></li>
                     <li><a href="acercade.jsp">Acerca de</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="contactenos.jsp">Contacto</a></li>
                     <li><a href="locales.jsp">Locales</a></li>
                 </ul>
                 <div class="logo"><a href="Inicio.jsp">ENCHUFATE</a></div>

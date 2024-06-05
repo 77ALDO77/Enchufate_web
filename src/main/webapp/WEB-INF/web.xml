@@ -16,6 +16,10 @@
         <servlet-name>cntLocales</servlet-name>
         <servlet-class>ServLets.cntLocales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntReclamos</servlet-name>
+        <servlet-class>ServLets.cntReclamos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>cntLocales</servlet-name>
         <url-pattern>/cntLocales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntReclamos</servlet-name>
+        <url-pattern>/cntReclamos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

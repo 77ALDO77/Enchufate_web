@@ -56,7 +56,7 @@
             </div>
             <div style="display: flex; place-content: center; margin: 50px 0px;">
                 <div class="suggestion-form">
-                    <form action="<%= request.getContextPath()%>/cntClaims" method="post" class="formulario" id="formClaims">
+                    <form action="<%= request.getContextPath()%>/cntReclamos" method="post" class="formulario" id="formClaims">
                         <label for="ID">DNI:</label><br>
                         <input type="text" id="ID" name="ID" required pattern="\d{8}" title="El DNI debe contener 8 dígitos"><br>
                         <label for="name">Nombre:</label><br>
