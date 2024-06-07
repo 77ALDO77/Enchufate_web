@@ -65,8 +65,8 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Producto A</td>
-                                    <td>$10.00</td>
+                                    <td>Bloqueador solar</td>
+                                    <td>s/10.00</td>
                                     <td>20</td>
                                     <td>
                                         <button class="btn-edit" onclick="showEditProductForm(1)">Editar</button>
@@ -75,8 +75,8 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Producto B</td>
-                                    <td>$15.00</td>
+                                    <td>Mikes</td>
+                                    <td>s/15.00</td>
                                     <td>10</td>
                                     <td>
                                         <button class="btn-edit" onclick="showEditProductForm(2)">Editar</button>
