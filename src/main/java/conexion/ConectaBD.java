@@ -7,26 +7,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConectaBD {
-    
+
     public Connection getConnection() {
         Connection cnx = null;
 
-        String url = "jdbc:mysql://localhost:3306/enchufate3?useTimeZone=true&"
-                + "serverTimezone=UTC&autoReconnect=true";
-
+        String url = "jdbc:mysql://localhost:3306/enchufate1?useTimeZone=true&serverTimezone=UTC&autoReconnect=true";
         String user = "root";
-        String clave = "";
-
-        String Driver = "com.mysql.cj.jdbc.Driver";
+        String clave = "root";
+        String driver = "com.mysql.cj.jdbc.Driver";
 
         try {
-            Class.forName(Driver);
+            Class.forName(driver);
             cnx = DriverManager.getConnection(url, user, clave);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ConectaBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cnx;
     }
-    
 }
-

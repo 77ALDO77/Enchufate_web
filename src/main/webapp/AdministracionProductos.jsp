@@ -1,9 +1,3 @@
-<%-- 
-    Document   : AdministracionProductos
-    Created on : 4 jun. 2024, 10:12:53 p. m.
-    Author     : aldom
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
