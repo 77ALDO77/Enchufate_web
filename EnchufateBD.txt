@@ -119,6 +119,7 @@ CodCategoria int NOT NULL,
 CodProveedor int NOT NULL,
 Precio decimal(10,2) NOT NULL,
 Nombre varchar(50) NOT NULL,
+Descripcion varchar(200) NOT NULL,
 FechaVencimiento date NULL,
 FOREIGN KEY (CodCategoria) REFERENCES Categoria(CodCategoria),
 FOREIGN KEY (CodProveedor) REFERENCES Proveedor(CodProveedor)
