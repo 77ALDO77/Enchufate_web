@@ -12,9 +12,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Enchufate - Menú</title>
         <link href="resources/css/market.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/inicio.css" rel="stylesheet" type="text/css"/>
         <script src="resources/scrip/market.js" type="text/javascript"></script>
+        <style>
+            body {
+                background: url('${pageContext.request.contextPath}/resources/img/inicio/fondoenchufate.png') no-repeat center center fixed;
+                background-size: cover;
+            }
+        </style>
     </head>
     <body>
+        <jsp:include page="components/encabezado.jsp"/>
         <header>
             <h1>Servicios Adicionales</h1>
             <p>Consulta los servicios adicionales que ofrecemos</p>
@@ -143,6 +151,7 @@
                 </div>
             </section>
         </main>
+        <jsp:include page="components/pie.jsp"/>
     </body>
 </html>
 

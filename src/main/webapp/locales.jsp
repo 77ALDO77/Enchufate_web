@@ -18,13 +18,6 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="modelo.dto.Customer" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="components/navbarRedirect.js" type="text/javascript"></script>
-<%
-    Customer customer = (Customer) session.getAttribute("customer");
-    String welcomeMessage = (customer != null) ? "Bienvenido " + customer.getUsuario() : "Iniciar sesión";
-    boolean isLoggedIn = (customer != null);
-%>
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -40,30 +33,7 @@
         </style>
     </head>
     <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="market.jsp">Tienda</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="acercade.jsp">Acerca de</a></li>
-                    <li><a href="Contactenos.jsp">Contacto</a></li>
-                    <li><a href="locales.jsp">Locales</a></li>
-                </ul>
-                <div class="logo"><a href="Inicio.jsp">ENCHUFATE</a></div>
-                <div class="auth-cart">
-                    <button class="btnnavbar btn-color" style="padding: 0px 16px; cursor: pointer; height: 36px">
-                    <%= isLoggedIn ? welcomeMessage : "<a href='login.jsp'>" + welcomeMessage + "</a>"%>
-                </button>
-
-                <% if (isLoggedIn) { %>
-                <button class="btnnavbar btn-color" style="padding: 0px 16px; cursor: pointer; height: 36px">
-                    <a href="logout">Cerrar sesión</a>
-                </button>
-                <% }%>   
-                    <a href="Carrito.jsp"><img src="${pageContext.request.contextPath}/resources/img/inicio/CarroCompra.png" alt="">Carrito de compras</a>
-                </div>
-            </nav>
-        </header>
+        <jsp:include page="components/encabezado.jsp"/>
         <%
             Boolean redireccionado = (Boolean) session.getAttribute("redireccionado");
             if (redireccionado == null || !redireccionado) {
@@ -104,18 +74,6 @@
             </div>
         </div>
         </main>
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h3>Horario</h3>
-                    <p>Lunes a viernes<br>De 6:30 a. m. a 11 p. m.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
-                    <p><a href="mailto:enchufate@gmail.com">enchufate@gmail.com</a><br>(555) 555-5555</p>
-                </div>
-            </div>
-            
-        </footer>
+        <jsp:include page="components/pie.jsp"/>
     </body>
 </html>
