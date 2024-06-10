@@ -28,6 +28,10 @@
         <servlet-name>cntProducto</servlet-name>
         <servlet-class>ServLets.cntProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntCubiculos</servlet-name>
+        <servlet-class>ServLets.cntCubiculos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>cntProducto</servlet-name>
         <url-pattern>/cntProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntCubiculos</servlet-name>
+        <url-pattern>/cntCubiculos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
