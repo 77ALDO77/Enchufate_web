@@ -4,33 +4,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelo.dto.Reclamos;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.dto.Producto;
 import conexion.ConectaBD;
 
 public class ProductoDAO {
-
     private Connection cnx;
 
     public ProductoDAO() {
         cnx = new ConectaBD().getConnection();
     }
-
-    public String insert(Reclamos c) {
-        String resp = "";
-        String cadSQL = "INSERT INTO reclamos (NombreCli, CorreoReclamo, dniReclamo, fechaReclamo, AsuntoReclamo, ContenidoReclamo) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement ps = cnx.prepareStatement(cadSQL)) {
-            ps.setString(1, c.getNombre_cliente());
-            ps.setString(2, c.getCorreo_reclamo());
-            ps.setString(3, c.getDni_reclamo());
-            ps.setDate(4, java.sql.Date.valueOf(c.getFecha_reclamo()));
-            ps.setString(5, c.getAsunto_reclamo());
-            ps.setString(6, c.getContenido_reclamo());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            resp = ex.getMessage();
+    public List<Producto> listarProductos() {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT * FROM Producto";
+        
+        try (PreparedStatement ps = cnx.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Producto producto = new Producto();
+                producto.setCodproducto(rs.getInt("CodProducto"));
+                producto.setCodcategoria(rs.getInt("CodCategoria"));
+                producto.setCodproveedor(rs.getInt("CodProveedor"));
+                producto.setPrecio(rs.getDouble("Precio"));
+                producto.setNombre(rs.getString("Nombre"));
+                producto.setDescripcion(rs.getString("Descripcion"));
+                producto.setImagen(rs.getString("Imagen"));
+                producto.setFechavencimiento(rs.getString("FechaVencimiento"));
+                productos.add(producto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return resp;
+        return productos;
     }
 }
