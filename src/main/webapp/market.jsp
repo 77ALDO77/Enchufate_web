@@ -1,9 +1,7 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,19 +20,12 @@
 <body>
     <jsp:include page="components/encabezado.jsp"/>
     <%
-        List<modelo.dto.Producto> productos = (List<modelo.dto.Producto>) request.getAttribute("listaProductos");
-        if (productos == null) {
+        Map<String, List<modelo.dto.Producto>> productosPorCategoria = (Map<String, List<modelo.dto.Producto>>) request.getAttribute("productosPorCategoria");
+        List<String> ordenCategorias = (List<String>) request.getAttribute("ordenCategorias");
+        if (productosPorCategoria == null || ordenCategorias == null) {
             response.sendRedirect(request.getContextPath() + "/cntProducto");
             return;
         }
-        System.out.println("Número de productos en JSP: " + productos.size()); // Depuración
-
-        // Agrupar productos por categoría
-        Map<String, List<modelo.dto.Producto>> productosPorCategoria = new HashMap<>();
-        for (modelo.dto.Producto producto : productos) {
-            productosPorCategoria.computeIfAbsent(producto.getNombreCategoria(), k -> new ArrayList<>()).add(producto);
-        }
-        request.setAttribute("productosPorCategoria", productosPorCategoria); // Asegúrate de pasar el mapa a la JSP
     %>
     <header>
         <h1>Servicios Adicionales</h1>
@@ -43,7 +34,7 @@
     <main>
         <section class="menu-section">
             <h2>Productos</h2>
-            <c:forEach var="categoria" items="${productosPorCategoria.keySet()}">
+            <c:forEach var="categoria" items="${ordenCategorias}">
                 <h3>${categoria}</h3>
                 <div class="menu-items">
                     <c:forEach var="producto" items="${productosPorCategoria[categoria]}">
@@ -54,11 +45,11 @@
                             <p>Precio: $${producto.precio}</p>
                         </div>
                     </c:forEach>
+                    <c:if test="${empty productosPorCategoria[categoria]}">
+                        <p>No hay productos disponibles.</p>
+                    </c:if>
                 </div>
             </c:forEach>
-            <c:if test="${productos.isEmpty()}">
-                <p>No hay productos disponibles.</p>
-            </c:if>
         </section>
     </main>
     <jsp:include page="components/pie.jsp"/>
