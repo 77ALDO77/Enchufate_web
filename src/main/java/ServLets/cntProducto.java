@@ -5,10 +5,7 @@
 package ServLets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,29 +27,7 @@ public class cntProducto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Producto> listaProductos = productoDAO.listarProductos();
         System.out.println("Número de productos en Servlet: " + listaProductos.size()); // Depuración
-        List<String> ordenCategorias = new ArrayList<>();
-        ordenCategorias.add("Entradas");
-        ordenCategorias.add("Segundos");
-        ordenCategorias.add("Postres");
-        ordenCategorias.add("Piqueos y Snacks");
-        ordenCategorias.add("Bebidas no alcoholicas");
-        ordenCategorias.add("Cuidado Personal");
-        ordenCategorias.add("Cigarros y Vapes");
-
-        // Agrupar productos por categoría en el orden especificado
-        Map<String, List<Producto>> productosPorCategoria = new LinkedHashMap<>();
-        for (String categoria : ordenCategorias) {
-            productosPorCategoria.put(categoria, new ArrayList<>());
-        }
-        for (Producto producto : listaProductos) {
-            if (productosPorCategoria.containsKey(producto.getNombreCategoria())) {
-                productosPorCategoria.get(producto.getNombreCategoria()).add(producto);
-            }
-        }
-
-        request.setAttribute("productosPorCategoria", productosPorCategoria);
-        request.setAttribute("ordenCategorias", ordenCategorias);
-
+        request.setAttribute("listaProductos", listaProductos);
         RequestDispatcher dispatcher = request.getRequestDispatcher("market.jsp");
         dispatcher.forward(request, response);
     }
