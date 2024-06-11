@@ -15,9 +15,10 @@ public class ProductoDAO {
     public ProductoDAO() {
         cnx = new ConectaBD().getConnection();
     }
+
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT * FROM Producto";
+        String sql = "SELECT p.*, c.Nombre AS NombreCategoria FROM Producto p INNER JOIN Categoria c ON p.CodCategoria = c.CodCategoria";
         
         try (PreparedStatement ps = cnx.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -31,6 +32,7 @@ public class ProductoDAO {
                 producto.setDescripcion(rs.getString("Descripcion"));
                 producto.setImagen(rs.getString("Imagen"));
                 producto.setFechavencimiento(rs.getString("FechaVencimiento"));
+                producto.setNombreCategoria(rs.getString("NombreCategoria"));
                 productos.add(producto);
             }
         } catch (SQLException e) {

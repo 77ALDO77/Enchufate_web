@@ -17,11 +17,11 @@ public class Producto {
     String descripcion;
     String imagen;
     String fechavencimiento;
-
+    String nombreCategoria;
     public Producto() {
     }
 
-    public Producto(int codproducto, int codcategoria, int codproveedor, double precio, String nombre, String descripcion, String imagen, String fechavencimiento) {
+    public Producto(int codproducto, int codcategoria, int codproveedor, double precio, String nombre, String descripcion, String imagen, String fechavencimiento, String nombreCategoria) {
         this.codproducto = codproducto;
         this.codcategoria = codcategoria;
         this.codproveedor = codproveedor;
@@ -30,6 +30,7 @@ public class Producto {
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.fechavencimiento = fechavencimiento;
+        this.nombreCategoria = nombreCategoria;
     }
 
     public int getCodproducto() {
@@ -95,6 +96,14 @@ public class Producto {
     public void setFechavencimiento(String fechavencimiento) {
         this.fechavencimiento = fechavencimiento;
     }
+     public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+
     @Override
     public String toString() {
         return getNombre();
