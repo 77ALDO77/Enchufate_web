@@ -52,6 +52,10 @@
                             <p><strong>${producto.nombre}</strong></p>
                             <p>${producto.descripcion}</p>
                             <p>Precio: $${producto.precio}</p>
+                            <form action="${pageContext.request.contextPath}/agregarAlCarrito" method="post">
+                                <input type="hidden" name="codproducto" value="${producto.codproducto}" />
+                                <button type="submit">Agregar al Carrito</button>
+                            </form>
                         </div>
                     </c:forEach>
                 </div>

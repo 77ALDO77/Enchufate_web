@@ -47,11 +47,34 @@ header p {
     border-radius: 10px;
     width: 200px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .menu-item img {
     width: 100%;
     border-radius: 10px;
+}
+
+.menu-item p {
+    margin: 10px 0;
+    min-height: 5px;
+}
+
+.menu-item button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.menu-item button:hover {
+    background-color: #ff9900;
 }
 
 .payment-methods {
@@ -71,3 +94,5 @@ footer {
     background-color: #1a1a1a;
     color: #ccc;
 }
+
+
