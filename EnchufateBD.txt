@@ -1,6 +1,6 @@
-CREATE DATABASE Enchufate;
+CREATE DATABASE enchufate;
 
-USE Enchufate;
+USE enchufate;
 
 CREATE TABLE Ducha
 (
@@ -8,6 +8,29 @@ CodDucha int PRIMARY KEY auto_increment NOT NULL,
 Nivel int NOT NULL,
 Estado varchar(10) NOT NULL
 );
+
+CREATE TABLE Reserva
+(
+CodReserva int PRIMARY KEY auto_increment NOT NULL,
+CodCliente int NOT NULL,
+CodEmpleado int NOT NULL,
+Fecha date NOT NULL,
+Hora time NOT NULL,
+FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
+FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
+);
+
+CREATE TABLE DetalleReserva
+(
+CodReserva int NOT NULL,
+CodServicio int NOT NULL,
+TipoPago varchar(20) NOT NULL,
+Cantidad int NOT NULL,
+PRIMARY KEY (CodReserva, CodServicio),
+FOREIGN KEY (CodReserva) REFERENCES Reserva(CodReserva),
+FOREIGN KEY (CodServicio) REFERENCES Servicio(CodServicio)
+);
+
 
 CREATE TABLE Cubiculo
 (
@@ -67,6 +90,24 @@ Correo VARCHAR(100) NOT NULL,
 Contraseña VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE Empleado
+(
+CodEmpleado int PRIMARY KEY auto_increment NOT NULL,
+CodLocal int NOT NULL,
+CodArea int NOT NULL,
+Nombre varchar(30) NOT NULL,
+Apellidos varchar(30) NOT NULL,
+FechaNacimiento date NOT NULL,
+DNI int NOT NULL UNIQUE KEY,
+Sexo varchar(10) NOT NULL,
+Celular int NOT NULL UNIQUE KEY,
+Salario decimal(10,2) NOT NULL,
+Correo varchar(100) NOT NULL UNIQUE KEY,
+Clave varchar(50) NOT NULL,
+FOREIGN KEY (CodLocal) REFERENCES Locales(CodLocal),
+FOREIGN KEY (CodArea) REFERENCES Area(CodArea)
+);
+
 CREATE TABLE Locales
 (
 CodLocal int PRIMARY KEY auto_increment NOT NULL,
@@ -79,23 +120,6 @@ CREATE TABLE Area
 (
 CodArea int PRIMARY KEY auto_increment NOT NULL,
 Descripcion varchar(100) NOT NULL
-);
-
-CREATE TABLE Empleado
-(
-CodEmpleado int PRIMARY KEY auto_increment NOT NULL,
-CodLocal int NOT NULL,
-CodArea int NOT NULL,
-Nombre varchar(30) NOT NULL,
-Apellidos varchar(30) NOT NULL,
-FechaNacimiento date NOT NULL,
-DNI int NOT NULL UNIQUE KEY,
-Sexo varchar(10) NOT NULL,
-Celular int NOT NULL UNIQUE KEY,
-Correo varchar(100) NOT NULL UNIQUE KEY,
-Salario decimal(10,2) NOT NULL,
-FOREIGN KEY (CodLocal) REFERENCES Locales(CodLocal),
-FOREIGN KEY (CodArea) REFERENCES Area(CodArea)
 );
 
 CREATE TABLE Categoria
@@ -126,23 +150,7 @@ FOREIGN KEY (CodCategoria) REFERENCES Categoria(CodCategoria),
 FOREIGN KEY (CodProveedor) REFERENCES Proveedor(CodProveedor)
 );
 
-CREATE TABLE Login
-(
-CodLogin int PRIMARY KEY auto_increment NOT NULL,
-Usuario varchar(50) NOT NULL,
-Clave varchar(50) NOT NULL
-);
 
-CREATE TABLE Reserva
-(
-CodReserva int PRIMARY KEY auto_increment NOT NULL,
-CodCliente int NOT NULL,
-CodEmpleado int NOT NULL,
-Fecha date NOT NULL,
-Hora time NOT NULL,
-FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
-FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
-);
 
 CREATE TABLE Compra
 (
@@ -153,17 +161,6 @@ Fecha date NOT NULL,
 Hora time NOT NULL,
 FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
 FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
-);
-
-CREATE TABLE DetalleReserva
-(
-CodReserva int NOT NULL,
-CodServicio int NOT NULL,
-TipoPago varchar(20) NOT NULL,
-Cantidad int NOT NULL,
-PRIMARY KEY (CodReserva, CodServicio),
-FOREIGN KEY (CodReserva) REFERENCES Reserva(CodReserva),
-FOREIGN KEY (CodServicio) REFERENCES Servicio(CodServicio)
 );
 
 CREATE TABLE DetalleCompra
