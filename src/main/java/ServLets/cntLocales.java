@@ -21,17 +21,18 @@ import modelo.dto.Locales;
  */
 public class cntLocales extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         Boolean redireccionado = (Boolean) request.getSession().getAttribute("redireccionado");
         if (redireccionado == null || !redireccionado) {
             response.sendRedirect(request.getContextPath() + "/cntLocales?accion=locales");
-            
+
             request.getSession().setAttribute("redireccionado", true);
         } else {
             List<Locales> lista = new LocalesDAO().getList();
-            
+
             request.setAttribute("lista", lista);
-            
+
             request.getRequestDispatcher("/locales.jsp").forward(request, response);
             request.getSession().removeAttribute("redireccionado");
         }

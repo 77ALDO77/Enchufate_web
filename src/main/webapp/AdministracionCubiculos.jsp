@@ -8,30 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración de Cubículos</title>
     <link href="resources/css/Adm.css" rel="stylesheet" type="text/css"/>
+    <link href="resources/css/navAdm.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Ciber Café</h2>
-            </div>
-            <nav class="menu">
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Cubículos</a></li>
-                    <li><a href="#">Reservas</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Configuración</a></li>
-                </ul>
-            </nav>
-        </aside>
+    
+    <div action="<%= request.getContextPath()%>/cntCubiculos" class="container">
+        <jsp:include page="components/navegadorAdm.jsp"/>
         <main class="main-content">
             <header class="header">
                 <h1>Administración de Cubículos</h1>
             </header>
             <section class="dashboard">
                 <div class="stats">
-                    <div class="card">
+                    <div action="<%= request.getContextPath()%>/cntCubiculos" class="card">
                         <h3>Cubículos Activos</h3>
                         <p>${cubiculosActivos}</p>
                     </div>

@@ -35,12 +35,12 @@ public class cntCubiculos extends HttpServlet {
         ArrayList<Cubiculo> cubiculos = cubiculoDAO.obtenerCubiculos();
         int cubiculosActivos = cubiculoDAO.obtenerCubiculosActivos();
         int reservasHoy = cubiculoDAO.obtenerReservasHoy();
-        
+
         request.setAttribute("cubiculos", cubiculos);
         request.setAttribute("cubiculosActivos", cubiculosActivos);
         request.setAttribute("reservasHoy", reservasHoy);
-        
-        request.getRequestDispatcher("Adm.jsp").forward(request, response);
+
+        request.getRequestDispatcher("AdministracionCubiculos.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

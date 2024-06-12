@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package ServLets;
 
 import java.io.IOException;
@@ -11,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.dao.CustomerDAO;
+import modelo.dao.EmpleadoDAO;
 import modelo.dto.Customer;
+import modelo.dto.Empleado;
 
 public class cntLogin extends HttpServlet {
 
@@ -22,10 +20,8 @@ public class cntLogin extends HttpServlet {
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
 
-        // Crear una instancia del DAO
+        // Autenticar cliente
         CustomerDAO customerDAO = new CustomerDAO();
-
-        // Autenticar usuario
         Customer customer = customerDAO.authenticate(correo, contrasena);
 
         if (customer != null) {
@@ -34,9 +30,20 @@ public class cntLogin extends HttpServlet {
             session.setAttribute("customer", customer);
             response.sendRedirect("Inicio.jsp");
         } else {
-            // Redirigir de nuevo a la página de login con un mensaje de error
-            request.setAttribute("errorMessage", "Correo o contraseña incorrectos");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            // Autenticar empleado
+            EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+            Empleado empleado = empleadoDAO.authenticate(correo, contrasena);
+
+            if (empleado != null) {
+                // Crear una sesión y redirigir a adminCubiculos.jsp
+                HttpSession session = request.getSession();
+                session.setAttribute("empleado", empleado);
+                response.sendRedirect("AdministracionCubiculos.jsp");
+            } else {
+                // Redirigir de nuevo a la página de login con un mensaje de error
+                request.setAttribute("errorMessage", "Correo o contraseña incorrectos");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         }
     }
     @Override

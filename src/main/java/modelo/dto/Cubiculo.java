@@ -1,35 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo.dto;
 
 public class Cubiculo {
-    private int CodCubiculo;
-    private int Nivel;
-    private String Estado;
+
+    private int codCubiculo;
+    private int nivel;
+    private String estado;
 
     public int getCodCubiculo() {
-        return CodCubiculo;
+        return codCubiculo;
     }
 
-    public void setCodCubiculo(int CodCubiculo) {
-        this.CodCubiculo = CodCubiculo;
+    public void setCodCubiculo(int codCubiculo) {
+        this.codCubiculo = codCubiculo;
     }
 
     public int getNivel() {
-        return Nivel;
+        return nivel;
     }
 
-    public void setNivel(int Nivel) {
-        this.Nivel = Nivel;
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
