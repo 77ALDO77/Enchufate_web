@@ -6,6 +6,10 @@ public class Cubiculo {
     private int nivel;
     private String estado;
 
+    public Cubiculo() {
+    }
+    
+
     public int getCodCubiculo() {
         return codCubiculo;
     }

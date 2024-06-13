@@ -38,7 +38,7 @@ public class cntLogin extends HttpServlet {
                 // Crear una sesión y redirigir a adminCubiculos.jsp
                 HttpSession session = request.getSession();
                 session.setAttribute("empleado", empleado);
-                response.sendRedirect("AdministracionCubiculos.jsp");
+                response.sendRedirect("AdmDashboar.jsp");
             } else {
                 // Redirigir de nuevo a la página de login con un mensaje de error
                 request.setAttribute("errorMessage", "Correo o contraseña incorrectos");

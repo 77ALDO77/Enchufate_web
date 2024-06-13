@@ -18,6 +18,9 @@ public class Empleado {
     private BigDecimal salario;
     private String clave;
 
+    public Empleado() {
+    }
+
     public int getCodEmpleado() {
         return codEmpleado;
     }

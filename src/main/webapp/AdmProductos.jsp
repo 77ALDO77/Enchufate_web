@@ -6,24 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gestión de Productos</title>
         <link href="resources/css/AdmProductos.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/navAdm.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
-            <aside class="sidebar">
-                <div class="sidebar-header">
-                    <h2>Ciber Café</h2>
-                </div>
-                <nav class="menu">
-                    <ul>
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Cubículos</a></li>
-                        <li><a href="#">Reservas</a></li>
-                        <li><a href="#">Clientes</a></li>
-                        <li><a href="#">Productos</a></li>
-                        <li><a href="#">Configuración</a></li>
-                    </ul>
-                </nav>
-            </aside>
+            <jsp:include page="components/navegadorAdm.jsp"/>
             <main class="main-content">
                 <header class="header">
                     <h1>Gestión de Productos</h1>
