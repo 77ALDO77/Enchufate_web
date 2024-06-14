@@ -7,7 +7,7 @@
         <link href="resources/css/Admin.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin-Display.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>Administrador</title>
+        <title>Clientes</title>
     </head>
     <body class="parent-container">
         <jsp:include page="components/navegadorAdm.jsp"/>
