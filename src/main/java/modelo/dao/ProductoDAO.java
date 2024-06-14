@@ -40,4 +40,28 @@ public class ProductoDAO {
         }
         return productos;
     }
+    public Producto obtenerProductoPorId(int codproducto) {
+        Producto producto = null;
+        try {
+            String query = "SELECT * FROM producto WHERE codproducto = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            stmt.setInt(1, codproducto);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                producto = new Producto();
+                producto.setCodproducto(rs.getInt("codproducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setImagen(rs.getString("imagen"));
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return producto;
+    }
 }

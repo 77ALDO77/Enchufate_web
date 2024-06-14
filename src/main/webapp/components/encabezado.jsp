@@ -26,7 +26,7 @@
                     <a href="logout">Cerrar sesión</a>
                 </button>
                 <% }%>   
-                    <a href="Carrito.jsp"><img src="${pageContext.request.contextPath}/resources/img/inicio/CarroCompra.png" alt="">Carrito de compras</a>
+                    <a href="carrito.jsp"><img src="${pageContext.request.contextPath}/resources/img/inicio/CarroCompra.png" alt="">Carrito de compras</a>
                 </div>
             </nav>
         </header>
