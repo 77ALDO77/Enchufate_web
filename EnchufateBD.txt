@@ -192,3 +192,11 @@ CREATE TABLE Reclamos
     AsuntoReclamo VARCHAR(50) NOT NULL,
     ContenidoReclamo VARCHAR(1000) NOT NULL
 );
+CREATE TABLE Carrito (
+    CodCarrito INT AUTO_INCREMENT PRIMARY KEY,
+    CodCliente INT NOT NULL,
+    CodProducto INT NOT NULL,
+    Cantidad INT NOT NULL,
+    FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
+    FOREIGN KEY (CodProducto) REFERENCES Producto(CodProducto)
+);
