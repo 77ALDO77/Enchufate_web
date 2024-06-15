@@ -37,6 +37,11 @@ public class cntCarrito extends HttpServlet {
         try {
             int codProducto = Integer.parseInt(request.getParameter("codProducto"));
             carritoDAO.agregarProducto(codCliente, codProducto, 1);
+
+            // Actualizar el carrito en la sesión
+            List<Producto> productosEnCarrito = carritoDAO.getProductosEnCarrito(codCliente);
+            session.setAttribute("carrito", productosEnCarrito);
+
             response.sendRedirect("cntCarrito?action=view");
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -58,11 +63,10 @@ public class cntCarrito extends HttpServlet {
         List<Producto> productosEnCarrito = carritoDAO.getProductosEnCarrito(codCliente);
         if (productosEnCarrito == null || productosEnCarrito.isEmpty()) {
             request.setAttribute("errorMessage", "El carrito está vacío.");
-            request.getRequestDispatcher("carrito.jsp").forward(request, response);
-            return;
+        } else {
+            request.setAttribute("productosEnCarrito", productosEnCarrito);
         }
-        System.out.println("Número de productos en el carrito: " + productosEnCarrito.size()); // Depuración
-        request.setAttribute("productosEnCarrito", productosEnCarrito);
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("carrito.jsp");
         dispatcher.forward(request, response);
     }
