@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="resources/css/adminDasboard.css" rel="stylesheet" type="text/css"/>      
+        <link href="resources/css/AdmProductos.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin-Display.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
