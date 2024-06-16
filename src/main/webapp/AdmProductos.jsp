@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,14 @@
     </head>
     <body class="parent-container">
         <jsp:include page="components/navegadorAdm.jsp"/>
+        <%
+            Boolean redireccionado = (Boolean) session.getAttribute("redireccionado");
+            if (redireccionado == null || !redireccionado) {
+                response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
+
+                session.setAttribute("redireccionado", true);
+            }
+        %>
         <script src="resources/scrip/AdmPng.js" type="text/javascript"></script>
         <div class="box-content">
             <div class="container">
@@ -18,6 +27,45 @@
                     <header class="header">
                         <h1>Gestión de Productos</h1>
                     </header>
+                    <section class="dashboard">
+                        <div class="agregar-prod">
+                            <form action="<%= request.getContextPath()%>./cntAdmProductos" method="post" class="formulario" id="formProductos">
+                                <fieldset>
+                                    <legend>Registro de Productos</legend>
+                                    <label for="nombre" class="etiqueta">(*)Nombre</label>
+                                    <input type="text" name="nombre" value="${nombre}" placeholder="Nuevo Producto"/>
+                                    <label for="precio" class="etiqueta">(*)Precio(s/.)</label>
+                                    <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00">
+                                    <label for="fecha" class="etiqueta">Fecha de Vencimiento</label>
+                                    <input type="text" name="fecha" value="${fecha}" placeholder="YYYY-MM-DD">
+                                    <label for="categoria" class="etiqueta">(*)Categoria</label>
+                                    <div class="combo-cat">
+                                        <select id="categoria" name="cboCategoria">
+                                            <c:forEach var="itemCategoria" items="${listaCategoria}">
+                                                <option value="${itemCategoria.codCategoria}"  ${categoria == itemCategoria.codCategoria ? "selected" : ""} >${itemCategoria.nombre}</option>                        
+                                            </c:forEach>
+                                        </select>    
+                                        <i></i>
+                                    </div>
+                                    <label for="proveedor" class="etiqueta">(*)Proveedor</label>
+                                    <div class="combo-prov">
+                                        <select>
+                                            <c:forEach var="itemProveedor" items="${listaProveedor}">
+                                                <option value="${itemProveedor.codProveedor}"  ${proveedor == itemProveedor.codProveedor ? "selected" : ""} >${itemProveedor.nombre}</option>                        
+                                            </c:forEach>
+                                        </select>    
+                                        <i></i>
+                                    </div>
+                                    <label class="nota">No olvide que los campos con (*) son <b>obligatorios</b></label>
+                                    <input type="submit" value="Registrar" name="accion" class="etiqueta"/>                
+                                </fieldset>
+
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                            </form>
+                        </div>
+                    </section>
+                    <!--
                     <section class="dashboard">
                         <div class="stats">
                             <div class="card">
@@ -67,11 +115,11 @@
                                             <button class="btn-delete" onclick="deleteProduct(2)">Eliminar</button>
                                         </td>
                                     </tr>
-                                    <!-- Más filas aquí -->
+                                    <!-- Más filas aquí 
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Formulario para agregar productos -->
+                        <!-- Formulario para agregar productos 
                         <div id="addProductForm" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="closeAddProductForm()">&times;</span>
@@ -87,7 +135,7 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- Formulario para editar productos -->
+                        <!-- Formulario para editar productos 
                         <div id="editProductForm" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="closeEditProductForm()">&times;</span>
@@ -105,6 +153,7 @@
                             </div>
                         </div>
                     </section>
+                    -->
                 </main>
             </div>
             <script>

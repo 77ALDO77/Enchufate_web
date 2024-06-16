@@ -40,6 +40,10 @@
         <servlet-name>cntCarrito</servlet-name>
         <servlet-class>ServLets.cntCarrito</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntAdmProductos</servlet-name>
+        <servlet-class>ServLets.cntAdmProductos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>cntCarrito</servlet-name>
         <url-pattern>/cntCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntAdmProductos</servlet-name>
+        <url-pattern>/cntAdmProductos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

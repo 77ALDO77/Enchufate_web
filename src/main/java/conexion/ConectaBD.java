@@ -13,7 +13,7 @@ public class ConectaBD {
 
         String url = "jdbc:mysql://localhost:3306/enchufate1?useTimeZone=true&serverTimezone=UTC&autoReconnect=true";
         String user = "root";
-        String clave = "root";
+        String clave = "";
         String driver = "com.mysql.cj.jdbc.Driver";
 
         try {
