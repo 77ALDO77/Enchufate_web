@@ -34,7 +34,7 @@ public class cntLogin extends HttpServlet {
             if (empleado != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("empleado", empleado);
-                response.sendRedirect("AdministracionCubiculos.jsp");
+                response.sendRedirect("AdmDashboar.jsp");
             } else {
                 request.setAttribute("errorMessage", "Correo o contraseña incorrectos");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -67,7 +67,7 @@ public class cntCarrito extends HttpServlet {
             request.setAttribute("productosEnCarrito", productosEnCarrito);
         }
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("carrito.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Carrito.jsp");
         dispatcher.forward(request, response);
     }
 }

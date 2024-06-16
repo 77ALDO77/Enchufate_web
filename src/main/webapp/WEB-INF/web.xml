@@ -44,6 +44,10 @@
         <servlet-name>cntAdmProductos</servlet-name>
         <servlet-class>ServLets.cntAdmProductos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cntDashboard</servlet-name>
+        <servlet-class>ServLets.cntDashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>cntAdmProductos</servlet-name>
         <url-pattern>/cntAdmProductos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntDashboard</servlet-name>
+        <url-pattern>/cntDashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

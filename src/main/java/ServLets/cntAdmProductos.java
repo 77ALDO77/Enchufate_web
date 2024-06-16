@@ -31,7 +31,7 @@ public class cntAdmProductos extends HttpServlet {
                     listaCat = new CategoriaDAO().getList();
                     request.setAttribute("listaCategoria", listaCat);
                     request.setAttribute("lista", listaCat);
-                    
+
                     listaProv = new ProveedorDAO().getList();
                     request.setAttribute("listaProveedor", listaProv);
                     request.setAttribute("lista", listaProv);

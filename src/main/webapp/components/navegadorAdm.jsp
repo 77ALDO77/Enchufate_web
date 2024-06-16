@@ -14,6 +14,7 @@
             </div>
             <div class="button-nav-admin" onclick="location.href = './AdmDashboar.jsp';">
                 <div style="display: flex; justify-content: end;"></div>
+                 
                 <div>Panel de Información</div>
             </div>
             <div class="button-nav-admin" onclick="location.href = './AdmEmpleados.jsp';">
