@@ -18,10 +18,11 @@ public class Producto implements Serializable {
     private String fechavencimiento;
     private String nombreCategoria;
     private int cantidad;
+    private double total;
     public Producto() {
     }
 
-    public Producto(int codproducto, int codcategoria, int codproveedor, double precio, String nombre, String descripcion, String imagen, String fechavencimiento, String nombreCategoria,int cantidad) {
+    public Producto(int codproducto, int codcategoria, int codproveedor, double precio, String nombre, String descripcion, String imagen, String fechavencimiento, String nombreCategoria,int cantidad,double total) {
         this.codproducto = codproducto;
         this.codcategoria = codcategoria;
         this.codproveedor = codproveedor;
@@ -32,6 +33,7 @@ public class Producto implements Serializable {
         this.fechavencimiento = fechavencimiento;
         this.nombreCategoria = nombreCategoria;
         this.cantidad=cantidad;
+        this.total=total;
     }
 
     public int getCodproducto() {
@@ -112,6 +114,14 @@ public class Producto implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
     
     @Override

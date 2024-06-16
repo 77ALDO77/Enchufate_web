@@ -10,7 +10,7 @@
     <nav>
         <ul>
             <li><a href="market.jsp">Tienda</a></li>
-            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Cubiculos</a></li>
             <li><a href="acercade.jsp">Acerca de</a></li>
             <li><a href="Contactenos.jsp">Contacto</a></li>
             <li><a href="locales.jsp">Locales</a></li>
