@@ -33,7 +33,7 @@
                 <div style="display: flex; justify-content: end;"></div>
                 <div style="display: flex; align-items: center;">Cubiculos</div>               
             </div>                             
-            <div class="button-nav-admin">
+            <div class="button-nav-admin" onclick="location.href = './Inicio.jsp';">
                 <div style="display: flex; justify-content: end;"></div>
                 <div>Cerrar Sesión</div>
             </div>

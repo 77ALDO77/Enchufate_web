@@ -34,9 +34,12 @@ public class cntDashboard extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-        if (accion == null || accion.equals("cargar")) {
+        if (accion != null && accion.equals("cargar")) {
+            String fechaInicio = request.getParameter("fechaInicio");
+            String fechaFin = request.getParameter("fechaFin");
+
             VentaDAO ventaDAO = new VentaDAO();
-            List<Venta> ventas = ventaDAO.obtenerVentas();
+            List<Venta> ventas = ventaDAO.obtenerVentas(fechaInicio, fechaFin);
 
             // Convertir la lista de ventas a JSON
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

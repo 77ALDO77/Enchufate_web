@@ -15,4 +15,74 @@ html, body {
     grid-auto-columns: auto;
     height: 100vh;
     box-sizing: border-box;
+    align-items: center;
+    flex-direction: column;
 }
+.box-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+form#dateForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+form#dateForm label {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+form#dateForm input[type="date"] {
+    padding: 5px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form#dateForm button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form#dateForm button:hover {
+    background-color: #45a049;
+}
+
+.graficos-ventas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#piechart_3d {
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #666;
+}
+
