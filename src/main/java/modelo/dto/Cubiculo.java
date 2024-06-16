@@ -1,15 +1,11 @@
 package modelo.dto;
 
 public class Cubiculo {
-
     private int codCubiculo;
     private int nivel;
     private String estado;
 
-    public Cubiculo() {
-    }
-    
-
+    // Getters y Setters
     public int getCodCubiculo() {
         return codCubiculo;
     }

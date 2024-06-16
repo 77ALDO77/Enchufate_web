@@ -1,94 +1,70 @@
 package modelo.dao;
 
-import conexion.ConectaBD;
 import modelo.dto.Cubiculo;
+import conexion.ConectaBD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CubiculoDAO {
-    public ArrayList<Cubiculo> obtenerCubiculos() {
-        ArrayList<Cubiculo> cubiculos = new ArrayList<>();
-        ConectaBD conectaBD = new ConectaBD();
-        Connection connection = conectaBD.getConnection();
 
-        try {
-            String sqlCubiculos = "SELECT * FROM Cubiculo";
-            PreparedStatement pstCubiculos = connection.prepareStatement(sqlCubiculos);
-            ResultSet rsCubiculos = pstCubiculos.executeQuery();
+    public List<Cubiculo> obtenerCubiculos() {
+        List<Cubiculo> cubiculos = new ArrayList<>();
+        String sql = "SELECT * FROM Cubiculo";
+        
+        try (Connection cnx = new ConectaBD().getConnection();
+             PreparedStatement pst = cnx.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
 
-            while (rsCubiculos.next()) {
+            while (rs.next()) {
                 Cubiculo cubiculo = new Cubiculo();
-                cubiculo.setCodCubiculo(rsCubiculos.getInt("CodCubiculo"));
-                cubiculo.setNivel(rsCubiculos.getInt("Nivel"));
-                cubiculo.setEstado(rsCubiculos.getString("Estado"));
+                cubiculo.setCodCubiculo(rs.getInt("CodCubiculo"));
+                cubiculo.setNivel(rs.getInt("Nivel"));
+                cubiculo.setEstado(rs.getString("Estado"));
                 cubiculos.add(cubiculo);
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return cubiculos;
     }
+    
+    public void actualizarEstadoCubiculo(int codCubiculo, String nuevoEstado) {
+        String sql = "UPDATE Cubiculo SET Estado = ? WHERE CodCubiculo = ?";
+        
+        try (Connection cnx = new ConectaBD().getConnection();
+             PreparedStatement pst = cnx.prepareStatement(sql)) {
 
-    public int obtenerCubiculosActivos() {
-        int cubiculosActivos = 0;
-        ConectaBD conectaBD = new ConectaBD();
-        Connection connection = conectaBD.getConnection();
-
-        try {
-            String sqlCubiculosActivos = "SELECT COUNT(*) FROM Cubiculo WHERE Estado = 'Ocupado'";
-            PreparedStatement pstCubiculosActivos = connection.prepareStatement(sqlCubiculosActivos);
-            ResultSet rsCubiculosActivos = pstCubiculosActivos.executeQuery();
-
-            if (rsCubiculosActivos.next()) {
-                cubiculosActivos = rsCubiculosActivos.getInt(1);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            pst.setString(1, nuevoEstado);
+            pst.setInt(2, codCubiculo);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return cubiculosActivos;
     }
 
-    public int obtenerReservasHoy() {
-        int reservasHoy = 0;
-        ConectaBD conectaBD = new ConectaBD();
-        Connection connection = conectaBD.getConnection();
-
-        try {
-            String sqlReservasHoy = "SELECT COUNT(*) FROM Reserva WHERE Fecha = CURDATE()";
-            PreparedStatement pstReservasHoy = connection.prepareStatement(sqlReservasHoy);
-            ResultSet rsReservasHoy = pstReservasHoy.executeQuery();
-
-            if (rsReservasHoy.next()) {
-                reservasHoy = rsReservasHoy.getInt(1);
+    public Cubiculo obtenerCubiculoPorCodigo(int codCubiculo) {
+        Cubiculo cubiculo = null;
+        String sql = "SELECT * FROM Cubiculo WHERE CodCubiculo = ?";
+        
+        try (Connection cnx = new ConectaBD().getConnection();
+             PreparedStatement pst = cnx.prepareStatement(sql)) {
+            pst.setInt(1, codCubiculo);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    cubiculo = new Cubiculo();
+                    cubiculo.setCodCubiculo(rs.getInt("CodCubiculo"));
+                    cubiculo.setNivel(rs.getInt("Nivel"));
+                    cubiculo.setEstado(rs.getString("Estado"));
+                }
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return reservasHoy;
+        return cubiculo;
     }
 }

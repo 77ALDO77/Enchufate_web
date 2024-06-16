@@ -4,15 +4,23 @@
  */
 package ServLets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import modelo.dao.CubiculoDAO;
+import modelo.dao.ReservaDAO;
+import modelo.dao.ClienteDAO;
+import modelo.dto.Cubiculo;
+import modelo.dto.Reserva;
+import modelo.dto.Cliente;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.dao.CubiculoDAO;
-import modelo.dto.Cubiculo;
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.List;
 
 /**
  *
@@ -20,27 +28,67 @@ import modelo.dto.Cubiculo;
  */
 public class cntCubiculos extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String accion = request.getParameter("accion");
         CubiculoDAO cubiculoDAO = new CubiculoDAO();
-        ArrayList<Cubiculo> cubiculos = cubiculoDAO.obtenerCubiculos();
-        int cubiculosActivos = cubiculoDAO.obtenerCubiculosActivos();
-        int reservasHoy = cubiculoDAO.obtenerReservasHoy();
+        ReservaDAO reservaDAO = new ReservaDAO();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Gson gson = new Gson();
 
-        request.setAttribute("cubiculos", cubiculos);
-        request.setAttribute("cubiculosActivos", cubiculosActivos);
-        request.setAttribute("reservasHoy", reservasHoy);
+        if (accion != null) {
+            switch (accion) {
+                case "listar":
+                    List<Cubiculo> cubiculos = cubiculoDAO.obtenerCubiculos();
+                    String jsonCubiculos = gson.toJson(cubiculos);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(jsonCubiculos);
+                    break;
+                case "crearReserva":
+                    String dniCliente = request.getParameter("dniCliente");
+                    Cliente cliente = clienteDAO.obtenerClientePorDNI(dniCliente);
+                    int codEmpleado = 1; // Supongamos que el empleado está registrado y su código es 1
+                    int codCubiculo = Integer.parseInt(request.getParameter("codCubiculo"));
+                    Date fecha = new Date(System.currentTimeMillis());
+                    Time hora = Time.valueOf(LocalTime.now());
+                    int duracion = Integer.parseInt(request.getParameter("duracion"));
 
-        request.getRequestDispatcher("AdministracionCubiculos.jsp").forward(request, response);
+                    Reserva reserva = new Reserva();
+                    reserva.setCodCliente(cliente.getCodCliente());
+                    reserva.setCodEmpleado(codEmpleado);
+                    reserva.setCodCubiculo(codCubiculo);
+                    reserva.setFecha(fecha);
+                    reserva.setHora(hora);
+                    reserva.setDuracion(duracion);
+
+                    reservaDAO.crearReserva(reserva);
+                    cubiculoDAO.actualizarEstadoCubiculo(codCubiculo, "Ocupado");
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    break;
+                case "obtenerTiempoRestante":
+                    codCubiculo = Integer.parseInt(request.getParameter("codCubiculo"));
+                    int tiempoRestante = reservaDAO.obtenerTiempoRestante(codCubiculo);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("{\"tiempoRestante\":" + tiempoRestante + "}");
+                    break;
+                case "obtenerCubiculo":
+                    codCubiculo = Integer.parseInt(request.getParameter("codCubiculo"));
+                    Cubiculo cubiculo = cubiculoDAO.obtenerCubiculoPorCodigo(codCubiculo);
+                    String jsonCubiculo = gson.toJson(cubiculo);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(jsonCubiculo);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no reconocida");
+                    break;
+            }
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no proporcionada");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +127,7 @@ public class cntCubiculos extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet que maneja los cubículos";
     }// </editor-fold>
 
 }
