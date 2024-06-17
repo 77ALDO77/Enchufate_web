@@ -69,6 +69,9 @@ public class cntCubiculos extends HttpServlet {
                 case "obtenerTiempoRestante":
                     codCubiculo = Integer.parseInt(request.getParameter("codCubiculo"));
                     int tiempoRestante = reservaDAO.obtenerTiempoRestante(codCubiculo);
+                    if (tiempoRestante <= 0) {
+                        cubiculoDAO.actualizarEstadoCubiculo(codCubiculo, "Disponible");
+                    }
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
                     response.getWriter().write("{\"tiempoRestante\":" + tiempoRestante + "}");

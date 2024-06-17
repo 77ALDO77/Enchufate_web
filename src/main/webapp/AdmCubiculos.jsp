@@ -91,7 +91,7 @@
                         });
 
                         // Actualizar tiempo restante
-                        setInterval(actualizarTiemposRestantes, 60);
+                        setInterval(actualizarTiemposRestantes, 15000);
                     },
                     error: function (error) {
                         console.log('Error al obtener los datos:', error);
@@ -172,6 +172,9 @@
                             codCubiculo: codCubiculo
                         },
                         success: function (data) {
+                            if (data.tiempoRestante <= 0) {
+                                cargarCubiculo(codCubiculo);
+                            }
                             elem.text(data.tiempoRestante + ' minutos');
                         },
                         error: function (error) {

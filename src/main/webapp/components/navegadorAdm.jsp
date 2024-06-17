@@ -8,7 +8,7 @@
             <div style="display:flex;flex-direction:row; height: fit-content; width:100%; justify-content: center; align-items: center; padding: 30px 0px;">
                 <img id="adminImg" alt=""/>
                 <div style="display: flex; flex-direction: column; padding: 0px 10px;">
-                    <label style="color: white;font-weight: 600; margin: 5px 0px;">Mario</label>
+                    <label style="color: white;font-weight: 600; margin: 5px 0px;"></label>
                     <label  style="color: #00FEC1;font-weight: 600;">Administrador</label>
                 </div>
             </div>

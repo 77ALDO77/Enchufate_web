@@ -1,15 +1,12 @@
 package modelo.dao;
 
-import conexion.ConectaBD;
 import modelo.dto.Empleado;
+import conexion.ConectaBD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class EmpleadoDAO {
-
     public Empleado authenticate(String correo, String clave) {
         Empleado empleado = null;
         Connection cnx = new ConectaBD().getConnection();
@@ -30,12 +27,12 @@ public class EmpleadoDAO {
                 empleado.setCodArea(rs.getInt("CodArea"));
                 empleado.setNombre(rs.getString("Nombre"));
                 empleado.setApellidos(rs.getString("Apellidos"));
-                empleado.setFechaNacimiento(rs.getDate("FechaNacimiento"));
+                empleado.setFechaNacimiento("FechaNacimineto");
                 empleado.setDni(rs.getInt("DNI"));
                 empleado.setSexo(rs.getString("Sexo"));
                 empleado.setCelular(rs.getInt("Celular"));
                 empleado.setCorreo(rs.getString("Correo"));
-                empleado.setSalario(rs.getBigDecimal("Salario"));
+                empleado.setSalario(rs.getInt("Salario"));
                 empleado.setClave(rs.getString("Clave"));
             }
         } catch (SQLException ex) {

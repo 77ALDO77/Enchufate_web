@@ -1,26 +1,20 @@
 package modelo.dto;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class Empleado {
-
     private int codEmpleado;
     private int codLocal;
     private int codArea;
     private String nombre;
     private String apellidos;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private int dni;
     private String sexo;
     private int celular;
+    private double salario;
     private String correo;
-    private BigDecimal salario;
     private String clave;
 
-    public Empleado() {
-    }
-
+    // Getters y Setters
     public int getCodEmpleado() {
         return codEmpleado;
     }
@@ -61,11 +55,11 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -93,20 +87,20 @@ public class Empleado {
         this.celular = celular;
     }
 
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
     public String getCorreo() {
         return correo;
     }
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public BigDecimal getSalario() {
-        return salario;
-    }
-
-    public void setSalario(BigDecimal salario) {
-        this.salario = salario;
     }
 
     public String getClave() {
@@ -116,5 +110,4 @@ public class Empleado {
     public void setClave(String clave) {
         this.clave = clave;
     }
-
 }

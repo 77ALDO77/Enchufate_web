@@ -16,6 +16,7 @@ public class cntLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
 
@@ -40,6 +41,7 @@ public class cntLogin extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
+
     }
 
     @Override
@@ -47,4 +49,3 @@ public class cntLogin extends HttpServlet {
         return "Short description";
     }
 }
-

@@ -15,10 +15,8 @@ public class CubiculoDAO {
     public List<Cubiculo> obtenerCubiculos() {
         List<Cubiculo> cubiculos = new ArrayList<>();
         String sql = "SELECT * FROM Cubiculo";
-        
-        try (Connection cnx = new ConectaBD().getConnection();
-             PreparedStatement pst = cnx.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery()) {
+
+        try (Connection cnx = new ConectaBD().getConnection(); PreparedStatement pst = cnx.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
                 Cubiculo cubiculo = new Cubiculo();
@@ -32,12 +30,11 @@ public class CubiculoDAO {
         }
         return cubiculos;
     }
-    
+
     public void actualizarEstadoCubiculo(int codCubiculo, String nuevoEstado) {
         String sql = "UPDATE Cubiculo SET Estado = ? WHERE CodCubiculo = ?";
-        
-        try (Connection cnx = new ConectaBD().getConnection();
-             PreparedStatement pst = cnx.prepareStatement(sql)) {
+
+        try (Connection cnx = new ConectaBD().getConnection(); PreparedStatement pst = cnx.prepareStatement(sql)) {
 
             pst.setString(1, nuevoEstado);
             pst.setInt(2, codCubiculo);
@@ -50,9 +47,8 @@ public class CubiculoDAO {
     public Cubiculo obtenerCubiculoPorCodigo(int codCubiculo) {
         Cubiculo cubiculo = null;
         String sql = "SELECT * FROM Cubiculo WHERE CodCubiculo = ?";
-        
-        try (Connection cnx = new ConectaBD().getConnection();
-             PreparedStatement pst = cnx.prepareStatement(sql)) {
+
+        try (Connection cnx = new ConectaBD().getConnection(); PreparedStatement pst = cnx.prepareStatement(sql)) {
             pst.setInt(1, codCubiculo);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {

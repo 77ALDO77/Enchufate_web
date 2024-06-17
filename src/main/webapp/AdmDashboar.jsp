@@ -23,6 +23,7 @@
                     <input type="date" id="fechaFin" name="fechaFin" required>
                     <button type="submit">Cargar Datos</button>
                 </form>
+                <button id="exportExcelBtn">Exportar a Excel</button>
                 <div class="graficos-ventas">
                     <h2>Ventas Diarias</h2>
                     <div id="piechart_3d"></div>
@@ -34,7 +35,6 @@
             google.charts.load("current", {packages: ["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
 
-            // Función para dibujar el gráfico
             function drawChart(fechaInicio, fechaFin) {
                 $.ajax({
                     url: '<%= request.getContextPath()%>/cntDashboard',
@@ -69,7 +69,6 @@
                 });
             }
 
-            // Enviar el formulario y actualizar el gráfico
             $('#dateForm').on('submit', function (event) {
                 event.preventDefault();
                 var fechaInicio = $('#fechaInicio').val();
@@ -77,7 +76,12 @@
                 drawChart(fechaInicio, fechaFin);
             });
 
-            // Dibujar el gráfico con un rango de fechas por defecto al cargar la página
+            $('#exportExcelBtn').on('click', function () {
+                var fechaInicio = $('#fechaInicio').val();
+                var fechaFin = $('#fechaFin').val();
+                window.location.href = '<%= request.getContextPath()%>/cntDashboard?accion=exportarExcel&fechaInicio=' + fechaInicio + '&fechaFin=' + fechaFin;
+            });
+
             $(document).ready(function () {
                 var today = new Date().toISOString().split('T')[0];
                 $('#fechaInicio').val(today);
@@ -87,3 +91,4 @@
         </script>
     </body>
 </html>
+
