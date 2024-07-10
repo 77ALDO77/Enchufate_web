@@ -111,7 +111,8 @@
                     <img src="${pageContext.request.contextPath}/resources/img/payments/payment_pagoefectivo.png" alt="Método de pago 2" class="payment-method-image">
                     <img src="${pageContext.request.contextPath}/resources/img/payments/payment_visa.png" alt="Método de pago 3" class="payment-method-image">
                 </div>
-                <button class="sqs-button-element--secondary buy-button">Comprar</button>
+                <button class="sqs-button-element--secondary buy-button" onclick="window.location.href='Pago.jsp'">Comprar</button>
+
             </div>
         </div>
     </div>

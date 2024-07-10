@@ -11,6 +11,7 @@
     boolean isLoggedIn = (customer != null);
 %>
 <header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <nav>
         <ul>
             <li><a href="market.jsp">Tienda</a></li>
