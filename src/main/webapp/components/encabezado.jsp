@@ -1,4 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="modelo.dto.Customer" %>
 <%
@@ -28,4 +32,13 @@
             <a href="cntCarrito?action=view"><img src="${pageContext.request.contextPath}/resources/img/inicio/CarroCompra.png" alt="">Carrito de compras</a>
         </div>
     </nav>
+        <link href="resources/css/chatbot.css" rel="stylesheet" type="text/css"/>
+        <script src="${pageContext.request.contextPath}/resources/scrip/chat-bot.js"></script>
+        <div class="chat-bot-container" id="chatBot">
+        <div class="chat-header">Chat-Bot</div>
+        <div class="chat-body" id="chatBody">
+            <!-- Mensajes del chat -->
+        </div>
+    </div>
 </header>
+            
