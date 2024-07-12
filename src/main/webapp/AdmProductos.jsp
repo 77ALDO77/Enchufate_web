@@ -37,7 +37,9 @@
                                     <label for="precio" class="etiqueta">(*)Precio(s/.)</label>
                                     <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00">
                                     <label for="fecha" class="etiqueta">Fecha de Vencimiento</label>
-                                    <input type="text" name="fecha" value="${fecha}" placeholder="YYYY-MM-DD">
+                                    <input type="date" name="fecha" value="${fecha}" placeholder="DD-MM-YYYY">
+                                    <label for="nombre" class="etiqueta">(*)Descripción</label>
+                                    <input type="text" name="descripcion" value="${descripcion}" placeholder="Insertar descripción"/>
                                     <label for="categoria" class="etiqueta">(*)Categoria</label>
                                     <div class="combo-cat">
                                         <select id="categoria" name="cboCategoria">
