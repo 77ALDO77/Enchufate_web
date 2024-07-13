@@ -19,6 +19,9 @@ public class Producto implements Serializable {
     private String nombreCategoria;
     private int cantidad;
     private double total;
+    private Categoria categoria;
+    private Proveedor proveedor;
+    
     public Producto() {
     }
 
@@ -34,6 +37,16 @@ public class Producto implements Serializable {
         this.nombreCategoria = nombreCategoria;
         this.cantidad=cantidad;
         this.total=total;
+    }
+    
+    public Producto(int codproducto, String nombre, String descripcion, String fechavencimiento, double precio, Categoria categoria, Proveedor proveedor){
+        this.codproducto = codproducto;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechavencimiento = fechavencimiento;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.proveedor = proveedor;
     }
 
     public int getCodproducto() {
@@ -122,6 +135,22 @@ public class Producto implements Serializable {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+    
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
     
     @Override

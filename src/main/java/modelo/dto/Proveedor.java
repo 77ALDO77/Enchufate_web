@@ -8,6 +8,11 @@ public class Proveedor {
     
     public Proveedor(){}
     
+    public Proveedor(int codProveedor, String nombre){
+        this.codProveedor = codProveedor;
+        this.nombre = nombre;
+    }
+    
     public Proveedor(int codProveedor, String nombre, String contacto, String pais){
         this.codProveedor = codProveedor;
         this.nombre = nombre;

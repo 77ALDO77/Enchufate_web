@@ -1,4 +1,17 @@
+<%@page import="modelo.dto.Proveedor"%>
+<%@page import="modelo.dto.Categoria"%>
+<%@page import="conexion.ConectaBD"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="ServLets.cntAdmProductos"%>
+<%@page import="modelo.dao.ProductoDAO"%>
+<%@page import="modelo.dto.Producto"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,12 +62,12 @@
                                                 <br>
                                                 <label for="nombre" class="etiqueta-admproductos">(*)Nombre</label>
                                                 <input type="text" name="nombre" value="${nombre}" placeholder="Nuevo Producto" class="entrada-admproductos"/>
-                                                <label for="precio" class="etiqueta-admproductos">(*)Precio(s/.)</label>
-                                                <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00" class="entrada-admproductos">
+                                                <label for="descripcion" class="etiqueta-admproductos">(*)Descripción</label>
+                                                <input type="text" name="descripcion" value="${descripcion}" placeholder="Insertar descripción" class="entrada-admproductos"/>
                                                 <label for="fecha" class="etiqueta-admproductos">Fecha de Vencimiento</label>
                                                 <input type="date" name="fecha" value="${fecha}" placeholder="DD-MM-YYYY" class="entrada-admproductos">
-                                                <label for="nombre" class="etiqueta-admproductos">(*)Descripción</label>
-                                                <input type="text" name="descripcion" value="${descripcion}" placeholder="Insertar descripción" class="entrada-admproductos"/>
+                                                <label for="precio" class="etiqueta-admproductos">(*)Precio(s/.)</label>
+                                                <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00" class="entrada-admproductos">
                                                 <label for="categoria" class="etiqueta-admproductos">(*)Categoria</label>
                                                 <div class="combo-cat">
                                                     <select id="categoria" name="cboCategoria" class="cbx-admproductos">
@@ -87,7 +100,30 @@
                     </div>
                     <br>
                     <div class="mostrar-productos">
-                        
+                        <table class="tabla-admproductos">
+                            <thead>
+                                <tr>
+                                    <td>Código</td><td>Nombre</td><td>Descripción</td><td>Fecha de Vencimiento</td><td>Precio</td><td>Categoría</td><td>Proveedor</td><td>Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="producto" items="${listaProducto}">
+                                    <tr>
+                                        <td>${producto.codproducto}</td>
+                                        <td>${producto.nombre}</td>
+                                        <td>${producto.descripcion}</td>
+                                        <td>${producto.fechavencimiento}</td>
+                                        <td>${producto.precio}</td>
+                                        <td>${producto.categoria.nombre}</td>
+                                        <td>${producto.proveedor.nombre}</td>
+                                        <td class="acciones">
+                                            <input type="button" value="editar">
+                                            <input type="button" value="eliminar">
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </main>
             </div>

@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.Producto;
 import conexion.ConectaBD;
+import modelo.dto.Categoria;
+import modelo.dto.Proveedor;
 
 public class ProductoDAO {
+
     private Connection cnx;
 
     public ProductoDAO() {
@@ -19,9 +22,8 @@ public class ProductoDAO {
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT p.*, c.Nombre AS NombreCategoria FROM Producto p INNER JOIN Categoria c ON p.CodCategoria = c.CodCategoria";
-        
-        try (PreparedStatement ps = cnx.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+
+        try (PreparedStatement ps = cnx.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Producto producto = new Producto();
                 producto.setCodproducto(rs.getInt("CodProducto"));
@@ -40,6 +42,7 @@ public class ProductoDAO {
         }
         return productos;
     }
+
     public Producto obtenerProductoPorId(int codproducto) {
         Producto producto = null;
         try {
@@ -63,5 +66,35 @@ public class ProductoDAO {
             e.printStackTrace();
         }
         return producto;
+    }
+
+    public List<Producto> getList() {
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor FROM producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor);";
+        List<Producto> lista = null;
+
+        try {
+            ps = cnx.prepareStatement(sql);
+            rs = ps.executeQuery();
+            lista = new ArrayList<>();
+            
+            while (rs.next()) {
+                Producto producto = new Producto(
+                        rs.getInt("codproducto"),
+                        rs.getString("nombre"),
+                        rs.getString("descripcion"),
+                        rs.getString("fechavencimiento"),
+                        rs.getDouble("precio"),
+                        new Categoria(rs.getInt("codcategoria"), rs.getString("categoria")),
+                        new Proveedor(rs.getInt("codproveedor"), rs.getString("proveedor"))
+                );
+                lista.add(producto);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al cargar los datos del producto en la lista " + ex);
+        }
+        return lista;
     }
 }

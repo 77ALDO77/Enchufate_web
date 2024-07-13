@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.CategoriaDAO;
 import modelo.dao.LocalesDAO;
+import modelo.dao.ProductoDAO;
 import modelo.dao.ProveedorDAO;
 import modelo.dto.Categoria;
 import modelo.dto.Locales;
+import modelo.dto.Producto;
 import modelo.dto.Proveedor;
 
 public class cntAdmProductos extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) //evalúa las peticiones que ha hecho el usuario
             throws ServletException, IOException {
-        List<Categoria> listaCat = new CategoriaDAO().getList();
-        List<Proveedor> listaProv = new ProveedorDAO().getList();
         String accion = request.getParameter("accion");
         Boolean redireccionado = (Boolean) request.getSession().getAttribute("redireccionado");
         if (accion != null) {
@@ -28,13 +28,14 @@ public class cntAdmProductos extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
                     request.getSession().setAttribute("redireccionado", true);
                 } else {
-                    listaCat = new CategoriaDAO().getList();
+                    List<Categoria> listaCat = new CategoriaDAO().getList();
                     request.setAttribute("listaCategoria", listaCat);
-                    request.setAttribute("lista", listaCat);
 
-                    listaProv = new ProveedorDAO().getList();
+                    List<Proveedor> listaProv = new ProveedorDAO().getList();
                     request.setAttribute("listaProveedor", listaProv);
-                    request.setAttribute("lista", listaProv);
+                    
+                    List<Producto> listaProd = new ProductoDAO().getList();
+                    request.setAttribute("listaProducto", listaProd);
 
                     request.getRequestDispatcher("/AdmProductos.jsp").forward(request, response);
                     request.getSession().removeAttribute("redireccionado");
