@@ -33,3 +33,7 @@ INSERT INTO Producto (CodCategoria, CodProveedor, Precio, Nombre, Descripcion, I
 (7, 1, 10.00, 'Malboro', 'Cigarro Marlboro Double Burst 10 und', 'malboro.png', '2024-12-31'),
 (7, 1, 39.00, 'Vapeador', 'Vapeador Electrónico Boom Mango Ice 1 und', 'vapeador.png', '2024-12-31'),
 (7, 1, 3.50, 'OCB X-PERT', 'Vapeador Electrónico Boom Mango Ice 1 und', 'vapeadormikes.png', '2024-12-31');
+
+INSERT INTO Proveedor (Nombre, Contacto, Pais) VALUES 
+('LescoCorp.', 'lescocorp@mail.com', 'USA'),
+('Manco de Lepanto S.A.', 'lepantomancop@comp.com', 'España');
