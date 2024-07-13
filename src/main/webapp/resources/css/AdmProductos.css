@@ -137,3 +137,96 @@ input[type="submit"] {
     outline: none; /* Sin borde de enfoque */
     box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.5); /* Sombra alrededor al enfocar */
 }
+
+.box-content-admproductos {
+    flex: 1; /* Ocupa todo el espacio restante */
+    height: 100%;
+    border: 1px solid #000;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+.mostrar-productos {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.contenedor-tabla-admproductos {
+    margin: 20px auto;
+    width: 90%;
+}
+
+.tabla-admproductos {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Estilos de la cabecera */
+.cabeza-tabla-admproductos {
+    background-color: #f4f4f4;
+    text-align: center; /* Centrar el texto horizontalmente */
+    vertical-align: middle; /* Centrar el texto verticalmente */
+}
+
+.fila-cabeza-tabla-admproductos {
+    border-bottom: 2px solid #ddd;
+}
+
+.cuadro-cabeza-tabla-admproductos {
+    padding: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilos del cuerpo */
+.cuerpo-tabla-admproductos {
+    background-color: #fff;
+}
+
+.fila-cuerpo-tabla-admproductos:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cuadro-cuerpo-tabla-admproductos {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    text-align: center; /* Centrar el texto horizontalmente */
+    vertical-align: middle; /* Centrar el texto verticalmente */
+}
+
+/* Estilos de acciones */
+.acciones-cuerpo-tabla-admproductos {
+    white-space: nowrap;
+    margin-right: 3px;
+}
+
+.btn-editar-admproductos,
+.btn-eliminar-admproductos {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.btn-editar-admproductos {
+    background-color: #4CAF50; /* Verde */
+}
+
+.btn-eliminar-admproductos {
+    background-color: #f44336; /* Rojo */
+}
+
+/* Efectos de hover para botones */
+.btn-editar-admproductos:hover {
+    background-color: #45a049;
+}
+
+.btn-eliminar-admproductos:hover {
+    background-color: #e53935;
+}
