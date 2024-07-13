@@ -8,9 +8,11 @@
         <link href="resources/css/Admin.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin-Display.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>Productos</title>
     </head>
-    <body class="parent-container">
+    <body class="parent-container-admproductos">
         <jsp:include page="components/navegadorAdm.jsp"/>
         <%
             Boolean redireccionado = (Boolean) session.getAttribute("redireccionado");
@@ -21,141 +23,72 @@
             }
         %>
         <script src="resources/scrip/AdmPng.js" type="text/javascript"></script>
-        <div class="box-content">
-            <div class="container">
-                <main class="main-content">
-                    <header class="header">
-                        <h1>Gestión de Productos</h1>
-                    </header>
-                    <section class="dashboard">
-                        <div class="agregar-prod">
-                            <form action="<%= request.getContextPath()%>./cntAdmProductos" method="post" class="formulario" id="formProductos">
-                                <fieldset>
-                                    <legend>Registro de Productos</legend>
-                                    <label for="nombre" class="etiqueta">(*)Nombre</label>
-                                    <input type="text" name="nombre" value="${nombre}" placeholder="Nuevo Producto"/>
-                                    <label for="precio" class="etiqueta">(*)Precio(s/.)</label>
-                                    <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00">
-                                    <label for="fecha" class="etiqueta">Fecha de Vencimiento</label>
-                                    <input type="date" name="fecha" value="${fecha}" placeholder="DD-MM-YYYY">
-                                    <label for="nombre" class="etiqueta">(*)Descripción</label>
-                                    <input type="text" name="descripcion" value="${descripcion}" placeholder="Insertar descripción"/>
-                                    <label for="categoria" class="etiqueta">(*)Categoria</label>
-                                    <div class="combo-cat">
-                                        <select id="categoria" name="cboCategoria">
-                                            <c:forEach var="itemCategoria" items="${listaCategoria}">
-                                                <option value="${itemCategoria.codCategoria}"  ${categoria == itemCategoria.codCategoria ? "selected" : ""} >${itemCategoria.nombre}</option>                        
-                                            </c:forEach>
-                                        </select>    
-                                        <i></i>
-                                    </div>
-                                    <label for="proveedor" class="etiqueta">(*)Proveedor</label>
-                                    <div class="combo-prov">
-                                        <select>
-                                            <c:forEach var="itemProveedor" items="${listaProveedor}">
-                                                <option value="${itemProveedor.codProveedor}"  ${proveedor == itemProveedor.codProveedor ? "selected" : ""} >${itemProveedor.nombre}</option>                        
-                                            </c:forEach>
-                                        </select>    
-                                        <i></i>
-                                    </div>
-                                    <label class="nota">No olvide que los campos con (*) son <b>obligatorios</b></label>
-                                    <input type="submit" value="Registrar" name="accion" class="etiqueta"/>                
-                                </fieldset>
+        <div class="box-content-admproductos">
+            <header class="header-admproductos">
+                <h1>Gestión de Productos</h1>
+            </header>
+            <div class="container-admproductos">
+                <main class="main-content-admproductos">
+                    <div class="registrar-productos">
+                        <div class="form-prod-admproductos">
+                            <button type="button" class="btn-agregarprod btn-primary mt-2 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-sharp fa-regular fa-file"></i>
+                                Agregar Nuevo Producto
+                            </button>
+                        </div>
+                        <div class="modal fade" id="exampleModal" tabindex="1" aria labellebdy="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="contenido-registrar-admproductos">
+                                        <div class="modal-header">
+                                            <h1 class="modal-tittle fs-5" id="exampleModalLabel">Registro de Productos</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="<%= request.getContextPath()%>./cntAdmProductos" method="post" class="formulario-admproductos" id="formProductos">
+                                            <fieldset class="campos-admproductos">
+                                                <br>
+                                                <label for="nombre" class="etiqueta-admproductos">(*)Nombre</label>
+                                                <input type="text" name="nombre" value="${nombre}" placeholder="Nuevo Producto" class="entrada-admproductos"/>
+                                                <label for="precio" class="etiqueta-admproductos">(*)Precio(s/.)</label>
+                                                <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00" class="entrada-admproductos">
+                                                <label for="fecha" class="etiqueta-admproductos">Fecha de Vencimiento</label>
+                                                <input type="date" name="fecha" value="${fecha}" placeholder="DD-MM-YYYY" class="entrada-admproductos">
+                                                <label for="nombre" class="etiqueta-admproductos">(*)Descripción</label>
+                                                <input type="text" name="descripcion" value="${descripcion}" placeholder="Insertar descripción" class="entrada-admproductos"/>
+                                                <label for="categoria" class="etiqueta-admproductos">(*)Categoria</label>
+                                                <div class="combo-cat">
+                                                    <select id="categoria" name="cboCategoria" class="cbx-admproductos">
+                                                        <c:forEach var="itemCategoria" items="${listaCategoria}">
+                                                            <option value="${itemCategoria.codCategoria}"  ${categoria == itemCategoria.codCategoria ? "selected" : ""} >${itemCategoria.nombre}</option>                        
+                                                        </c:forEach>
+                                                    </select>    
+                                                    <i></i>
+                                                </div>
+                                                <label for="proveedor" class="etiqueta-admproductos">(*)Proveedor</label>
+                                                <div class="combo-prov">
+                                                    <select id="proveedor" name="cboProveedor" class="cbx-admproductos">
+                                                        <c:forEach var="itemProveedor" items="${listaProveedor}">
+                                                            <option value="${itemProveedor.codProveedor}"  ${proveedor == itemProveedor.codProveedor ? "selected" : ""} >${itemProveedor.nombre}</option>                        
+                                                        </c:forEach>
+                                                    </select>    
+                                                    <i></i>
+                                                </div>
+                                                <label class="nota">No olvide que los campos con (*) son <b>obligatorios</b></label>
+                                                <input type="submit" value="Registrar" name="accion" class="button-admproductos"/>                
+                                            </fieldset>
 
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                            </form>
-                        </div>
-                    </section>
-                    <!--
-                    <section class="dashboard">
-                        <div class="stats">
-                            <div class="card">
-                                <h3>Total de Productos</h3>
-                                <p>50</p>
-                            </div>
-                            <div class="card">
-                                <h3>Productos en Stock</h3>
-                                <p>45</p>
-                            </div>
-                            <div class="card">
-                                <h3>Productos Vendidos Hoy</h3>
-                                <p>5</p>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="details">
-                            <h2>Detalles de Productos</h2>
-                            <button class="btn-add" onclick="showAddProductForm()">Agregar Producto</button>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad en Stock</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Bloqueador solar</td>
-                                        <td>s/10.00</td>
-                                        <td>20</td>
-                                        <td>
-                                            <button class="btn-edit" onclick="showEditProductForm(1)">Editar</button>
-                                            <button class="btn-delete" onclick="deleteProduct(1)">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Mikes</td>
-                                        <td>s/15.00</td>
-                                        <td>10</td>
-                                        <td>
-                                            <button class="btn-edit" onclick="showEditProductForm(2)">Editar</button>
-                                            <button class="btn-delete" onclick="deleteProduct(2)">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Más filas aquí 
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Formulario para agregar productos 
-                        <div id="addProductForm" class="modal">
-                            <div class="modal-content">
-                                <span class="close" onclick="closeAddProductForm()">&times;</span>
-                                <h2>Agregar Producto</h2>
-                                <form>
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" required>
-                                    <label for="precio">Precio</label>
-                                    <input type="text" id="precio" name="precio" required>
-                                    <label for="cantidad">Cantidad en Stock</label>
-                                    <input type="text" id="cantidad" name="cantidad" required>
-                                    <button type="submit">Agregar</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Formulario para editar productos 
-                        <div id="editProductForm" class="modal">
-                            <div class="modal-content">
-                                <span class="close" onclick="closeEditProductForm()">&times;</span>
-                                <h2>Editar Producto</h2>
-                                <form>
-                                    <input type="hidden" id="edit-product-id" name="product-id">
-                                    <label for="edit-nombre">Nombre</label>
-                                    <input type="text" id="edit-nombre" name="nombre" required>
-                                    <label for="edit-precio">Precio</label>
-                                    <input type="text" id="edit-precio" name="precio" required>
-                                    <label for="edit-cantidad">Cantidad en Stock</label>
-                                    <input type="text" id="edit-cantidad" name="cantidad" required>
-                                    <button type="submit">Guardar Cambios</button>
-                                </form>
-                            </div>
-                        </div>
-                    </section>
-                    -->
+                    </div>
+                    <br>
+                    <div class="mostrar-productos">
+                        
+                    </div>
                 </main>
             </div>
             <script>
@@ -182,7 +115,7 @@
                     alert('Producto ' + id + ' eliminado');
                 }
             </script>
-
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         </div>
     </body>
 </html>

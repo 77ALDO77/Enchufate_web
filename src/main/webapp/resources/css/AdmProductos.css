@@ -2,74 +2,71 @@
     font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
 }
 
-html, body {
+.parent-container-admproductos{
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-}
-
-.parent-container{
     display: grid;
     grid-template-columns: minmax(400px,0.3fr) 1fr;
     grid-auto-columns: auto;
     height: 100vh;
     box-sizing: border-box;
-}
-
-body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
-.header {
+.header-admproductos {
     background-color: #004080;
     color: white;
     padding: 20px;
     text-align: center;
 }
 
-.dashboard {
+.form-prod-admproductos {
     display: flex;
-    justify-content: center;
-    margin-top: 30px;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    flex-direction: column; /* Alinear elementos en columna */
+    height: 100%; /* Asegurar que el div tome toda la altura disponible */
+    text-align: center; /* Centrar el texto */
 }
 
-.agregar-prod {
+.contenido-registrar-admproductos {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.formulario {
+.modal-tittle {
+    font-size: 1.25rem; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: #333; /* Color del texto */
+    text-align: center; /* Alineación centrada */
+}
+
+.formulario-admproductos {
     width: 100%;
     max-width: 400px;
 }
 
-fieldset {
+.campos-admproductos {
     border: none;
     margin: 0;
     padding: 0;
 }
 
-legend {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-label {
+.etiqueta-admproductos {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select {
+.entrada-admproductos[type="text"],
+.entrada-admproductos[type="number"],
+.entrada-admproductos[type="date"],
+.cbx-admproductos {
     width: calc(100% - 20px);
     padding: 8px 10px;
     margin-bottom: 20px;
@@ -99,9 +96,10 @@ input[type="submit"] {
     padding: 10px 20px;
     text-align: center;
     margin-top: 10px;
+    justify-content: center;
 }
 
-input[type="submit"]:hover {
+.button-admproductos[type="submit"]:hover {
     background-color: #00274d;
 }
 
@@ -113,4 +111,29 @@ input[type="submit"]:hover {
 
 .nota b {
     color: #e74c3c;
+}
+
+.btn-agregarprod {
+    background-color: #004080; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambio de cursor al pasar sobre el botón */
+    text-align: center; /* Alineación del texto */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+.btn-agregarprod:hover {
+    background-color: #003060; /* Color de fondo al pasar el cursor */
+}
+
+.btn-agregarprod:active {
+    background-color: #002040; /* Color de fondo al hacer clic */
+}
+
+.btn-agregarprod:focus {
+    outline: none; /* Sin borde de enfoque */
+    box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.5); /* Sombra alrededor al enfocar */
 }
