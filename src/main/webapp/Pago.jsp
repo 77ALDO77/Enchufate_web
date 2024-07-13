@@ -32,6 +32,26 @@
             display: none;
             margin-top: 20px;
         }
+        .qr-image img {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .loading-overlay img, .loading-overlay video {
+            max-width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -47,13 +67,13 @@
             <span>Pago con Mastercard</span>
         </div>
         <div class="payment-method" id="payment-efectivo">
-            <img src="${pageContext.request.contextPath}/resources/img/payments/payment_pagoefectivo.png" alt="Pago Efectivo">
-            <span>Pago Efectivo</span>
+            <img src="${pageContext.request.contextPath}/resources/img/payments/payment_yape.png" alt="Pago Efectivo">
+            <span>Yape</span>
         </div>
         
         <div class="payment-form" id="card-form">
             <h3>Ingrese los datos de su tarjeta</h3>
-            <form action="procesarPago.jsp" method="post">
+            <form id="payment-form" action="procesarPago.jsp" method="post">
                 <label for="card-number">Número de tarjeta:</label>
                 <input type="text" id="card-number" name="card-number" required>
                 <label for="card-name">Nombre en la tarjeta:</label>
@@ -68,9 +88,14 @@
 
         <div class="qr-image" id="qr-image">
             <h3>Escanea el código QR para pagar en efectivo</h3>
-            <img src="${pageContext.request.contextPath}/resources/img/payments/qr_code.png" alt="Código QR">
+            <img src="${pageContext.request.contextPath}/resources/img/payments/qr_yape.jpg" alt="Código QR">
         </div>
     </div>
+    
+    <div class="loading-overlay" id="loading-overlay">
+        <img src="${pageContext.request.contextPath}/resources/img/payments/carga.gif" alt="Cargando...">
+    </div>
+
     <jsp:include page="components/pie.jsp"/>
     <script>
         document.getElementById('payment-visa').addEventListener('click', function() {
@@ -86,6 +111,10 @@
         document.getElementById('payment-efectivo').addEventListener('click', function() {
             document.getElementById('qr-image').style.display = 'block';
             document.getElementById('card-form').style.display = 'none';
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            document.getElementById('loading-overlay').style.display = 'flex';
         });
     </script>
 </body>

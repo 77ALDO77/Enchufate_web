@@ -52,6 +52,10 @@
         <servlet-name>cntAdmEmpleados</servlet-name>
         <servlet-class>ServLets.cntAdmEmpleados</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>procesarPago</servlet-name>
+        <servlet-class>ServLets.procesarPago</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>cntAdmEmpleados</servlet-name>
         <url-pattern>/cntAdmEmpleados</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>procesarPago</servlet-name>
+        <url-pattern>/procesarPago</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

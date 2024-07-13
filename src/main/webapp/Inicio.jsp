@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -16,27 +17,27 @@
         <main>
             <div class="hero">
                 <h1>ENCHUFATE</h1>
-                <p>Tu Tiempo, Tu Espacio, Tu Conexión</p>
-                <a href="#" class="btn">Más información</a>
+                <p>Tu Tiempo, Tu Espacio, Tu ConexiÃ³n</p>
+                <a href="#" class="btn">MÃ¡s informaciÃ³n</a>
             </div>
 
-            <!-- Nueva Sección de Cubículos -->
+            <!-- Nueva SecciÃ³n de CubÃ­culos -->
             <section class="cubicles">
-                <h2>Servicio de Cubículo</h2>
+                <h2>Servicio de CubÃ­culo</h2>
                 <div class="cubicle-container">
                     <div class="cubicle">
-                        <img src="${pageContext.request.contextPath}/resources/img/inicio/Normal.png" alt="Cubículo General">
-                        <h3>Cubículo General</h3>
+                        <img src="${pageContext.request.contextPath}/resources/img/inicio/Normal.png" alt="CubÃ­culo General">
+                        <h3>CubÃ­culo General</h3>
                         <p>S/. 5 x hora</p>
                     </div>
                     <div class="cubicle">
-                        <img src="${pageContext.request.contextPath}/resources/img/inicio/VIP.png" alt="Cubículo VIP">
-                        <h3>Cubículo VIP</h3>
+                        <img src="${pageContext.request.contextPath}/resources/img/inicio/VIP.png" alt="CubÃ­culo VIP">
+                        <h3>CubÃ­culo VIP</h3>
                         <p>S/. 8 x hora</p>
                     </div>
                     <div class="cubicle">
-                        <img src="${pageContext.request.contextPath}/resources/img/inicio/VIPUltra.png" alt="Cubículo ULTRA VIP">
-                        <h3>Cubículo ULTRA VIP</h3>
+                        <img src="${pageContext.request.contextPath}/resources/img/inicio/VIPUltra.png" alt="CubÃ­culo ULTRA VIP">
+                        <h3>CubÃ­culo ULTRA VIP</h3>
                         <p>S/. 12 x hora</p>
                     </div>
                 </div>

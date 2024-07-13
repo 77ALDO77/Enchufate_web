@@ -12,6 +12,22 @@
             background: url('${pageContext.request.contextPath}/resources/img/inicio/fondoenchufate.png') no-repeat center center fixed;
             background-size: cover;
         }
+        .payment-result {
+            margin: 50px auto;
+            width: 400px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            color: black;
+            text-align: center;
+        }
+        .payment-result h2 {
+            color: green;
+        }
+        .payment-result p {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -23,10 +39,7 @@
             String cardExpiry = request.getParameter("card-expiry");
             String cardCvv = request.getParameter("card-cvv");
 
-            // Aquí iría la lógica para procesar el pago con la tarjeta
-            // Si el pago es exitoso, se muestra un mensaje de confirmación
-
-            boolean pagoExitoso = true; // Simulación de pago exitoso
+            boolean pagoExitoso = true; 
 
             if (pagoExitoso) {
                 out.println("<h2>Pago realizado con éxito</h2>");
