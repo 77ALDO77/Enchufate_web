@@ -72,7 +72,7 @@ public class ProductoDAO {
     public List<Producto> getList() {
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "SELECT p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor FROM producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor) where estado='S';";
+        String sql = "SELECT p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor FROM producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor) where estado='S' order by codproducto asc;";
         List<Producto> lista = null;
 
         try {
