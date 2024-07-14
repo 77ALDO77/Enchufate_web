@@ -52,7 +52,11 @@ public class cntAdmProductos extends HttpServlet {
                 Producto producto = new Producto();
                 producto.setNombre(nombre);
                 producto.setDescripcion(descripcion);
-                producto.setFechavencimiento(fecha);
+                if (fecha != null && !fecha.isEmpty()) {
+                    producto.setFechavencimiento(fecha);
+                } else {
+                    producto.setFechavencimiento(null); // o no establecer la fecha si es nula
+                }
                 producto.setPrecio(precio);
                 producto.setCodcategoria(codCategoria); // Asumiendo que setCodcategoria y setCodproveedor existen en la clase Producto
                 producto.setCodproveedor(codProveedor);
@@ -60,9 +64,9 @@ public class cntAdmProductos extends HttpServlet {
                 // Llamar al DAO para registrar o actualizar el producto
                 ProductoDAO dao = new ProductoDAO();
                 String respuesta = dao.RegistrarActualizarProducto(producto);
-                
+
                 response.getWriter().println(respuesta);
-                
+
                 List<Categoria> listaCat = new CategoriaDAO().getList();
                 request.setAttribute("listaCategoria", listaCat);
 
