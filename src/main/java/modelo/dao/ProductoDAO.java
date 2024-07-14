@@ -10,6 +10,7 @@ import modelo.dto.Producto;
 import conexion.ConectaBD;
 import modelo.dto.Categoria;
 import modelo.dto.Proveedor;
+import javax.swing.JOptionPane;
 
 public class ProductoDAO {
 
@@ -71,7 +72,7 @@ public class ProductoDAO {
     public List<Producto> getList() {
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "SELECT p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor FROM producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor);";
+        String sql = "SELECT p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor FROM producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor) where estado='S';";
         List<Producto> lista = null;
 
         try {
@@ -93,8 +94,65 @@ public class ProductoDAO {
             }
             rs.close();
         } catch (SQLException ex) {
-            System.out.println("Error al cargar los datos del producto en la lista " + ex);
+            System.out.println("Error al listar los productos: "+ex);
         }
         return lista;
+    }
+    
+    public Producto ObtenerProducto (int codproducto){
+        Producto p = null;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "select p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor from producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor) where codproducto = ? and estado='S';";
+        
+        try{
+            ps = cnx.prepareStatement(sql);
+            ps.setInt(1, codproducto);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                p = new Producto();
+                p.setCodproducto(rs.getInt("codproducto"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setFechavencimiento(rs.getString("fechavencimiento"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCategoria(new Categoria(rs.getInt("codcategoria"), ""));
+                p.setProveedor(new Proveedor(rs.getInt("codproveedor"), ""));
+            }
+        }catch(SQLException ex){
+            System.out.println("Error al obtener producto por su código: "+ex);
+        }
+        return p;
+    }
+    
+    public String RegistrarActualizarProducto (Producto p){
+        String resp = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "insert into producto (nombre, descripcion, fechavencimiento, precio, codcategoria, codproveedor, estado) values (?, ?, ?, ?, ?, ?, 'S');";
+        if(p.getCodproducto()!=0){
+            sql = "update producto set nombre=?, descripcion=?, fechavencimiento=?, precio=?, codcategoria=?, codproveedor=? where codproducto=?;";
+        }
+        try{
+            ps = cnx.prepareStatement(sql);
+            ps.setString(1, p.getNombre());
+            ps.setString(2,p.getDescripcion());
+            ps.setString(3, p.getFechavencimiento());
+            ps.setDouble(4, p.getPrecio());
+            if(p.getCodcategoria()!=0){
+                ps.setInt(5, p.getCodcategoria());
+            }
+            if(p.getCodproveedor()!=0){
+                ps.setInt(6, p.getCodproveedor());
+            }
+            int ctos = ps.executeUpdate();
+            if (ctos == 0){
+                resp = "No se ha registrado";
+            }
+            ps.close();
+        }catch(SQLException ex){
+            resp = ex.getMessage();
+        }
+        return resp;
     }
 }

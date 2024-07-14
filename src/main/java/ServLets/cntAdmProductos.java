@@ -8,18 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.CategoriaDAO;
-import modelo.dao.LocalesDAO;
 import modelo.dao.ProductoDAO;
 import modelo.dao.ProveedorDAO;
 import modelo.dto.Categoria;
-import modelo.dto.Locales;
 import modelo.dto.Producto;
 import modelo.dto.Proveedor;
+import conexion.ConectaBD;
 
 public class cntAdmProductos extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) //evalúa las peticiones que ha hecho el usuario
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("accion");
         Boolean redireccionado = (Boolean) request.getSession().getAttribute("redireccionado");
         if (accion != null) {
@@ -33,13 +33,47 @@ public class cntAdmProductos extends HttpServlet {
 
                     List<Proveedor> listaProv = new ProveedorDAO().getList();
                     request.setAttribute("listaProveedor", listaProv);
-                    
+
                     List<Producto> listaProd = new ProductoDAO().getList();
                     request.setAttribute("listaProducto", listaProd);
 
-                    request.getRequestDispatcher("/AdmProductos.jsp").forward(request, response);
+                    request.getRequestDispatcher("./AdmProductos.jsp").forward(request, response);
                     request.getSession().removeAttribute("redireccionado");
                 }
+            } else if (accion.equals("Registrar")) {
+                String nombre = request.getParameter("nombre");
+                String descripcion = request.getParameter("descripcion");
+                String fecha = request.getParameter("fecha");
+                Double precio = Double.parseDouble(request.getParameter("precio"));
+                int codCategoria = Integer.parseInt(request.getParameter("cboCategoria"));
+                int codProveedor = Integer.parseInt(request.getParameter("cboProveedor"));
+
+                // Crear objeto Producto con los datos del formulario
+                Producto producto = new Producto();
+                producto.setNombre(nombre);
+                producto.setDescripcion(descripcion);
+                producto.setFechavencimiento(fecha);
+                producto.setPrecio(precio);
+                producto.setCodcategoria(codCategoria); // Asumiendo que setCodcategoria y setCodproveedor existen en la clase Producto
+                producto.setCodproveedor(codProveedor);
+
+                // Llamar al DAO para registrar o actualizar el producto
+                ProductoDAO dao = new ProductoDAO();
+                String respuesta = dao.RegistrarActualizarProducto(producto);
+                
+                response.getWriter().println(respuesta);
+                
+                List<Categoria> listaCat = new CategoriaDAO().getList();
+                request.setAttribute("listaCategoria", listaCat);
+
+                List<Proveedor> listaProv = new ProveedorDAO().getList();
+                request.setAttribute("listaProveedor", listaProv);
+
+                List<Producto> listaProd = new ProductoDAO().getList();
+                request.setAttribute("listaProducto", listaProd);
+
+                // Redirigir a la vista AdmProductos.jsp
+                request.getRequestDispatcher("/AdmProductos.jsp").forward(request, response);
             }
         }
     }
