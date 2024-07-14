@@ -46,45 +46,73 @@ public class cntAdmProductos extends HttpServlet {
                 String nombre = request.getParameter("nombre");
                 String descripcion = request.getParameter("descripcion");
                 String fecha = request.getParameter("fecha");
-                Double precio = Double.parseDouble(request.getParameter("precio"));
+                String precioStr = request.getParameter("precio");
+                Double precio = null;
+
+                // Verificar si el precio es válido
+                try {
+                    precio = Double.parseDouble(precioStr);
+                } catch (NumberFormatException e) {
+                    precio = null;
+                }
                 int codCategoria = Integer.parseInt(request.getParameter("cboCategoria"));
                 int codProveedor = Integer.parseInt(request.getParameter("cboProveedor"));
 
-                // Crear objeto Producto con los datos del formulario
-                Producto producto = new Producto();
-                producto.setNombre(nombre);
-                producto.setDescripcion(descripcion);
-                if (fecha != null && !fecha.isEmpty()) {
-                    producto.setFechavencimiento(fecha);
+                if (nombre == null || nombre.isEmpty()
+                        || descripcion == null || descripcion.isEmpty()
+                        || precio == null) {
+
+                    String mensajeAdvertencia = "Llene todos los campos obligatorios.";
+                    HttpSession session = request.getSession();
+                    session.setAttribute("mensajeAdvertencia", mensajeAdvertencia);
+
+                    // Redirigir de nuevo al formulario de registro
+                    response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
+                } else if (precio <= 0 || precio>100000000) {
+                    // Verificar si el precio es menor o igual a 0
+                    String mensajeAdvertencia = "Ingrese un precio válido.";
+                    HttpSession session = request.getSession();
+                    session.setAttribute("mensajeAdvertencia", mensajeAdvertencia);
+
+                    // Redirigir de nuevo al formulario de registro
+                    response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
                 } else {
-                    producto.setFechavencimiento(null); // o no establecer la fecha si es nula
+                    // Crear objeto Producto con los datos del formulario
+                    Producto producto = new Producto();
+                    producto.setNombre(nombre);
+                    producto.setDescripcion(descripcion);
+                    if (fecha != null && !fecha.isEmpty()) {
+                        producto.setFechavencimiento(fecha);
+                    } else {
+                        producto.setFechavencimiento(null); // o no establecer la fecha si es nula
+                    }
+                    producto.setPrecio(precio);
+                    producto.setCodcategoria(codCategoria); // Asumiendo que setCodcategoria y setCodproveedor existen en la clase Producto
+                    producto.setCodproveedor(codProveedor);
+
+                    // Llamar al DAO para registrar o actualizar el producto
+                    ProductoDAO dao = new ProductoDAO();
+                    String respuesta = dao.RegistrarActualizarProducto(producto);
+
+                    response.getWriter().println(respuesta);
+
+                    List<Categoria> listaCat = new CategoriaDAO().getList();
+                    request.setAttribute("listaCategoria", listaCat);
+
+                    List<Proveedor> listaProv = new ProveedorDAO().getList();
+                    request.setAttribute("listaProveedor", listaProv);
+
+                    List<Producto> listaProd = new ProductoDAO().getList();
+                    request.setAttribute("listaProducto", listaProd);
+
+                    // Establecer el mensaje de confirmación en la sesión
+                    String mensajeConfirmacion = "¡Producto '" + nombre + "' registrado correctamente!";
+                    HttpSession session = request.getSession();
+                    session.setAttribute("mensajeConfirmacion", mensajeConfirmacion);
+
+                    // Redirigir a la acción AdmProductos
+                    response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
                 }
-                producto.setPrecio(precio);
-                producto.setCodcategoria(codCategoria); // Asumiendo que setCodcategoria y setCodproveedor existen en la clase Producto
-                producto.setCodproveedor(codProveedor);
-
-                // Llamar al DAO para registrar o actualizar el producto
-                ProductoDAO dao = new ProductoDAO();
-                String respuesta = dao.RegistrarActualizarProducto(producto);
-
-                response.getWriter().println(respuesta);
-
-                List<Categoria> listaCat = new CategoriaDAO().getList();
-                request.setAttribute("listaCategoria", listaCat);
-
-                List<Proveedor> listaProv = new ProveedorDAO().getList();
-                request.setAttribute("listaProveedor", listaProv);
-
-                List<Producto> listaProd = new ProductoDAO().getList();
-                request.setAttribute("listaProducto", listaProd);
-
-                // Establecer el mensaje de confirmación en la sesión
-                String mensajeConfirmacion = "¡Producto '" + nombre + "' registrado correctamente!";
-                HttpSession session = request.getSession();
-                session.setAttribute("mensajeConfirmacion", mensajeConfirmacion);
-
-                // Redirigir a la acción AdmProductos
-                response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
             }
         }
     }

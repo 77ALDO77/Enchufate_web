@@ -148,6 +148,14 @@
                     // Eliminar el atributo de sesión después de mostrar la notificación
             <% session.removeAttribute("mensajeConfirmacion");%>
                 }
+
+                // Mostrar mensaje de advertencia si existe
+                var mensajeAdvertencia = "<%= session.getAttribute("mensajeAdvertencia")%>";
+                if (mensajeAdvertencia !== "null" && mensajeAdvertencia !== "") {
+                    toastr.warning(mensajeAdvertencia);
+                    // Eliminar el atributo de sesión después de mostrar la notificación
+            <% session.removeAttribute("mensajeAdvertencia");%>
+                }
             });
         </script>
     </body>
