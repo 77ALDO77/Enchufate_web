@@ -146,11 +146,10 @@ Nombre varchar(50) NOT NULL,
 Descripcion varchar(200) NOT NULL,
 Imagen varchar(255) NULL,
 FechaVencimiento date NULL,
+Estado varchar(10) NOT NULL,
 FOREIGN KEY (CodCategoria) REFERENCES Categoria(CodCategoria),
 FOREIGN KEY (CodProveedor) REFERENCES Proveedor(CodProveedor)
 );
-
-
 
 CREATE TABLE Compra
 (
