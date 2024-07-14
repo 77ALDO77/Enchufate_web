@@ -17,7 +17,9 @@
         <link href="resources/css/AdmProductos.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin-Display.css" rel="stylesheet" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>Productos</title>
@@ -65,7 +67,7 @@
                                                 <label for="fecha" class="etiqueta-admproductos">Fecha de Vencimiento</label>
                                                 <input type="date" name="fecha" value="${fecha}" placeholder="DD-MM-YYYY" class="entrada-admproductos">
                                                 <label for="precio" class="etiqueta-admproductos">(*)Precio(s/.)</label>
-                                                <input type="number" name="precio" id="precio" value="${precio}" placeholder="00.00" class="entrada-admproductos">
+                                                <input type="number" name="precio" id="precio" step="0.01" value="${precio}" placeholder="00.00" class="entrada-admproductos">
                                                 <label for="categoria" class="etiqueta-admproductos">(*)Categoria</label>
                                                 <div class="combo-cat">
                                                     <select id="categoria" name="cboCategoria" class="cbx-admproductos">
@@ -135,5 +137,18 @@
             </div>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         </div>
+        <script>
+            $(document).ready(function () {
+                // Mostrar mensaje de confirmación si existe
+                var mensajeConfirmacion = "<%= session.getAttribute("mensajeConfirmacion")%>";
+                if (mensajeConfirmacion !== "null" && mensajeConfirmacion !== "") {
+                    toastr.success(mensajeConfirmacion, null, {
+                        className: 'toast-success' // Agregar la clase de estilo personalizado
+                    });
+                    // Eliminar el atributo de sesión después de mostrar la notificación
+            <% session.removeAttribute("mensajeConfirmacion");%>
+                }
+            });
+        </script>
     </body>
 </html>

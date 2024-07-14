@@ -14,11 +14,13 @@ import modelo.dto.Categoria;
 import modelo.dto.Producto;
 import modelo.dto.Proveedor;
 import conexion.ConectaBD;
+import javax.servlet.http.HttpSession;
 
 public class cntAdmProductos extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) //evalúa las peticiones que ha hecho el usuario
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String accion = request.getParameter("accion");
         Boolean redireccionado = (Boolean) request.getSession().getAttribute("redireccionado");
@@ -76,8 +78,13 @@ public class cntAdmProductos extends HttpServlet {
                 List<Producto> listaProd = new ProductoDAO().getList();
                 request.setAttribute("listaProducto", listaProd);
 
-                // Redirigir a la vista AdmProductos.jsp
-                request.getRequestDispatcher("/AdmProductos.jsp").forward(request, response);
+                // Establecer el mensaje de confirmación en la sesión
+                String mensajeConfirmacion = "¡Producto '" + nombre + "' registrado correctamente!";
+                HttpSession session = request.getSession();
+                session.setAttribute("mensajeConfirmacion", mensajeConfirmacion);
+
+                // Redirigir a la acción AdmProductos
+                response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
             }
         }
     }
