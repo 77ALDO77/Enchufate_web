@@ -15,7 +15,7 @@
     <nav>
         <ul>
             <li><a href="market.jsp">Tienda</a></li>
-            <li><a href="#">Cubiculos</a></li>
+            <li><a href="Cubiculos.jsp">Cubiculos</a></li>
             <li><a href="acercade.jsp">Acerca de</a></li>
             <li><a href="Contactenos.jsp">Contacto</a></li>
             <li><a href="locales.jsp">Locales</a></li>
@@ -36,7 +36,7 @@
         <link href="resources/css/chatbot.css" rel="stylesheet" type="text/css"/>
         <script src="${pageContext.request.contextPath}/resources/scrip/chat-bot.js"></script>
         <div class="chat-bot-container" id="chatBot">
-        <div class="chat-header">Chat-Bot</div>
+        <div class="chat-header">EnchufateBot</div>
         <div class="chat-body" id="chatBody">
             <!-- Mensajes del chat -->
         </div>
