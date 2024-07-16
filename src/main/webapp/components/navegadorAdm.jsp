@@ -25,7 +25,7 @@
                 <div style="display: flex; justify-content: end;"></div>
                 <div style="display: flex; align-items: center;">Clientes</div>                
             </div>
-            <div class="button-nav-admin" onclick="location.href = './AdmProductos.jsp';">
+            <div class="button-nav-admin" onclick="location.href = '${pageContext.request.contextPath}/cntAdmProductos?accion=AdmProductos';">
                 <div style="display: flex; justify-content: end;"></div>
                 <div style="display: flex; align-items: center;" href="EnchufateWeb/AdmProductos.jsp">Productos</div>               
             </div>         

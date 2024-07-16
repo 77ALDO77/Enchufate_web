@@ -99,45 +99,41 @@ public class ProductoDAO {
         return lista;
     }
 
-    public Producto ObtenerProducto(int codproducto) {
+    public Producto ObtenerProducto(int cod) {
         Producto p = null;
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "select p.codproducto, p.nombre, p.descripcion, p.fechavencimiento, p.precio, c.codcategoria, c.nombre as categoria, v.codproveedor, v.nombre as proveedor from producto p inner join categoria c on (p.codcategoria = c.codcategoria) inner join proveedor v on (p.codproveedor = v.codproveedor) where codproducto = ? and estado='S';";
+        String sql = "select nombre, descripcion, fechavencimiento, precio, codcategoria, codproveedor, codproducto from producto where codproducto=? and estado='S';";
 
         try {
             ps = cnx.prepareStatement(sql);
-            ps.setInt(1, codproducto);
+            ps.setInt(1, cod);
             rs = ps.executeQuery();
             if (rs.next()) {
                 p = new Producto();
-                p.setCodproducto(rs.getInt("codproducto"));
                 p.setNombre(rs.getString("nombre"));
                 p.setDescripcion(rs.getString("descripcion"));
-                // Manejo de la fecha de vencimiento nula
-                if (p.getFechavencimiento() != null) {
-                    ps.setString(3, p.getFechavencimiento());
-                } else {
-                    ps.setNull(3, java.sql.Types.DATE);
-                }
+                p.setFechavencimiento(rs.getString("fechavencimiento"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCategoria(new Categoria(rs.getInt("codcategoria"), ""));
                 p.setProveedor(new Proveedor(rs.getInt("codproveedor"), ""));
+                p.setCodproducto(rs.getInt("codproducto"));
+            } else {
+                System.out.println("No se encontró ningún producto con el código: " + cod);
             }
+            rs.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Error al obtener producto por su código: " + ex);
         }
         return p;
     }
 
-    public String RegistrarActualizarProducto(Producto p) {
+    public String RegistrarProducto(Producto p) {
         String resp = "";
         PreparedStatement ps;
         ResultSet rs;
         String sql = "insert into producto (nombre, descripcion, fechavencimiento, precio, codcategoria, codproveedor, estado) values (?, ?, ?, ?, ?, ?, 'S');";
-        if (p.getCodproducto() != 0) {
-            sql = "update producto set nombre=?, descripcion=?, fechavencimiento=?, precio=?, codcategoria=?, codproveedor=? where codproducto=?;";
-        }
         try {
             ps = cnx.prepareStatement(sql);
             ps.setString(1, p.getNombre());
@@ -156,6 +152,35 @@ public class ProductoDAO {
             }
             ps.close();
         } catch (SQLException ex) {
+            resp = ex.getMessage();
+        }
+        return resp;
+    }
+    
+    public String ActualizarProducto(Producto p){
+        String resp = "";
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "update producto set nombre=?, descripcion=?, fechavencimiento=?, precio=?, codcategoria=?, codproveedor=? where codproducto=?;";
+        try{
+            ps = cnx.prepareStatement(sql);
+            ps.setString(1, p.getNombre());
+            ps.setString(2, p.getDescripcion());
+            ps.setString(3, p.getFechavencimiento());
+            ps.setDouble(4, p.getPrecio());
+            if (p.getCodcategoria() != 0) {
+                ps.setInt(5, p.getCodcategoria());
+            }
+            if (p.getCodproveedor() != 0) {
+                ps.setInt(6, p.getCodproveedor());
+            }
+            ps.setInt(7, p.getCodproducto());
+            int ctos = ps.executeUpdate();
+            if (ctos == 0) {
+                resp = "No se ha actualizado";
+            }
+            ps.close();
+        }catch(SQLException ex){
             resp = ex.getMessage();
         }
         return resp;
