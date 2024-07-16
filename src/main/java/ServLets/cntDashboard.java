@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import modelo.dao.ReservaDAO;
+import modelo.dto.Reserva;
 
 /**
  *
@@ -40,11 +42,17 @@ public class cntDashboard extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion != null) {
             switch (accion) {
-                case "cargar":
+                case "cargarVentas":
                     cargarVentas(request, response);
                     break;
-                case "exportarExcel":
-                    exportarExcel(request, response);
+                case "cargarReservas":
+                    cargarReservas(request, response);
+                    break;
+                case "exportarExcelVentas":
+                    exportarExcelVentas(request, response);
+                    break;
+                case "exportarExcelReservas":
+                    exportarExcelReservas(request, response);
                     break;
                 default:
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no reconocida");
@@ -62,17 +70,30 @@ public class cntDashboard extends HttpServlet {
         VentaDAO ventaDAO = new VentaDAO();
         List<Venta> ventas = ventaDAO.obtenerVentas(fechaInicio, fechaFin);
 
-        // Convertir la lista de ventas a JSON
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         String json = gson.toJson(ventas);
 
-        // Configurar la respuesta
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
     }
 
-    private void exportarExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void cargarReservas(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String fechaInicio = request.getParameter("fechaInicio");
+        String fechaFin = request.getParameter("fechaFin");
+
+        ReservaDAO reservaDAO = new ReservaDAO();
+        List<Reserva> reservas = reservaDAO.obtenerReservas(fechaInicio, fechaFin);
+
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = gson.toJson(reservas);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+    }
+
+    private void exportarExcelVentas(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String fechaInicio = request.getParameter("fechaInicio");
         String fechaFin = request.getParameter("fechaFin");
 
@@ -100,21 +121,49 @@ public class cntDashboard extends HttpServlet {
         workbook.write(outputStream);
         workbook.close();
         outputStream.close();
-    
+    }
 
-}
+    private void exportarExcelReservas(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String fechaInicio = request.getParameter("fechaInicio");
+        String fechaFin = request.getParameter("fechaFin");
+
+        ReservaDAO reservaDAO = new ReservaDAO();
+        List<Reserva> reservas = reservaDAO.obtenerReservas(fechaInicio, fechaFin);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Reservas Diarias");
+
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Fecha");
+        headerRow.createCell(1).setCellValue("Total Reservas");
+
+        int rowNum = 1;
+        for (Reserva reserva : reservas) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(reserva.getFecha().toString());
+            row.createCell(1).setCellValue(reserva.getTotal());
+        }
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=reservas_diarias.xlsx");
+
+        OutputStream outputStream = response.getOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
+        outputStream.close();
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -128,7 +177,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -139,7 +188,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConectaBD {
+//esta es la conexion para la base de datos 
 
     public Connection getConnection() {
         Connection cnx = null;

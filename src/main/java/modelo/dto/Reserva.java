@@ -9,10 +9,12 @@ public class Reserva {
     private int codEmpleado;
     private int codCubiculo;
     private Date fecha;
-    private Time hora;
+    private Time horaInicio;
+    private Time horaFin;
     private int duracion;
 
     // Getters y Setters
+
     public int getCodReserva() {
         return codReserva;
     }
@@ -53,12 +55,20 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public Time getHora() {
-        return hora;
+    public Time getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora(Time hora) {
-        this.hora = hora;
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
     }
 
     public int getDuracion() {
@@ -67,5 +77,13 @@ public class Reserva {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public double getTotal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setTotal(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
