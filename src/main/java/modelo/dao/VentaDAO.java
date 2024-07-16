@@ -13,11 +13,11 @@ public class VentaDAO {
 
     public List<Venta> obtenerVentas(String fechaInicio, String fechaFin) {
         List<Venta> ventas = new ArrayList<>();
-        String sql = "SELECT Fecha, SUM(Cantidad) as Total " +
-                     "FROM DetalleCompra " +
-                     "INNER JOIN Compra ON DetalleCompra.CodCompra = Compra.CodCompra " +
-                     "WHERE Fecha BETWEEN ? AND ? " +
-                     "GROUP BY Fecha";
+        String sql = "SELECT Compra.Fecha, SUM(DetalleCompra.Cantidad) AS Total\n"
+                + "FROM DetalleCompra\n"
+                + "INNER JOIN Compra ON DetalleCompra.CodCompra = Compra.CodCompra\n"
+                + "WHERE Compra.Fecha BETWEEN ? AND ?\n"
+                + "GROUP BY Compra.Fecha;";
         try (Connection cnx = new ConectaBD().getConnection(); PreparedStatement pst = cnx.prepareStatement(sql)) {
             pst.setString(1, fechaInicio);
             pst.setString(2, fechaFin);
