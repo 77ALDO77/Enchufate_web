@@ -1,0 +1,158 @@
+USE enchufate4;
+
+-- Insertar en la tabla Locales
+INSERT INTO Locales (Nombre, Direccion, Telefono) VALUES 
+('Enchufate Angamos', 'Av. Angamos Nº 1803 y/o Av. Tomas Marsano Nº 961- Surquillo', '994014253'),
+('Enchufate Arenales', 'Av. Arenales 1737, Lince, Lima 15046 Perú', '951678654'),
+('Enchufate Surco', 'Av. Alfredo Benavides 52, Santiago de Surco 15039', '984534498');
+
+-- Insertar en la tabla Cliente
+INSERT INTO Cliente (Nombres, ApePaterno, ApeMaterno, DNI, FechaNacimiento, Usuario, Correo, Contraseña) VALUES
+('Carlos', 'Gomez', 'Perez', '12345671', '1990-01-01', 'carlosg', 'carlos.gomez@example.com', 'password1'),
+('Maria', 'Rodriguez', 'Lopez', '12345672', '1985-02-02', 'mariar', 'maria.rodriguez@example.com', 'password2'),
+('Juan', 'Martinez', 'Sanchez', '12345673', '1988-03-03', 'juanm', 'juan.martinez@example.com', 'password3'),
+('Ana', 'Garcia', 'Ramirez', '12345674', '1992-04-04', 'anag', 'ana.garcia@example.com', 'password4'),
+('Luis', 'Hernandez', 'Diaz', '12345675', '1987-05-05', 'luish', 'luis.hernandez@example.com', 'password5'),
+('Laura', 'Fernandez', 'Ruiz', '12345676', '1995-06-06', 'lauraf', 'laura.fernandez@example.com', 'password6'),
+('Miguel', 'Torres', 'Gonzalez', '12345677', '1991-07-07', 'miguelt', 'miguel.torres@example.com', 'password7'),
+('Sofia', 'Ramirez', 'Cruz', '12345678', '1989-08-08', 'sofiar', 'sofia.ramirez@example.com', 'password8'),
+('Jorge', 'Lopez', 'Morales', '12345679', '1993-09-09', 'jorgel', 'jorge.lopez@example.com', 'password9'),
+('Isabel', 'Mendoza', 'Ortiz', '12345670', '1994-10-10', 'isabelm', 'isabel.mendoza@example.com', 'password10');
+
+-- Insertar en la tabla Area
+INSERT INTO Area (Descripcion) VALUES
+('Administración'),
+('Ventas'),
+('Compras'),
+('Almacén'),
+('Recursos Humanos');
+
+-- Insertar en la tabla Empleado
+INSERT INTO Empleado (CodLocal, CodArea, Nombre, Apellidos, FechaNacimiento, DNI, Sexo, Celular, Salario, Correo, Clave) VALUES
+(1, 1, 'Juan', 'Perez', '1985-02-15', '12345678', 'Masculino', '987654321', 2500.00, 'juan.perez@example.com', 'clave123'),
+(2, 2, 'Maria', 'Gonzalez', '1990-06-20', '87654321', 'Femenino', '912345678', 2800.00, 'maria.gonzalez@example.com', 'clave456'),
+(3, 3, 'Carlos', 'Lopez', '1988-11-05', '12348765', 'Masculino', '923456789', 3000.00, 'carlos.lopez@example.com', 'clave789'),
+(3, 4, 'Ana', 'Martinez', '1992-08-10', '87651234', 'Femenino', '934567890', 2700.00, 'ana.martinez@example.com', 'clave101112'),
+(3, 5, 'Luis', 'Hernandez', '1987-03-25', '13572468', 'Masculino', '945678901', 2900.00, 'luis.hernandez@example.com', 'clave131415');
+
+-- Insertar en la tabla Categoria
+INSERT INTO Categoria (Nombre) VALUES
+('Entradas'),
+('Segundos'),
+('Postres'),
+('Piqueos y Snacks'),
+('Bebidas no alcoholicas'),
+('Cuidado Personal'),
+('Cigarros y Vapes'),
+('Bebidas Alcoholicas'),
+('Farmacia');
+
+-- Insertar en la tabla Proveedor
+INSERT INTO Proveedor (Nombre, Contacto, Pais) VALUES
+('Proveedor Principal', 'Contacto Proveedor', 'Pais Proveedor');
+
+-- Insertar en la tabla Producto
+INSERT INTO Producto (CodCategoria, CodProveedor, Precio, Nombre, Descripcion, Imagen, FechaVencimiento) VALUES
+(1, 1, 4.00, 'Papa a la huancaina','Papa con crema huancaina', 'papahuancaina.png', '2024-12-31'),
+(1, 1, 4.00, 'Ensalada de Palta', 'Ensalada con palta', 'ensaladapalta.png', '2024-12-31'),
+(1, 1, 4.00, 'Sopa Ramen', 'Sopa proveniente de Japon', 'soparamen.png', '2024-12-31'),
+(2, 1, 14.00, 'Lomo Saltado', 'Lomo saltado con papas fritas y arroz', 'lomosaltado.png', '2024-12-31'),
+(2, 1, 12.00, 'Arroz Chaufa', 'Arroz chaufa de pollo', 'chaufa.png', '2024-12-31'),
+(2, 1, 13.00, 'Pollo a la plancha', 'Pollo cocinado a la plancha', 'polloplancha.png', '2024-12-31'),
+(3, 1, 2.00, 'Gelatina', 'Gelatina de diferentes sabores', 'gelatina.png', '2024-12-31'),
+(3, 1, 1.50, 'Queque de naranja', 'Queque hecho de sabor naranja', 'quequenaranja.png', '2024-12-31'),
+(3, 1, 3.00, 'Crema Volteada', 'Crema volteada', 'cremavolteada.png', '2024-12-31'),
+(4, 1, 7.90, 'Doritos', 'Piqueos Doritos 190gr', 'doritos.png', '2024-12-31'),
+(4, 1, 9.40, 'Inka Chips', 'Papas fritas 115gr', 'inkachips.png', '2024-12-31'),
+(4, 1, 5.50, 'Cheese tris', 'Fritura de queso 140gr', 'cheesetris.png', '2024-12-31'),
+(5, 1, 21.00, 'Inca Kola + Coca Cola', 'Gaseosa Inca Kola + Coca Cola Twopack 3 L', 'inca-coca.png', '2024-12-31'),
+(5, 1, 11.00, 'Agua San Mateo', 'Sixpack Agua San Mateo Con Gas 600 ml', 'aguasanmateo.png', '2024-12-31'),
+(5, 1, 7.90, 'Monster', 'Monster Energy 473 ml', 'monster.png', '2024-12-31'),
+(6, 1, 5.00, 'Gillette', 'Máquina De Afeitar Gillete Prestobarba 3 1', 'gillette.png', '2024-12-31'),
+(6, 1, 7.00, 'Durex', 'Preservativo Durex Clásico 3', 'durex.png', '2024-12-31'),
+(6, 1, 3.00, 'Bloqueador Solar', 'Bloqueador Palmera Sachet Spf 50 10 grs', 'bloqueador.png', '2024-12-31'),
+(6, 1, 1.40, 'Shampoo Pantene', 'Shampoo Pantene Restauración dual sachet 18 ml', 'pantene.png', '2024-12-31'),
+(6, 1, 12.00, 'Toallas Humedas', 'Toallitas Húmedas Zaidman 72', 'toallashumedas.png', '2024-12-31'),
+(7, 1, 10.00, 'Malboro', 'Cigarro Marlboro Double Burst 10 und', 'malboro.png', '2024-12-31'),
+(7, 1, 39.00, 'Vapeador', 'Vapeador Electrónico Boom Mango Ice 1 und', 'vapeador.png', '2024-12-31'),
+(7, 1, 3.50, 'OCB X-PERT', 'Papel para enrollar OCB X-PERT 1 und', 'ocb_xpert.png', '2024-12-31');
+
+-- Insertar datos en la tabla Compra
+INSERT INTO Compra (CodCliente, CodEmpleado, Fecha, Hora) VALUES
+(1, 1, '2024-06-16', '10:00:00'),
+(1, 2, '2024-06-16', '11:00:00'),
+(1, 3, '2024-06-16', '12:00:00');
+
+-- Insertar datos en la tabla DetalleCompra
+INSERT INTO DetalleCompra (CodCompra, CodProducto, TipoPago, Cantidad) VALUES
+(1, 1, 'Tarjeta', 2),
+(1, 4, 'Tarjeta', 1),
+(2, 2, 'Efectivo', 1),
+(2, 5, 'Efectivo', 2),
+(3, 3, 'Tarjeta', 3),
+(3, 6, 'Tarjeta', 1);
+
+-- Insertar más datos en la tabla Compra
+INSERT INTO Compra (CodCliente, CodEmpleado, Fecha, Hora) VALUES
+(4, 1, '2024-06-17', '13:00:00'),
+(5, 2, '2024-06-17', '14:00:00'),
+(6, 3, '2024-06-18', '15:00:00'),
+(7, 4, '2024-06-18', '16:00:00'),
+(8, 5, '2024-06-19', '17:00:00'),
+(9, 1, '2024-06-19', '18:00:00'),
+(10, 2, '2024-06-20', '19:00:00');
+
+-- Insertar más datos en la tabla DetalleCompra
+INSERT INTO DetalleCompra (CodCompra, CodProducto, TipoPago, Cantidad) VALUES
+(4, 7, 'Tarjeta', 1),
+(4, 8, 'Tarjeta', 2),
+(5, 9, 'Efectivo', 1),
+(5, 10, 'Efectivo', 3),
+(6, 11, 'Tarjeta', 2),
+(6, 12, 'Tarjeta', 1),
+(7, 13, 'Efectivo', 1),
+(7, 14, 'Efectivo', 2),
+(8, 15, 'Tarjeta', 1),
+(8, 16, 'Tarjeta', 2),
+(9, 17, 'Efectivo', 1),
+(9, 18, 'Efectivo', 3),
+(10, 19, 'Tarjeta', 1),
+(10, 20, 'Tarjeta', 2);
+
+-- Insertar datos en la tabla Cubiculo asociados a locales
+INSERT INTO Cubiculo (CodLocal, Nivel, Estado_Cubiculo, estado) VALUES
+(1, 'General', 'Disponible', 'activo'),
+(1, 'VIP', 'Disponible', 'activo'),
+(1, 'Ultra VIP', 'Disponible', 'activo'),
+(2, 'General', 'Disponible', 'activo'),
+(2, 'VIP', 'Disponible', 'activo'),
+(2, 'Ultra VIP', 'Disponible', 'activo'),
+(3, 'General', 'Disponible', 'activo'),
+(3, 'VIP', 'Disponible', 'activo'),
+(3, 'Ultra VIP', 'Disponible', 'activo');
+
+-- Insertar en la tabla Ducha (suponiendo que no hay duchas existentes)
+INSERT INTO Ducha (Estado_Ducha, estado) VALUES
+('Disponible', 'activo'),
+('Ocupado', 'activo');
+
+-- Insertar en la tabla Clasificacion (suponiendo que no hay clasificaciones existentes)
+INSERT INTO Clasificacion (Nombre) VALUES
+('Básico'),
+('Premium');
+
+-- Insertar en la tabla Servicio
+INSERT INTO Servicio (CodDucha, CodCubiculo, CodClasificacion, Descripcion, Precio) VALUES
+(1, 1, 1, 'Servicio Básico con Ducha', 50.00),
+(1, 2, 2, 'Servicio Premium', 100.00),
+(2, 3, 1, 'Servicio Básico con Ducha y Cubículo', 75.00);
+
+-- Insertar en la tabla MaterialDucha
+INSERT INTO MaterialDucha (CodDucha, Descripcion, FechaAdquisicion, FechaVencimiento) VALUES
+(1, 'Jabón', '2024-01-01', '2025-01-01'),
+(2, 'Toallas', '2024-01-01', NULL);
+
+-- Insertar en la tabla MaterialCubiculo
+INSERT INTO MaterialCubiculo (CodCubiculo, Descripcion, FechaAdquisicion) VALUES
+(1, 'Silla', '2024-01-01'),
+(2, 'Escritorio', '2024-01-01');
