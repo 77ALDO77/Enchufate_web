@@ -13,6 +13,26 @@ public class Cliente {
     private String correo;
     private String contraseña;
 
+    public Cliente(int codCliente, String nombres, String apePaterno, String apeMaterno, String DNI, Date fechaNacimiento, String usuario, String correo, String contraseña) {
+        this.codCliente = codCliente;
+        this.nombres = nombres;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
+        this.DNI = DNI;
+        this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
+        this.correo = correo;
+        this.contraseña = contraseña;
+    }
+
+    public Cliente() {}
+    
+    
+    
+    
+    
+    
+
     // Getters y Setters
     public int getCodCliente() {
         return codCliente;

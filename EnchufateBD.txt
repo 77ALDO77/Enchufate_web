@@ -2,176 +2,176 @@ CREATE DATABASE enchufate;
 
 USE enchufate;
 
+CREATE TABLE Clasificacion
+(
+    CodClasificacion int PRIMARY KEY auto_increment NOT NULL,
+    Nombre varchar(40) NOT NULL
+);
+
 CREATE TABLE Ducha
 (
-CodDucha int PRIMARY KEY auto_increment NOT NULL,
-Nivel int NOT NULL,
-Estado varchar(10) NOT NULL
+    CodDucha int PRIMARY KEY auto_increment NOT NULL,
+    Nivel int NOT NULL,
+    Estado varchar(10) NOT NULL
 );
-
-CREATE TABLE Reserva
-(
-CodReserva int PRIMARY KEY auto_increment NOT NULL,
-CodCliente int NOT NULL,
-CodEmpleado int NOT NULL,
-Fecha date NOT NULL,
-Hora time NOT NULL,
-FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
-FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
-);
-
-CREATE TABLE DetalleReserva
-(
-CodReserva int NOT NULL,
-CodServicio int NOT NULL,
-TipoPago varchar(20) NOT NULL,
-Cantidad int NOT NULL,
-PRIMARY KEY (CodReserva, CodServicio),
-FOREIGN KEY (CodReserva) REFERENCES Reserva(CodReserva),
-FOREIGN KEY (CodServicio) REFERENCES Servicio(CodServicio)
-);
-
 
 CREATE TABLE Cubiculo
 (
-CodCubiculo int PRIMARY KEY auto_increment NOT NULL,
-Nivel int NOT NULL,
-Estado varchar(10) NOT NULL
-);
-
-CREATE TABLE MaterialDucha
-(
-CodMatDucha int PRIMARY KEY auto_increment NOT NULL,
-CodDucha int NOT NULL,
-Descripcion varchar (100) NOT NULL,
-FechaAdquisicion date NOT NULL,
-FechaVencimiento date NULL,
-FOREIGN KEY (CodDucha) REFERENCES Ducha(CodDucha)
-);
-
-CREATE TABLE MaterialCubiculo
-(
-CodMatCub int PRIMARY KEY auto_increment NOT NULL,
-CodCubiculo int NOT NULL,
-Descripcion varchar(100) NOT NULL,
-FechaAdquisicion date NOT NULL,
-FOREIGN KEY (CodCubiculo) REFERENCES Cubiculo(CodCubiculo)
-);
-
-CREATE TABLE Clasificacion
-(
-CodClasificacion int PRIMARY KEY auto_increment NOT NULL,
-Nombre varchar(40) NOT NULL
-);
-
-CREATE TABLE Servicio
-(
-CodServicio int PRIMARY KEY auto_increment NOT NULL,
-CodDucha int NULL,
-CodCubiculo int NOT NULL,
-CodClasificacion int NOT NULL,
-Descripcion varchar(100) NOT NULL,
-Precio decimal(10,2) NOT NULL,
-FOREIGN KEY (CodDucha) REFERENCES Ducha(CodDucha),
-FOREIGN KEY (CodCubiculo) REFERENCES Cubiculo(CodCubiculo),
-FOREIGN KEY (CodClasificacion) REFERENCES Clasificacion(CodClasificacion)
+    CodCubiculo int PRIMARY KEY auto_increment NOT NULL,
+    Nivel int NOT NULL,
+    Estado varchar(10) NOT NULL
 );
 
 CREATE TABLE Cliente
 (
-CodCliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-Nombres VARCHAR(40) NOT NULL,
-ApePaterno VARCHAR(20) NOT NULL,
-ApeMaterno VARCHAR(20) NOT NULL,
-DNI INT NOT NULL,
-FechaNacimiento DATE NOT NULL,
-Usuario VARCHAR(20) NOT NULL,
-Correo VARCHAR(100) NOT NULL,
-Contraseña VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE Empleado
-(
-CodEmpleado int PRIMARY KEY auto_increment NOT NULL,
-CodLocal int NOT NULL,
-CodArea int NOT NULL,
-Nombre varchar(30) NOT NULL,
-Apellidos varchar(30) NOT NULL,
-FechaNacimiento date NOT NULL,
-DNI int NOT NULL UNIQUE KEY,
-Sexo varchar(10) NOT NULL,
-Celular int NOT NULL UNIQUE KEY,
-Salario decimal(10,2) NOT NULL,
-Correo varchar(100) NOT NULL UNIQUE KEY,
-Clave varchar(50) NOT NULL,
-FOREIGN KEY (CodLocal) REFERENCES Locales(CodLocal),
-FOREIGN KEY (CodArea) REFERENCES Area(CodArea)
+    CodCliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Nombres VARCHAR(40) NOT NULL,
+    ApePaterno VARCHAR(20) NOT NULL,
+    ApeMaterno VARCHAR(20) NOT NULL,
+    DNI INT NOT NULL,
+    FechaNacimiento DATE NOT NULL,
+    Usuario VARCHAR(20) NOT NULL,
+    Correo VARCHAR(100) NOT NULL,
+    Contraseña VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Locales
 (
-CodLocal int PRIMARY KEY auto_increment NOT NULL,
-Direccion varchar(100) NOT NULL,
-Nombre varchar(60) NOT NULL,
-Telefono int NOT NULL
+    CodLocal int PRIMARY KEY auto_increment NOT NULL,
+    Direccion varchar(100) NOT NULL,
+    Nombre varchar(60) NOT NULL,
+    Telefono int NOT NULL
 );
 
 CREATE TABLE Area
 (
-CodArea int PRIMARY KEY auto_increment NOT NULL,
-Descripcion varchar(100) NOT NULL
+    CodArea int PRIMARY KEY auto_increment NOT NULL,
+    Descripcion varchar(100) NOT NULL
+);
+
+CREATE TABLE Empleado
+(
+    CodEmpleado int PRIMARY KEY auto_increment NOT NULL,
+    CodLocal int NOT NULL,
+    CodArea int NOT NULL,
+    Nombre varchar(30) NOT NULL,
+    Apellidos varchar(30) NOT NULL,
+    FechaNacimiento date NOT NULL,
+    DNI int NOT NULL UNIQUE KEY,
+    Sexo varchar(10) NOT NULL,
+    Celular int NOT NULL UNIQUE KEY,
+    Salario decimal(10,2) NOT NULL,
+    Correo varchar(100) NOT NULL UNIQUE KEY,
+    Clave varchar(50) NOT NULL,
+    FOREIGN KEY (CodLocal) REFERENCES Locales(CodLocal),
+    FOREIGN KEY (CodArea) REFERENCES Area(CodArea)
+);
+
+CREATE TABLE Servicio
+(
+    CodServicio int PRIMARY KEY auto_increment NOT NULL,
+    CodDucha int NULL,
+    CodCubiculo int NOT NULL,
+    CodClasificacion int NOT NULL,
+    Descripcion varchar(100) NOT NULL,
+    Precio decimal(10,2) NOT NULL,
+    FOREIGN KEY (CodDucha) REFERENCES Ducha(CodDucha),
+    FOREIGN KEY (CodCubiculo) REFERENCES Cubiculo(CodCubiculo),
+    FOREIGN KEY (CodClasificacion) REFERENCES Clasificacion(CodClasificacion)
+);
+
+CREATE TABLE Reserva
+(
+    CodReserva int PRIMARY KEY auto_increment NOT NULL,
+    CodCliente int NOT NULL,
+    CodEmpleado int NOT NULL,
+    Fecha date NOT NULL,
+    Hora time NOT NULL,
+    FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
+    FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
+);
+
+CREATE TABLE DetalleReserva
+(
+    CodReserva int NOT NULL,
+    CodServicio int NOT NULL,
+    TipoPago varchar(20) NOT NULL,
+    Cantidad int NOT NULL,
+    PRIMARY KEY (CodReserva, CodServicio),
+    FOREIGN KEY (CodReserva) REFERENCES Reserva(CodReserva),
+    FOREIGN KEY (CodServicio) REFERENCES Servicio(CodServicio)
+);
+
+CREATE TABLE MaterialDucha
+(
+    CodMatDucha int PRIMARY KEY auto_increment NOT NULL,
+    CodDucha int NOT NULL,
+    Descripcion varchar (100) NOT NULL,
+    FechaAdquisicion date NOT NULL,
+    FechaVencimiento date NULL,
+    FOREIGN KEY (CodDucha) REFERENCES Ducha(CodDucha)
+);
+
+CREATE TABLE MaterialCubiculo
+(
+    CodMatCub int PRIMARY KEY auto_increment NOT NULL,
+    CodCubiculo int NOT NULL,
+    Descripcion varchar(100) NOT NULL,
+    FechaAdquisicion date NOT NULL,
+    FOREIGN KEY (CodCubiculo) REFERENCES Cubiculo(CodCubiculo)
 );
 
 CREATE TABLE Categoria
 (
-CodCategoria int PRIMARY KEY auto_increment NOT NULL,
-Nombre varchar(40) NOT NULL
+    CodCategoria int PRIMARY KEY auto_increment NOT NULL,
+    Nombre varchar(40) NOT NULL
 );
 
 CREATE TABLE Proveedor
 (
-CodProveedor int PRIMARY KEY auto_increment NOT NULL,
-Nombre varchar(40) NOT NULL,
-Contacto varchar (50) NOT NULL,
-Pais varchar(40) NOT NULL
+    CodProveedor int PRIMARY KEY auto_increment NOT NULL,
+    Nombre varchar(40) NOT NULL,
+    Contacto varchar (50) NOT NULL,
+    Pais varchar(40) NOT NULL
 );
 
 CREATE TABLE Producto
 (
-CodProducto int PRIMARY KEY auto_increment NOT NULL,
-CodCategoria int NOT NULL,
-CodProveedor int NOT NULL,
-Precio decimal(10,2) NOT NULL,
-Nombre varchar(50) NOT NULL,
-Descripcion varchar(200) NOT NULL,
-Imagen varchar(255) NULL,
-FechaVencimiento date NULL,
-Estado varchar(10) NOT NULL,
-FOREIGN KEY (CodCategoria) REFERENCES Categoria(CodCategoria),
-FOREIGN KEY (CodProveedor) REFERENCES Proveedor(CodProveedor)
+    CodProducto int PRIMARY KEY auto_increment NOT NULL,
+    CodCategoria int NOT NULL,
+    CodProveedor int NOT NULL,
+    Precio decimal(10,2) NOT NULL,
+    Nombre varchar(50) NOT NULL,
+    Descripcion varchar(200) NOT NULL,
+    Imagen varchar(255) NULL,
+    FechaVencimiento date NULL,
+    Estado varchar(10) NOT NULL,
+    FOREIGN KEY (CodCategoria) REFERENCES Categoria(CodCategoria),
+    FOREIGN KEY (CodProveedor) REFERENCES Proveedor(CodProveedor)
 );
 
 CREATE TABLE Compra
 (
-CodCompra int PRIMARY KEY auto_increment NOT NULL,
-CodCliente int NOT NULL,
-CodEmpleado int NOT NULL,
-Fecha date NOT NULL,
-Hora time NOT NULL,
-FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
-FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
+    CodCompra int PRIMARY KEY auto_increment NOT NULL,
+    CodCliente int NOT NULL,
+    CodEmpleado int NOT NULL,
+    Fecha date NOT NULL,
+    Hora time NOT NULL,
+    FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
+    FOREIGN KEY (CodEmpleado) REFERENCES Empleado(CodEmpleado)
 );
 
 CREATE TABLE DetalleCompra
 (
-CodCompra int NOT NULL,
-CodProducto int NOT NULL,
-TipoPago varchar(20) NOT NULL,
-Cantidad int NOT NULL,
-PRIMARY KEY (CodCompra, CodProducto),
-FOREIGN KEY (CodCompra) REFERENCES Compra(CodCompra),
-FOREIGN KEY (CodProducto) REFERENCES Producto(CodProducto)
+    CodCompra int NOT NULL,
+    CodProducto int NOT NULL,
+    TipoPago varchar(20) NOT NULL,
+    Cantidad int NOT NULL,
+    PRIMARY KEY (CodCompra, CodProducto),
+    FOREIGN KEY (CodCompra) REFERENCES Compra(CodCompra),
+    FOREIGN KEY (CodProducto) REFERENCES Producto(CodProducto)
 );
+
 CREATE TABLE Contacto
 (
     id_contacto int PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -191,7 +191,9 @@ CREATE TABLE Reclamos
     AsuntoReclamo VARCHAR(50) NOT NULL,
     ContenidoReclamo VARCHAR(1000) NOT NULL
 );
-CREATE TABLE Carrito (
+
+CREATE TABLE Carrito
+(
     CodCarrito INT AUTO_INCREMENT PRIMARY KEY,
     CodCliente INT NOT NULL,
     CodProducto INT NOT NULL,
