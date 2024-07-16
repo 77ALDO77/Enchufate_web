@@ -47,4 +47,5 @@
         </main>
         <jsp:include page="components/pie.jsp"/>
     </body>
+    <---hola>
 </html>
