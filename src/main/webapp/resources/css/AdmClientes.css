@@ -1,0 +1,20 @@
+table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #283342;
+    border-color: #283342;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #32435b;
+    border-color: #334763;
+}
+
+body {
+    background-color: #f4f4f4;
+}

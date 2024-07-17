@@ -164,3 +164,16 @@ form button {
 form button:hover {
     background-color: #45a049;
 }
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #283342;
+    border-color: #283342;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #32435b;
+    border-color: #334763;
+}

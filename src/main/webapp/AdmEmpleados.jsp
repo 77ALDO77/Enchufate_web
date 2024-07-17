@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="resources/css/AdmEmpleados.css" rel="stylesheet" type="text/css"/>
+
         <link href="resources/css/Admin.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/Admin-Display.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -26,7 +26,7 @@
         <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.38/sweetalert2.min.css" />
         <script src="${pageContext.servletContext.contextPath}/resources/scrip/empleado.js"></script>
-
+        <link href="resources/css/AdmEmpleados.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="parent-container">
         <jsp:include page="components/navegadorAdm.jsp"/>
@@ -39,7 +39,7 @@
 
             <hr>
             <div class="row align-items-start">
-                <div class="col-9"><h1>Empleados</h1></div>
+                <div class="col-9"><h1>Gestión de Empleados</h1></div>
                 <div class="col-3 align-self-center">
                     <div class="d-grid gap-2">
                         <button type="button" class="btn btn-success btnAdd" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar</button>
@@ -210,6 +210,9 @@
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.38/sweetalert2.all.min.js"></script>   
         
-        
+        <script>
+            var contextPath = '${pageContext.servletContext.contextPath}';
+        </script>
+        <script src="${pageContext.servletContext.contextPath}/resources/scrip/empleado.js"></script>
     </body>
 </html>
