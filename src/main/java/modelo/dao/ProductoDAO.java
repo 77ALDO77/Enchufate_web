@@ -156,13 +156,13 @@ public class ProductoDAO {
         }
         return resp;
     }
-    
-    public String ActualizarProducto(Producto p){
+
+    public String ActualizarProducto(Producto p) {
         String resp = "";
         PreparedStatement ps;
         ResultSet rs;
         String sql = "update producto set nombre=?, descripcion=?, fechavencimiento=?, precio=?, codcategoria=?, codproveedor=? where codproducto=?;";
-        try{
+        try {
             ps = cnx.prepareStatement(sql);
             ps.setString(1, p.getNombre());
             ps.setString(2, p.getDescripcion());
@@ -180,8 +180,30 @@ public class ProductoDAO {
                 resp = "No se ha actualizado";
             }
             ps.close();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             resp = ex.getMessage();
+        }
+        return resp;
+    }
+
+    public String EliminarProducto(int cod) {
+        String resp = "";
+        PreparedStatement ps;
+        String sql = "UPDATE producto SET estado='N' WHERE codproducto=?";
+
+        try {
+            ps = cnx.prepareStatement(sql);
+            ps.setInt(1, cod);
+            int ctos = ps.executeUpdate(); // Execute update once
+
+            if (ctos == 0) {
+                resp = "No se ha actualizado";
+            } else {
+                resp = "Producto eliminado correctamente";
+            }
+            ps.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR no se puede eliminar cargo: " + ex);
         }
         return resp;
     }
