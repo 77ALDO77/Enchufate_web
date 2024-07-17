@@ -198,6 +198,7 @@ CREATE TABLE Carrito
     CodCliente INT NOT NULL,
     CodProducto INT NOT NULL,
     Cantidad INT NOT NULL,
+    Total Decimal(10,2) not null,
     FOREIGN KEY (CodCliente) REFERENCES Cliente(CodCliente),
     FOREIGN KEY (CodProducto) REFERENCES Producto(CodProducto)
 );
