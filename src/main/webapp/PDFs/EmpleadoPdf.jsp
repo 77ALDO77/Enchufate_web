@@ -8,7 +8,7 @@ response.setContentType("application/pdf");
 response.setHeader("Content-Disposition", "attachment; filename=clientes.pdf");
 
 // Conexión a la base de datos
-String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true";
+String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
 String username = "root";
 String password = "root";
 Connection conn = null;

@@ -7,7 +7,7 @@ response.setContentType("application/vnd.ms-excel");
 response.setHeader("Content-Disposition", "attachment; filename=categorias_habitacion.xls");
 
 // Conexión a la base de datos
-String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true";
+String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
 String username = "root";
 String password = "root";
 Connection conn = null;
