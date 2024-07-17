@@ -121,8 +121,10 @@
                                             <td class="cuadro-cuerpo-tabla-admproductos">${producto.categoria}</td>
                                             <td class="cuadro-cuerpo-tabla-admproductos">${producto.proveedor}</td>
                                             <td class="acciones-cuerpo-tabla-admproductos">
-                                                <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=editar&codigoproducto=${producto.codproducto}" class="btn-editar-admproductos">Editar</a>
-                                                <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=borrar&codigoproducto=${producto.codproducto}" class="btn-eliminar-admproductos">Eliminar</a>
+                                                <div class="contenedor-acciones">
+                                                    <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=editar&codigoproducto=${producto.codproducto}" class="btn-editar-admproductos">Editar</a>
+                                                    <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=borrar&codigoproducto=${producto.codproducto}" class="btn-eliminar-admproductos">Eliminar</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -171,7 +173,7 @@
                                         $('#btnRegistrar').hide();
                                         $('#btnActualizar').show();
                                         $('#btnEliminar').hide();
-                                    } else if (isDelete === "true"){
+                                    } else if (isDelete === "true") {
                                         $('#lblObligatorio').hide();
                                         $('#lblDesea').show();
                                         $('#btnRegistrar').hide();

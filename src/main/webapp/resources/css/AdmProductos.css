@@ -230,3 +230,10 @@ input[type="submit"] {
 .btn-eliminar-admproductos:hover {
     background-color: #e53935;
 }
+
+.contenedor-acciones{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 10px; /* Espacio entre los botones (opcional) */
+}
