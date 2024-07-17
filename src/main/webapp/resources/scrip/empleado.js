@@ -4,16 +4,16 @@ function llenarFormulario(fila) {
     var nombres = $(fila).find(".nombres").text();
     var apellidos = $(fila).find(".apellidos").text();
     var dni = $(fila).find(".dni").text();
-    
+
     var Sexo = $(fila).data("sexo");
     var FechaN = $(fila).data("fechan");
     var Celular = $(fila).data("celular");
     var Salario = $(fila).data("salario");
     var Correo = $(fila).data("correo");
     var Clave = $(fila).data("clave");
-    
-    
-    
+
+
+
     var nombrelocal = $(fila).find(".nombrelocal").text(); //COMBOBOX
     var descripcionarea = $(fila).find(".descripcionarea").text(); //COMBOBOX
 

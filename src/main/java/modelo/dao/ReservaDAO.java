@@ -24,9 +24,9 @@ public class ReservaDAO {
             pstReserva.setInt(2, reserva.getCodEmpleado());
             pstReserva.setInt(3, reserva.getCodCubiculo());
             pstReserva.setDate(4, reserva.getFecha());
-            pstReserva.setTime(5, reserva.getHoraInicio());
-            pstReserva.setTime(6, reserva.getHoraFin());
-            pstReserva.setInt(7, reserva.getDuracion());
+            pstReserva.setTimestamp(5, reserva.getHoraInicio());
+            pstReserva.setTimestamp(6, reserva.getHoraFin());
+            //pstReserva.setInt(7, reserva.getDuracion());
             pstReserva.executeUpdate();
 
             // Actualizar estado del cubículo

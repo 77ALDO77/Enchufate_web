@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import modelo.dto.Area;
 import modelo.dto.Locales;
 
+public class EmpleadoDAO {
 
-public class EmpleadoDAO
-{
     public Empleado authenticate(String correo, String clave) {
         Empleado empleado = null;
         Connection cnx = new ConectaBD().getConnection();
@@ -52,7 +51,7 @@ public class EmpleadoDAO
         }
         return empleado;
     }
-    
+
     public int insertarEmpleado(Empleado em) {
         int res = 0;
         Connection cnx = null;
@@ -81,19 +80,23 @@ public class EmpleadoDAO
             System.out.println("Error al insertar " + e.getMessage());
         } finally {
             try {
-                if (pre != null) pre.close();
-                if (cnx != null) cnx.close();
+                if (pre != null) {
+                    pre.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
             } catch (SQLException e) {
                 System.out.println("Error al cerrar la conexión: " + e.getMessage());
             }
         }
         return res;
     }
-        
-    public ArrayList<Empleado> mostrarLocales()
-    {
+
+    public ArrayList<Empleado> mostrarLocales() {
         ArrayList<Empleado> lista = new ArrayList<>();
-        try {Connection cnx = new ConectaBD().getConnection();
+        try {
+            Connection cnx = new ConectaBD().getConnection();
 
             String sql = "select * from locales;";
 
@@ -107,7 +110,7 @@ public class EmpleadoDAO
                 String nombresBD = rs.getString("Nombre");
                 String direccionBD = rs.getString("Direccion");
                 int telefonoBD = rs.getInt("Telefono");
-                
+
                 Locales loc = new Locales();
 
                 loc.setCodLocal(codLocalBD);
@@ -120,16 +123,17 @@ public class EmpleadoDAO
                 lista.add(em);
 
             }
-        } catch (SQLException e) {System.out.println("Error al mostrar " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar " + e.getMessage());
         } finally {//            this.desconectar();
         }
         return lista;
     }
-        
-    public ArrayList<Empleado> mostrarAreas()
-    {
+
+    public ArrayList<Empleado> mostrarAreas() {
         ArrayList<Empleado> lista = new ArrayList<>();
-        try {Connection cnx = new ConectaBD().getConnection();
+        try {
+            Connection cnx = new ConectaBD().getConnection();
 
             String sql = "select * from area;";
 
@@ -141,7 +145,7 @@ public class EmpleadoDAO
                 // OBTENER LOS DATOS DE CADA AREA
                 int codAreaBD = rs.getInt("CodArea");
                 String descripcionBD = rs.getString("Descripcion");
-                
+
                 Area ar = new Area();
 
                 ar.setCodArea(codAreaBD);
@@ -152,16 +156,17 @@ public class EmpleadoDAO
                 lista.add(em);
 
             }
-        } catch (SQLException e) {System.out.println("Error al mostrar " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar " + e.getMessage());
         } finally {//            this.desconectar();
         }
         return lista;
     }
-    
-    public ArrayList<Empleado> mostrarEmpleados()
-    {
+
+    public ArrayList<Empleado> mostrarEmpleados() {
         ArrayList<Empleado> lista = new ArrayList<>();
-        try {Connection cnx = new ConectaBD().getConnection();
+        try {
+            Connection cnx = new ConectaBD().getConnection();
 
             String sql = "SELECT * FROM Empleado INNER JOIN Locales ON Empleado.CodLocal = Locales.CodLocal INNER JOIN Area ON Empleado.CodArea = Area.CodArea;";
 
@@ -169,26 +174,25 @@ public class EmpleadoDAO
             ResultSet rs;
             rs = pre.executeQuery();
             while (rs.next()) {
-                
-                
+
                 // OBTENER LOS DATOS DE CADA LOCAL
                 int codLocalBD = rs.getInt("Locales.CodLocal");
                 String nombresBD = rs.getString("Locales.Nombre");
                 String direccionBD = rs.getString("Locales.Direccion");
-                int telefonoBD = rs.getInt("Locales.Telefono");                
+                int telefonoBD = rs.getInt("Locales.Telefono");
                 Locales loc = new Locales();
                 loc.setCodLocal(codLocalBD);
                 loc.setNombre(nombresBD);
                 loc.setDireccion(direccionBD);
                 loc.setTelefono(telefonoBD);
-                
+
                 // OBTENER LOS DATOS DE CADA AREA
                 int codAreaBD = rs.getInt("Area.CodArea");
-                String descripcionBD = rs.getString("Area.Descripcion");                
+                String descripcionBD = rs.getString("Area.Descripcion");
                 Area ar = new Area();
                 ar.setCodArea(codAreaBD);
                 ar.setDescripcion(descripcionBD);
-                
+
                 // OBTENER LOS DATOS DE CADA EMPLEADO
                 int codEmpleadoBD = rs.getInt("Empleado.CodEmpleado");
                 String nombreEmBD = rs.getString("Empleado.Nombre");
@@ -200,10 +204,10 @@ public class EmpleadoDAO
                 double salarioEmBD = rs.getDouble("Empleado.Salario");
                 String correoEmBD = rs.getString("Empleado.Correo");
                 String claveEmBD = rs.getString("Empleado.Clave");
-                
+
                 // ENVIAR LAS CLASES LOCALES Y AREA COMO PARAMETROS DE EMPLEADO
-                Empleado em = new Empleado(loc,ar);
-                
+                Empleado em = new Empleado(loc, ar);
+
                 em.setCodEmpleado(codEmpleadoBD);
                 em.setCodLocal(codLocalBD);
                 em.setCodArea(codAreaBD);
@@ -220,14 +224,14 @@ public class EmpleadoDAO
                 lista.add(em);
 
             }
-        } catch (SQLException e) {System.out.println("Error al mostrar " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar " + e.getMessage());
         } finally {//            this.desconectar();
         }
         return lista;
     }
-        
-    public int modificarEmpleado(Empleado em)
-    {
+
+    public int modificarEmpleado(Empleado em) {
         int res = 0;
         try {
             Connection cnx = new ConectaBD().getConnection();
@@ -248,15 +252,14 @@ public class EmpleadoDAO
 
             res = pre.executeUpdate();
 
-
-        } catch (SQLException e) {System.out.println("Error al modificar " + e.getMessage());}
-        finally {//            this.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Error al modificar " + e.getMessage());
+        } finally {//            this.desconectar();
         }
         return res;
     }
-    
-    public int eliminarEmpleado(Empleado em)
-    {
+
+    public int eliminarEmpleado(Empleado em) {
         int res = 0;
         try {
             Connection cnx = new ConectaBD().getConnection();
@@ -266,8 +269,9 @@ public class EmpleadoDAO
             pre.setInt(1, em.getCodEmpleado());
 
             res = pre.executeUpdate();
-        } catch (SQLException e) {System.out.println("Error al eliminar " + e.getMessage());}
-        finally {//            this.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar " + e.getMessage());
+        } finally {//            this.desconectar();
         }
         return res;
     }

@@ -2,12 +2,9 @@ package ServLets;
 
 import com.google.gson.Gson;
 import modelo.dao.CubiculoDAO;
-import modelo.dao.ReservaDAO;
-import modelo.dao.ClienteDAO;
 import modelo.dto.Cubiculo;
 import modelo.dto.Reserva;
-import modelo.dto.Cliente;
-import modelo.dto.Local;
+import modelo.dto.Locales;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class cntCubiculos extends HttpServlet {
@@ -62,7 +59,7 @@ public class cntCubiculos extends HttpServlet {
 
     private void listarLocales(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CubiculoDAO cubiculoDAO = new CubiculoDAO();
-        List<Local> locales = cubiculoDAO.obtenerLocales();
+        List<Locales> locales = cubiculoDAO.obtenerLocales();
         Gson gson = new Gson();
         String json = gson.toJson(locales);
         response.setContentType("application/json");
@@ -71,19 +68,16 @@ public class cntCubiculos extends HttpServlet {
     }
 
     private void crearReserva(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ReservaDAO reservaDAO = new ReservaDAO();
-        ClienteDAO clienteDAO = new ClienteDAO();
+        CubiculoDAO cubiculoDAO = new CubiculoDAO();
         Reserva reserva = new Reserva();
-
-        int codCliente = clienteDAO.obtenerCodigoPorDNI(request.getParameter("dniCliente"));
-        reserva.setCodCliente(codCliente);
+        reserva.setCodCliente(Integer.parseInt(request.getParameter("codCliente"))); // Se asume que el parámetro es codCliente en lugar de dniCliente
         reserva.setCodEmpleado(1); // Proporciona el ID del empleado actual
         reserva.setCodCubiculo(Integer.parseInt(request.getParameter("codCubiculo")));
         reserva.setFecha(Date.valueOf(request.getParameter("fecha")));
-        reserva.setHoraInicio(Time.valueOf(request.getParameter("horaInicio")));
-        reserva.setHoraFin(Time.valueOf(request.getParameter("horaFin")));
-        reserva.setDuracion(Integer.parseInt(request.getParameter("duracion")));
-        reservaDAO.crearReserva(reserva);
+        reserva.setHoraInicio(Timestamp.valueOf(request.getParameter("horaInicio")));
+        reserva.setHoraFin(Timestamp.valueOf(request.getParameter("horaFin")));
+        reserva.setTiempo(request.getParameter("tiempo"));
+        cubiculoDAO.crearReserva(reserva);
     }
 
     private void obtenerCubiculo(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -99,8 +93,8 @@ public class cntCubiculos extends HttpServlet {
 
     private void obtenerTiempoRestante(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int codCubiculo = Integer.parseInt(request.getParameter("codCubiculo"));
-        ReservaDAO reservaDAO = new ReservaDAO();
-        int tiempoRestante = reservaDAO.obtenerTiempoRestante(codCubiculo);
+        CubiculoDAO cubiculoDAO = new CubiculoDAO();
+        int tiempoRestante = cubiculoDAO.obtenerTiempoRestante(codCubiculo);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("{\"tiempoRestante\":" + tiempoRestante + "}");

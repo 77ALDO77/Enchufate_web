@@ -1,19 +1,13 @@
 package modelo.dto;
 
-import java.sql.Time;
-
 public class Cubiculo {
     private int codCubiculo;
     private int codLocal;
-    private String nivel;
+    private int codNivel;
     private String estadoCubiculo;
     private String estado;
-    private Time horaInicio;
-    private Time horaFin;
-    private int tiempoRestante;
 
-    // Getters y Setters
-
+    // Getters and Setters
     public int getCodCubiculo() {
         return codCubiculo;
     }
@@ -30,12 +24,12 @@ public class Cubiculo {
         this.codLocal = codLocal;
     }
 
-    public String getNivel() {
-        return nivel;
+    public int getCodNivel() {
+        return codNivel;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+    public void setCodNivel(int codNivel) {
+        this.codNivel = codNivel;
     }
 
     public String getEstadoCubiculo() {
@@ -52,29 +46,5 @@ public class Cubiculo {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public Time getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(Time horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public Time getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Time horaFin) {
-        this.horaFin = horaFin;
-    }
-
-    public int getTiempoRestante() {
-        return tiempoRestante;
-    }
-
-    public void setTiempoRestante(int tiempoRestante) {
-        this.tiempoRestante = tiempoRestante;
     }
 }

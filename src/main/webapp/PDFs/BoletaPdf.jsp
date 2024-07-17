@@ -11,7 +11,7 @@
     // Conexión a la base de datos
     String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true";
     String username = "root";
-    String password = "";
+    String password = "root";
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;

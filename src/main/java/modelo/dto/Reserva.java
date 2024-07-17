@@ -1,7 +1,7 @@
 package modelo.dto;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Reserva {
     private int codReserva;
@@ -9,12 +9,11 @@ public class Reserva {
     private int codEmpleado;
     private int codCubiculo;
     private Date fecha;
-    private Time horaInicio;
-    private Time horaFin;
-    private int duracion;
+    private Timestamp horaInicio;
+    private Timestamp horaFin;
+    private String tiempo;
 
-    // Getters y Setters
-
+    // Getters and Setters
     public int getCodReserva() {
         return codReserva;
     }
@@ -55,28 +54,28 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public Time getHoraInicio() {
+    public Timestamp getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(Timestamp horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFin() {
+    public Timestamp getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Time horaFin) {
+    public void setHoraFin(Timestamp horaFin) {
         this.horaFin = horaFin;
     }
 
-    public int getDuracion() {
-        return duracion;
+    public String getTiempo() {
+        return tiempo;
     }
 
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 
     public double getTotal() {

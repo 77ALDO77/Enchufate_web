@@ -40,4 +40,8 @@ public class Locales {
     
     @Override
     public String toString() {        return getNombre();    }
+
+    public void setEstado(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
