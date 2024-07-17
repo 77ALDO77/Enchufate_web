@@ -1,7 +1,7 @@
 package modelo.dto;
 
 public class Local {
-    private int codLocal;
+    private int CodLocal;
     private String direccion;
     private String nombre;
     private String telefono;
@@ -9,11 +9,11 @@ public class Local {
 
     // Getters y Setters
     public int getCodLocal() {
-        return codLocal;
+        return CodLocal;
     }
 
-    public void setCodLocal(int codLocal) {
-        this.codLocal = codLocal;
+    public void setCodLocal(int CodLocal) {
+        this.CodLocal = CodLocal;
     }
 
     public String getDireccion() {

@@ -2,33 +2,33 @@ package modelo.dto;
 
 public class Cubiculo {
     private int codCubiculo;
-    private int codLocal;
+    private int CodLocal;
     private int codNivel;
     private String estadoCubiculo;
     private String estado;
 
     // Getters and Setters
-    public int getCodCubiculo() {
+    public int getcodCubiculo() {
         return codCubiculo;
     }
 
-    public void setCodCubiculo(int codCubiculo) {
+    public void setcodCubiculo(int codCubiculo) {
         this.codCubiculo = codCubiculo;
     }
 
     public int getCodLocal() {
-        return codLocal;
+        return CodLocal;
     }
 
-    public void setCodLocal(int codLocal) {
-        this.codLocal = codLocal;
+    public void setCodLocal(int CodLocal) {
+        this.CodLocal = CodLocal;
     }
 
-    public int getCodNivel() {
+    public int getcodNivel() {
         return codNivel;
     }
 
-    public void setCodNivel(int codNivel) {
+    public void setcodNivel(int codNivel) {
         this.codNivel = codNivel;
     }
 

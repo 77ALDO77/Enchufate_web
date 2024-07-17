@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import modelo.dto.Cliente;
 
 public class cntCubiculos extends HttpServlet {
 
@@ -27,6 +28,9 @@ public class cntCubiculos extends HttpServlet {
                     break;
                 case "listarLocales":
                     listarLocales(request, response);
+                    break;
+                case "listarClientes":
+                    listarClientes(request, response);
                     break;
                 case "crearReserva":
                     crearReserva(request, response);
@@ -47,9 +51,9 @@ public class cntCubiculos extends HttpServlet {
     }
 
     private void listarCubiculos(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int codLocal = Integer.parseInt(request.getParameter("codLocal"));
+        int CodLocal = Integer.parseInt(request.getParameter("CodLocal"));
         CubiculoDAO cubiculoDAO = new CubiculoDAO();
-        List<Cubiculo> cubiculos = cubiculoDAO.obtenerCubiculosPorLocal(codLocal);
+        List<Cubiculo> cubiculos = cubiculoDAO.obtenerCubiculosPorLocal(CodLocal);
         Gson gson = new Gson();
         String json = gson.toJson(cubiculos);
         response.setContentType("application/json");
@@ -67,17 +71,44 @@ public class cntCubiculos extends HttpServlet {
         response.getWriter().write(json);
     }
 
+    private void listarClientes(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CubiculoDAO cubiculoDAO = new CubiculoDAO();
+        List<Cliente> clientes = cubiculoDAO.obtenerClientes();
+        Gson gson = new Gson();
+        String json = gson.toJson(clientes);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+    }
+
     private void crearReserva(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CubiculoDAO cubiculoDAO = new CubiculoDAO();
         Reserva reserva = new Reserva();
-        reserva.setCodCliente(Integer.parseInt(request.getParameter("codCliente"))); // Se asume que el parámetro es codCliente en lugar de dniCliente
-        reserva.setCodEmpleado(1); // Proporciona el ID del empleado actual
-        reserva.setCodCubiculo(Integer.parseInt(request.getParameter("codCubiculo")));
-        reserva.setFecha(Date.valueOf(request.getParameter("fecha")));
-        reserva.setHoraInicio(Timestamp.valueOf(request.getParameter("horaInicio")));
-        reserva.setHoraFin(Timestamp.valueOf(request.getParameter("horaFin")));
-        reserva.setTiempo(request.getParameter("tiempo"));
-        cubiculoDAO.crearReserva(reserva);
+
+        // Verificar y obtener datos de los parámetros del request
+        String fechaStr = request.getParameter("fecha");
+        String horaInicioStr = request.getParameter("horaInicio");
+        String horaFinStr = request.getParameter("horaFin");
+
+        // Convertir y manejar los posibles errores de formato
+        try {
+            Date fecha = Date.valueOf(fechaStr); // Convertir String a Date
+            Timestamp horaInicio = Timestamp.valueOf(horaInicioStr.replace("T", " ") + ":00");
+            Timestamp horaFin = Timestamp.valueOf(horaFinStr.replace("T", " ") + ":00");
+
+            reserva.setcodCliente(Integer.parseInt(request.getParameter("codCliente")));
+            reserva.setcodEmpleado(1); // Proporciona el ID del empleado actual
+            reserva.setcodCubiculo(Integer.parseInt(request.getParameter("codCubiculo")));
+            reserva.setFecha(fecha);
+            reserva.sethoraInicio(horaInicio);
+            reserva.sethoraFin(horaFin);
+            reserva.setTiempo(request.getParameter("tiempo"));
+            cubiculoDAO.crearReserva(reserva);
+
+            response.setStatus(HttpServletResponse.SC_OK);
+        } catch (IllegalArgumentException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de fecha o hora incorrecto");
+        }
     }
 
     private void obtenerCubiculo(HttpServletRequest request, HttpServletResponse response) throws IOException {

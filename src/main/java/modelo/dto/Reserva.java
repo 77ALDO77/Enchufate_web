@@ -12,37 +12,38 @@ public class Reserva {
     private Timestamp horaInicio;
     private Timestamp horaFin;
     private String tiempo;
+    private int total;
 
     // Getters and Setters
-    public int getCodReserva() {
+    public int getcodReserva() {
         return codReserva;
     }
 
-    public void setCodReserva(int codReserva) {
+    public void setcodReserva(int codReserva) {
         this.codReserva = codReserva;
     }
 
-    public int getCodCliente() {
+    public int getcodCliente() {
         return codCliente;
     }
 
-    public void setCodCliente(int codCliente) {
+    public void setcodCliente(int codCliente) {
         this.codCliente = codCliente;
     }
 
-    public int getCodEmpleado() {
+    public int getcodEmpleado() {
         return codEmpleado;
     }
 
-    public void setCodEmpleado(int codEmpleado) {
+    public void setcodEmpleado(int codEmpleado) {
         this.codEmpleado = codEmpleado;
     }
 
-    public int getCodCubiculo() {
+    public int getcodCubiculo() {
         return codCubiculo;
     }
 
-    public void setCodCubiculo(int codCubiculo) {
+    public void setcodCubiculo(int codCubiculo) {
         this.codCubiculo = codCubiculo;
     }
 
@@ -54,19 +55,19 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public Timestamp getHoraInicio() {
+    public Timestamp gethoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Timestamp horaInicio) {
+    public void sethoraInicio(Timestamp horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Timestamp getHoraFin() {
+    public Timestamp gethoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Timestamp horaFin) {
+    public void sethoraFin(Timestamp horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -78,11 +79,11 @@ public class Reserva {
         this.tiempo = tiempo;
     }
 
-    public double getTotal() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int gettotal() {
+        return total;
     }
 
-    public void setTotal(int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void settotal(int total) {
+        this.total = total;
     }
 }

@@ -6,11 +6,11 @@ public class NivelCubiculo {
     private double precio;
 
     // Getters and Setters
-    public int getCodNivel() {
+    public int getcodNivel() {
         return codNivel;
     }
 
-    public void setCodNivel(int codNivel) {
+    public void setcodNivel(int codNivel) {
         this.codNivel = codNivel;
     }
 
