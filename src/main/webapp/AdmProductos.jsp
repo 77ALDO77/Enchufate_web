@@ -44,7 +44,7 @@
                                 <div class="modal-content">
                                     <div class="contenido-registrar-admproductos">
                                         <div class="modal-header">
-                                            <h1 class="modal-tittle fs-5" id="exampleModalLabel">Registro de Productos</h1>
+                                            <h1 class="modal-tittle fs-5" id="exampleModalLabel">Formulario de Productos</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <form action="${pageContext.request.contextPath}/cntAdmProductos" method="post" class="formulario-admproductos" id="formProductos">
@@ -82,9 +82,11 @@
                                                     <i></i>
                                                 </div>
                                                 <input type="hidden" name="codproducto" value="${codproducto}" />
-                                                <label class="nota">No olvide que los campos con (*) son <b>obligatorios</b></label>
+                                                <label class="nota" id="lblObligatorio">No olvide que los campos con (*) son <b>obligatorios</b></label>
+                                                <label class="nota" id="lblDesea">¿Desea eliminar este producto?</label>
                                                 <input type="submit" value="Registrar" name="accion" class="button-admproductos" id="btnRegistrar" />
                                                 <input type="submit" value="Actualizar" name="accion" class="button-admproductos" id="btnActualizar" />
+                                                <input type="submit" value="Eliminar" name="accion" class="button-admproductos" id="btnEliminar" />
                                             </fieldset>
 
                                         </form>
@@ -120,7 +122,7 @@
                                             <td class="cuadro-cuerpo-tabla-admproductos">${producto.proveedor}</td>
                                             <td class="acciones-cuerpo-tabla-admproductos">
                                                 <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=editar&codigoproducto=${producto.codproducto}" class="btn-editar-admproductos">Editar</a>
-                                                <input type="button" value="Borrar" class="btn-eliminar-admproductos">
+                                                <a href="<%=request.getContextPath()%>/cntAdmProductos?accion=borrar&codigoproducto=${producto.codproducto}" class="btn-eliminar-admproductos">Eliminar</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -162,12 +164,25 @@
 
                                     // Ocultar o mostrar botones en función del contexto (agregar o editar)
                                     var isEdit = "${isEdit}";
+                                    var isDelete = "${isDelete}"
                                     if (isEdit === "true") {
+                                        $('#lblObligatorio').show();
+                                        $('#lblDesea').hide();
                                         $('#btnRegistrar').hide();
                                         $('#btnActualizar').show();
+                                        $('#btnEliminar').hide();
+                                    } else if (isDelete === "true"){
+                                        $('#lblObligatorio').hide();
+                                        $('#lblDesea').show();
+                                        $('#btnRegistrar').hide();
+                                        $('#btnActualizar').hide();
+                                        $('#btnEliminar').show();
                                     } else {
+                                        $('#lblObligatorio').show();
+                                        $('#lblDesea').hide();
                                         $('#btnRegistrar').show();
                                         $('#btnActualizar').hide();
+                                        $('#btnEliminar').hide();
                                     }
                                 });
         </script>
@@ -175,6 +190,7 @@
             function setAgregarContext() {
                 $('#btnRegistrar').show();
                 $('#btnActualizar').hide();
+                $('#btnEliminar').hide();
             }
         </script>
     </body>

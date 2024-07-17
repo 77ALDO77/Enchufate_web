@@ -192,6 +192,40 @@ public class cntAdmProductos extends HttpServlet {
                     // Redirigir a la acción AdmProductos
                     response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
                 }
+            } else if (accion.equals("borrar")) {
+                Integer cod = Integer.valueOf(request.getParameter("codigoproducto"));
+                Producto p = new ProductoDAO().ObtenerProducto(cod);
+
+                request.setAttribute("nombre", p.getNombre());
+                request.setAttribute("descripcion", p.getDescripcion());
+                request.setAttribute("fechavencimiento", p.getFechavencimiento());
+                request.setAttribute("precio", "" + "" + p.getPrecio());
+                request.setAttribute("categoria", "" + p.getCategoria().getCodCategoria());
+                request.setAttribute("proveedor", "" + p.getProveedor().getCodProveedor());
+                request.setAttribute("codproducto", "" + p.getCodproducto());
+                request.setAttribute("listaCategoria", listaCat);
+                request.setAttribute("listaProveedor", listaProv);
+                request.setAttribute("listaProducto", listaProd);
+                request.setAttribute("showModal", true);
+                request.setAttribute("isDelete", true);
+
+                request.getRequestDispatcher("./AdmProductos.jsp").forward(request, response);
+            } else if (accion.equals("Eliminar")) {
+                int codProducto = Integer.parseInt(request.getParameter("codproducto"));
+
+                ProductoDAO dao = new ProductoDAO();
+                String respuesta = dao.EliminarProducto(codProducto);
+
+                // Actualizar la lista de productos después de la eliminación
+                request.setAttribute("listaProducto", listaProd);
+
+                // Establecer el mensaje de confirmación en la sesión
+                String mensajeConfirmacion = "¡Producto eliminado correctamente!";
+                HttpSession session = request.getSession();
+                session.setAttribute("mensajeConfirmacion", mensajeConfirmacion);
+
+                // Redirigir a la acción AdmProductos
+                response.sendRedirect(request.getContextPath() + "/cntAdmProductos?accion=AdmProductos");
             }
         }
     }
