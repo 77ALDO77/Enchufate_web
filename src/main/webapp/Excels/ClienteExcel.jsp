@@ -1,5 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="org.apache.poi.hssf.usermodel.*" %>
+<%@ page import="org.apache.poi.ss.usermodel.*" %>
+<%@ page import="org.apache.poi.util.IOUtils" %>
 <%@ page import="java.io.*" %>
 
 <%
@@ -7,20 +9,20 @@ response.setContentType("application/vnd.ms-excel");
 response.setHeader("Content-Disposition", "attachment; filename=categorias_habitacion.xls");
 
 // Conexión a la base de datos
-String url = "jdbc:mysql://localhost:3306/enchufate5?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
+String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
 String username = "root";
-String password = "root";
+String password = "";
 Connection conn = null;
 PreparedStatement stmt = null;
 ResultSet rs = null;
 
-OutputStream outputStream = null; // Cambio de nombre de la variable
+OutputStream outputStream = response.getOutputStream(); // Cambio de nombre de la variable
 
 try {
     Class.forName("com.mysql.cj.jdbc.Driver");
     conn = DriverManager.getConnection(url, username, password);
 
-    // Consulta SQL para obtener datos de la tabla Categoriahabitacion
+    // Consulta SQL para obtener datos de la tabla Cliente
     String sql = "SELECT * FROM cliente";
     stmt = conn.prepareStatement(sql);
     rs = stmt.executeQuery();
@@ -29,8 +31,22 @@ try {
     HSSFWorkbook workbook = new HSSFWorkbook();
     HSSFSheet sheet = workbook.createSheet("Clientes");
 
-    // Crear la fila de encabezado
-    HSSFRow headerRow = sheet.createRow(0);
+    // Agregar logo
+    InputStream inputStream = new FileInputStream(application.getRealPath("/resources/img/AdmNav/Logo.png"));
+    byte[] bytes = IOUtils.toByteArray(inputStream);
+    int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+    inputStream.close();
+
+    CreationHelper helper = workbook.getCreationHelper();
+    Drawing<?> drawing = sheet.createDrawingPatriarch();
+    ClientAnchor anchor = helper.createClientAnchor();
+    anchor.setCol1(0);
+    anchor.setRow1(0);
+    Picture pict = drawing.createPicture(anchor, pictureIdx);
+    pict.resize();
+
+    // Crear la fila de encabezado, desplazada una fila hacia abajo debido a la imagen
+    HSSFRow headerRow = sheet.createRow(8);
     headerRow.createCell(0).setCellValue("ID");
     headerRow.createCell(1).setCellValue("Nombres");
     headerRow.createCell(2).setCellValue("Apellido Paterno");
@@ -42,7 +58,7 @@ try {
     headerRow.createCell(8).setCellValue("Contraseña");
 
     // Llenar el libro con los datos de la base de datos
-    int rowNum = 1;
+    int rowNum = 9; // Empezar después de la fila de encabezado
     while (rs.next()) {
         HSSFRow row = sheet.createRow(rowNum++);
         row.createCell(0).setCellValue(rs.getString("CodCliente"));
@@ -57,7 +73,7 @@ try {
     }
 
     // Escribir el libro en el flujo de salida
-    workbook.write(response.getOutputStream()); // Cambio de nombre de la variable
+    workbook.write(outputStream);
 } catch (Exception e) {
     out.println("Error: " + e.getMessage());
 } finally {

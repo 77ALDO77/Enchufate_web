@@ -9,7 +9,7 @@
 <%@page import="modelo.dao.ProductoDAO"%>
 <%@page import="modelo.dto.Producto"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8" language="java"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +21,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>Productos</title>
+        
+        <script src="${pageContext.servletContext.contextPath}/resources/scrip/producto.js"></script>
+        
     </head>
     <body class="parent-container-admproductos">
         <jsp:include page="components/navegadorAdm.jsp"/>
@@ -39,6 +42,23 @@
                                 Agregar Nuevo Producto
                             </button>
                         </div>
+
+
+                        <hr>
+                        <div class="row align-items-start">
+                            <div class="col-9"></div>
+                            <div class="col-3 align-self-center">
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-primary btnGenerarPDF" onclick="generarPDF()">Generar PDF</button>
+                                    <button type="button" class="btn btn-primary btnGenerarExcel" onclick="generarExcel()">Generar EXCEL</button>
+                                </div>                    
+                            </div>
+                        </div>
+                        <hr>
+
+
+
+
                         <div class="modal fade" id="exampleModal" tabindex="1" aria labellebdy="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -139,54 +159,54 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                $(document).ready(function () {
-                                    // Mostrar mensaje de confirmación si existe
-                                    var mensajeConfirmacion = "<%= session.getAttribute("mensajeConfirmacion")%>";
-                                    if (mensajeConfirmacion !== "null" && mensajeConfirmacion !== "") {
-                                        toastr.success(mensajeConfirmacion, null, {
-                                            className: 'toast-success' // Agregar la clase de estilo personalizado
-                                        });
-                                        // Eliminar el atributo de sesión después de mostrar la notificación
+                            $(document).ready(function () {
+                                // Mostrar mensaje de confirmación si existe
+                                var mensajeConfirmacion = "<%= session.getAttribute("mensajeConfirmacion")%>";
+                                if (mensajeConfirmacion !== "null" && mensajeConfirmacion !== "") {
+                                    toastr.success(mensajeConfirmacion, null, {
+                                        className: 'toast-success' // Agregar la clase de estilo personalizado
+                                    });
+                                    // Eliminar el atributo de sesión después de mostrar la notificación
             <% session.removeAttribute("mensajeConfirmacion");%>
-                                    }
+                                }
 
-                                    // Mostrar mensaje de advertencia si existe
-                                    var mensajeAdvertencia = "<%= session.getAttribute("mensajeAdvertencia")%>";
-                                    if (mensajeAdvertencia !== "null" && mensajeAdvertencia !== "") {
-                                        toastr.warning(mensajeAdvertencia);
-                                        // Eliminar el atributo de sesión después de mostrar la notificación
+                                // Mostrar mensaje de advertencia si existe
+                                var mensajeAdvertencia = "<%= session.getAttribute("mensajeAdvertencia")%>";
+                                if (mensajeAdvertencia !== "null" && mensajeAdvertencia !== "") {
+                                    toastr.warning(mensajeAdvertencia);
+                                    // Eliminar el atributo de sesión después de mostrar la notificación
             <% session.removeAttribute("mensajeAdvertencia");%>
-                                    }
+                                }
 
-                                    // Mostrar el modal si el atributo showModal está presente
-                                    var showModal = "${showModal}";
-                                    if (showModal === "true") {
-                                        $('#exampleModal').modal('show');
-                                    }
+                                // Mostrar el modal si el atributo showModal está presente
+                                var showModal = "${showModal}";
+                                if (showModal === "true") {
+                                    $('#exampleModal').modal('show');
+                                }
 
-                                    // Ocultar o mostrar botones en función del contexto (agregar o editar)
-                                    var isEdit = "${isEdit}";
-                                    var isDelete = "${isDelete}"
-                                    if (isEdit === "true") {
-                                        $('#lblObligatorio').show();
-                                        $('#lblDesea').hide();
-                                        $('#btnRegistrar').hide();
-                                        $('#btnActualizar').show();
-                                        $('#btnEliminar').hide();
-                                    } else if (isDelete === "true") {
-                                        $('#lblObligatorio').hide();
-                                        $('#lblDesea').show();
-                                        $('#btnRegistrar').hide();
-                                        $('#btnActualizar').hide();
-                                        $('#btnEliminar').show();
-                                    } else {
-                                        $('#lblObligatorio').show();
-                                        $('#lblDesea').hide();
-                                        $('#btnRegistrar').show();
-                                        $('#btnActualizar').hide();
-                                        $('#btnEliminar').hide();
-                                    }
-                                });
+                                // Ocultar o mostrar botones en función del contexto (agregar o editar)
+                                var isEdit = "${isEdit}";
+                                var isDelete = "${isDelete}"
+                                if (isEdit === "true") {
+                                    $('#lblObligatorio').show();
+                                    $('#lblDesea').hide();
+                                    $('#btnRegistrar').hide();
+                                    $('#btnActualizar').show();
+                                    $('#btnEliminar').hide();
+                                } else if (isDelete === "true") {
+                                    $('#lblObligatorio').hide();
+                                    $('#lblDesea').show();
+                                    $('#btnRegistrar').hide();
+                                    $('#btnActualizar').hide();
+                                    $('#btnEliminar').show();
+                                } else {
+                                    $('#lblObligatorio').show();
+                                    $('#lblDesea').hide();
+                                    $('#btnRegistrar').show();
+                                    $('#btnActualizar').hide();
+                                    $('#btnEliminar').hide();
+                                }
+                            });
         </script>
         <script>
             function setAgregarContext() {
@@ -195,5 +215,13 @@
                 $('#btnEliminar').hide();
             }
         </script>
+        
+        
+        <script>
+                            var contextPath = '${pageContext.servletContext.contextPath}';
+        </script>
+        <script src="${pageContext.servletContext.contextPath}/resources/scrip/producto.js"></script>
+
+        
     </body>
 </html>

@@ -23,13 +23,13 @@ try {
     conn = DriverManager.getConnection(url, username, password);
 
     // Consulta SQL para obtener datos de la tabla Categoriahabitacion
-    String sql = "SELECT * FROM Empleado INNER JOIN Locales ON Empleado.CodLocal = Locales.CodLocal INNER JOIN Area ON Empleado.CodArea = Area.CodArea;";
+    String sql = "SELECT p.CodProducto, p.Nombre, p.Descripcion, p.Precio, p.FechaVencimiento, c.Nombre, pro.Nombre FROM Producto p INNER JOIN Categoria c ON p.CodCategoria = c.CodCategoria INNER JOIN proveedor pro ON p.CodProveedor=pro.CodProveedor;";
     stmt = conn.prepareStatement(sql);
     rs = stmt.executeQuery();
 
     // Crear el libro de Excel
     HSSFWorkbook workbook = new HSSFWorkbook();
-    HSSFSheet sheet = workbook.createSheet("Clientes");
+    HSSFSheet sheet = workbook.createSheet("Productos");
     
     
     // Agregar logo
@@ -50,32 +50,24 @@ try {
     // Crear la fila de encabezado
     HSSFRow headerRow = sheet.createRow(8);
     headerRow.createCell(0).setCellValue("ID");
-    headerRow.createCell(1).setCellValue("Nombres");
-    headerRow.createCell(2).setCellValue("Apellidos");
-    headerRow.createCell(3).setCellValue("Fecha de Nacimiento");
-    headerRow.createCell(4).setCellValue("DNI");
-    headerRow.createCell(5).setCellValue("Sexo");
-    headerRow.createCell(6).setCellValue("Salario");
-    headerRow.createCell(7).setCellValue("Area");
-    headerRow.createCell(8).setCellValue("Nombre del Local");
-    headerRow.createCell(9).setCellValue("Correo");
-    headerRow.createCell(10).setCellValue("Clave");
+    headerRow.createCell(1).setCellValue("Nombre");
+    headerRow.createCell(2).setCellValue("Descripcion");
+    headerRow.createCell(3).setCellValue("Precio");
+    headerRow.createCell(4).setCellValue("Fecha de Nacimiento");
+    headerRow.createCell(5).setCellValue("Categoria");
+    headerRow.createCell(6).setCellValue("Proveedor");
 
     // Llenar el libro con los datos de la base de datos
     int rowNum = 9;
     while (rs.next()) {
         HSSFRow row = sheet.createRow(rowNum++);
-        row.createCell(0).setCellValue(rs.getString("Empleado.CodEmpleado"));
-        row.createCell(1).setCellValue(rs.getString("Empleado.Nombre"));
-        row.createCell(2).setCellValue(rs.getString("Empleado.Apellidos"));
-        row.createCell(3).setCellValue(rs.getString("Empleado.FechaNacimiento"));
-        row.createCell(4).setCellValue(rs.getString("Empleado.Dni"));
-        row.createCell(5).setCellValue(rs.getString("Empleado.Sexo"));
-        row.createCell(6).setCellValue(rs.getString("Empleado.Salario"));
-        row.createCell(7).setCellValue(rs.getString("Area.Descripcion"));
-        row.createCell(8).setCellValue(rs.getString("Locales.Nombre"));
-        row.createCell(9).setCellValue(rs.getString("Empleado.Correo"));
-        row.createCell(10).setCellValue(rs.getString("Empleado.Clave"));
+        row.createCell(0).setCellValue(rs.getString("p.CodProducto"));
+        row.createCell(1).setCellValue(rs.getString("p.Nombre"));
+        row.createCell(2).setCellValue(rs.getString("p.Descripcion"));
+        row.createCell(3).setCellValue(rs.getString("p.Precio"));
+        row.createCell(4).setCellValue(rs.getString("p.FechaVencimiento"));
+        row.createCell(5).setCellValue(rs.getString("c.Nombre"));
+        row.createCell(6).setCellValue(rs.getString("pro.Nombre"));
     }
 
     // Escribir el libro en el flujo de salida

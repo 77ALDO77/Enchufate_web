@@ -23,7 +23,7 @@
         conn = DriverManager.getConnection(url, username, password);
 
         // Consulta SQL para obtener datos de la tabla cliente
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT p.CodProducto, p.Nombre, p.Descripcion, p.Precio, p.FechaVencimiento, c.Nombre, pro.Nombre FROM Producto p INNER JOIN Categoria c ON p.CodCategoria = c.CodCategoria INNER JOIN proveedor pro ON p.CodProveedor=pro.CodProveedor;";
         stmt = conn.prepareStatement(sql);
         rs = stmt.executeQuery();
 
@@ -42,20 +42,20 @@
 
         // Añadir título
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLUE);
-        Paragraph title = new Paragraph("Listado de Clientes", titleFont);
+        Paragraph title = new Paragraph("Listado de Productos", titleFont);
         title.setAlignment(Element.ALIGN_CENTER);
         title.setSpacingAfter(20);
         document.add(title);
 
         // Crear tabla con cabecera y definir colores
-        PdfPTable table = new PdfPTable(9);
+        PdfPTable table = new PdfPTable(7);
         table.setWidthPercentage(100);
         PdfPCell cell;
 
         // Encabezados de la tabla
         Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.WHITE);
         BaseColor headerColor = new BaseColor(0, 121, 182);
-        String[] headers = {"ID", "Nombres", "Apellido Paterno", "Apellido Materno", "DNI", "Fecha de Nacimiento", "Usuario", "Correo", "Contraseña"};
+        String[] headers = {"ID", "Nombre", "Descripcion", "Precio", "Fecha de Nacimiento", "Categoria", "Proveedor"};
 
         for (String header : headers) {
             cell = new PdfPCell(new Phrase(header, headerFont));
@@ -68,15 +68,13 @@
         // Llenar la tabla con los datos de la base de datos
         Font cellFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
         while (rs.next()) {
-            table.addCell(new PdfPCell(new Phrase(rs.getString("CodCliente"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("Nombres"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("ApePaterno"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("ApeMaterno"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("DNI"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("FechaNacimiento"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("Usuario"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("Correo"), cellFont)));
-            table.addCell(new PdfPCell(new Phrase(rs.getString("Contraseña"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("p.CodProducto"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("p.Nombre"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("p.Descripcion"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("p.Precio"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("p.FechaVencimiento"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("c.Nombre"), cellFont)));
+            table.addCell(new PdfPCell(new Phrase(rs.getString("pro.Nombre"), cellFont)));
         }
 
         // Agregar la tabla al documento

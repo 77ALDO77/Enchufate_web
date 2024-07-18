@@ -4,7 +4,7 @@
     Author     : juand
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8" language="java"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="modelo.dto.Customer" %>
 <html>

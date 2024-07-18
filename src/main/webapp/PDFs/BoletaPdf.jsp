@@ -9,9 +9,9 @@
     response.setHeader("Content-Disposition", "attachment; filename=boleta.pdf");
 
     // Conexión a la base de datos
-    String url = "jdbc:mysql://localhost:3306/enchufate5?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
+    String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
     String username = "root";
-    String password = "root";
+    String password = "";
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -115,12 +115,20 @@
             sumaTotal += Double.parseDouble(totalPagar);
         } while (rs.next());
 
-        // Mostrar el pago total al final de la boleta
-        Paragraph totalPagoInfo = new Paragraph();
-        totalPagoInfo.setFont(clientFont);
-        totalPagoInfo.add(new Chunk("Pago Total de los Productos: ", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
-        totalPagoInfo.add(String.format("%.2f", sumaTotal) + "\n\n");
-        document.add(totalPagoInfo);
+        // Calcular el subtotal, IGV y total a pagar
+        double subtotal = sumaTotal / 1.18;
+        double igv = sumaTotal - subtotal;
+
+        // Mostrar el subtotal, IGV y total a pagar al final de la boleta
+        Paragraph resumenPago = new Paragraph();
+        resumenPago.setFont(clientFont);
+        resumenPago.add(new Chunk("Subtotal: ", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        resumenPago.add(String.format("%.2f", subtotal) + "\n");
+        resumenPago.add(new Chunk("IGV (18%): ", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        resumenPago.add(String.format("%.2f", igv) + "\n");
+        resumenPago.add(new Chunk("Total a Pagar: ", FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
+        resumenPago.add(String.format("%.2f", sumaTotal) + "\n\n");
+        document.add(resumenPago);
 
         document.close();
 
