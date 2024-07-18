@@ -8,7 +8,7 @@
     response.setContentType("application/pdf");
     response.setHeader("Content-Disposition", "attachment; filename=clientes.pdf");
 
-// Conexión a la base de datos
+// ConexiÃ³n a la base de datos
     String url = "jdbc:mysql://localhost:3306/enchufate?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&characterEncoding=UTF-8";
     String username = "root";
     String password = "";
@@ -27,20 +27,20 @@
         stmt = conn.prepareStatement(sql);
         rs = stmt.executeQuery();
 
-        // Crear el documento PDF con márgenes
+        // Crear el documento PDF con mÃ¡rgenes
         Document document = new Document(PageSize.A4, 36, 36, 54, 36);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PdfWriter.getInstance(document, baos);
         document.open();
 
-        // Añade el logo al encabezado
+        // AÃ±ade el logo al encabezado
         String logoPath = "/resources/img/AdmNav/Logo.png"; // Ruta al logo
         Image logo = Image.getInstance(getServletContext().getRealPath(logoPath));
-        logo.scaleToFit(100, 100); // Ajusta tamaño del logo según sea necesario
+        logo.scaleToFit(100, 100); // Ajusta tamaÃ±o del logo segÃºn sea necesario
         logo.setAlignment(Element.ALIGN_CENTER); // Centra horizontalmente el logo
         document.add(logo);
 
-        // Añadir título
+        // AÃ±adir tÃ­tulo
         Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLUE);
         Paragraph title = new Paragraph("Listado de Productos", titleFont);
         title.setAlignment(Element.ALIGN_CENTER);
@@ -55,7 +55,7 @@
         // Encabezados de la tabla
         Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.WHITE);
         BaseColor headerColor = new BaseColor(0, 121, 182);
-        String[] headers = {"ID", "Nombre", "Descripcion", "Precio", "Fecha de Nacimiento", "Categoria", "Proveedor"};
+        String[] headers = {"ID", "Nombre", "Descripcion", "Precio", "Fecha de Vencimiento", "Categoria", "Proveedor"};
 
         for (String header : headers) {
             cell = new PdfPCell(new Phrase(header, headerFont));
