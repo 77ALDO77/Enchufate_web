@@ -60,10 +60,14 @@
         <servlet-name>ClienteServlet</servlet-name>
         <servlet-class>ServLets.ClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnviarEmail</servlet-name>
+        <servlet-class>ServLets.EnviarEmail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ClienteServlet</servlet-name>
         <url-pattern>/ClienteServlet</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     <servlet>
         <servlet-name>EmpleadoServlet</servlet-name>
         <servlet-class>ServLets.EmpleadoServlet</servlet-class>
@@ -71,7 +75,7 @@
     <servlet-mapping>
         <servlet-name>EmpleadoServlet</servlet-name>
         <url-pattern>/EmpleadoServlet</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>cntLogin</servlet-name>
         <url-pattern>/cntLogin</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>procesarPago</servlet-name>
         <url-pattern>/procesarPago</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnviarEmail</servlet-name>
+        <url-pattern>/EnviarEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
